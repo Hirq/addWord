@@ -47,8 +47,6 @@ const Topbar = () => {
     <>
     <StyledWrapperTop>
       <StyledLeftPage>
-        <StyledInput placeholder="ANG" name="word_ang"></StyledInput>
-        <StyledInput placeholder="PL" name="word_pl"></StyledInput>
         <WordAddButton/>
       </StyledLeftPage>
       <StyledRightPage>
