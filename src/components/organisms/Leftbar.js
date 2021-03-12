@@ -45,10 +45,9 @@ const StyledLinksList = styled.ul`
   padding: 0;
   list-style: none;
 `;
-const Leftbar = ({ pageType }) => {
+const Leftbar = ({ }) => {
   return(
     <StyledWrapper>
-
       <StyledLogoLink to="/" />
       <StyledLinksList>
         <li>
