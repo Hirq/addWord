@@ -1,85 +1,46 @@
 import React from 'react';
-import UserPageTemplate from 'templates/UserPageTemplate'
 import styled from 'styled-components';
 import Button from 'components/atoms/Button';
-import Input from 'components/atoms/Input';
-import Paragraph from 'components/atoms/Paragraph';
-import Heading from 'components/atoms/Heading';
-
 import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card';
-
-const notes = [
-  {
-    id: 1,
-    title: 'Cele',
-    content:
-      'Poprawić CARD + GridTemplate + Blog - odpowienie propsy przekazać. Następnie REDUX - Dodawania, usuwanie i na koncu edycja bloga',
-    created: '1 day',
-  },
-  {
-    id: 2,
-    title: 'Como es An Gular?',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '1 day',
-  },
-  {
-    id: 3,
-    title: 'Du bist Reactish',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '5 days',
-  },
-  {
-    id: 4,
-    title: 'Reactuj się kto moze!',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '10 days',
-  },
-];
+import { connect } from 'react-redux';
+import { addNote as addNoteAction } from 'redux/actions';
 
 const StyledButton = styled(Button)`
-
+  margin: 80px 0px 10px 150px;
 `;
 
-const Blog = () => {
+const Blog = ({ notes, addNote }) => {
   return (
-  <GridTemplate>
-    {notes.map(({ title, content, created, id }) => (
-      <Card
-        id={id}
-        title={title}
-        content={content}
-        created={created}
-        key={id}
-      />
-    ))}
-  </GridTemplate>
+    <>
+    <StyledButton onClick={() => addNote({
+      title: 'test',
+      content: 'test2',
+    })
+    }>
+      Add note</StyledButton>
+    <GridTemplate>
+      {notes.map(({ title, content, created, id }) => (
+        <Card 
+          id={id}
+          title={title}
+          content={content}
+          created={created}
+          key={id}
+        />
+      ))}
+    </GridTemplate>
+  </>
   )
 }
 
-export default Blog;
+const mapStateToProps = state  => {
+  const { notes } = state;
+  return { notes };
+}
 
+const mapDispatchToProps = dispatch => ({
+  addNote: (noteContent) => dispatch(addNoteAction(noteContent))
+});
 
-
-
-
-
-
-
-// const Articles = ({ articles }) => (
-//   <GridTemplate>
-//     {articles.map(({ title, content, articleUrl, created, id }) => (
-//       <Card
-//         id={id}
-//         title={title}
-//         content={content}
-//         articleUrl={articleUrl}
-//         created={created}
-//         key={id}
-//       />
-//     ))}
-//   </GridTemplate>
-// );
+export default connect(mapStateToProps, mapDispatchToProps)(Blog);

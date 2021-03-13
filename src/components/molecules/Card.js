@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
 import Button from 'components/atoms/Button';
+import { connect } from 'react-redux';
+import { removeNote as removeNoteAction } from 'redux/actions';
 
 const StyledWrapper = styled.div`
   min-height: 400px;
@@ -27,7 +29,7 @@ const InnerWrapper = styled.div`
     `}
 `;
 
-const Card = ({ title, content }) => {
+const Card = ({ id, title, content, removeNote }) => {
   return (
   <>
     <StyledWrapper>
@@ -36,11 +38,15 @@ const Card = ({ title, content }) => {
       </InnerWrapper>
       <InnerWrapper flex>
        <Paragraph>{content}</Paragraph>
-        <Button secondary>REMOVE</Button>
+        <Button onClick={() => removeNote(id)} secondary>REMOVE</Button>
       </InnerWrapper>
     </StyledWrapper>
   </>
   )
 }
 
-export default Card;
+const mapDispatchToProps = dispatch => ({
+  removeNote: (id) => dispatch(removeNoteAction(id)),
+})
+
+export default connect(null, mapDispatchToProps,)(Card);

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import GlobalStyle from 'theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from 'theme/mainTheme';
-import { useTheme } from 'theme/ThemeContext';
-import { AddWordContext } from 'theme/AddWordContext';
+import { useTheme } from 'context/ThemeContext';
+import { AddWordContext } from 'context/AddWordContext';
 
 const MainTemplate = ({ children }) => {
   const setDarkMode = useTheme();

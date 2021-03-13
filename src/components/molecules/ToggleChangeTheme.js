@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Input from 'components/atoms/Input';
-import { useTheme, useThemeUpdate } from 'theme/ThemeContext';
+import { useTheme, useThemeUpdate } from 'context/ThemeContext';
 
 const StyledDarkModeContainer = styled.div`
   display: flex;

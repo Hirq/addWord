@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from 'components/atoms/Button';
-import Input from 'components/atoms/Input';
 import ToggleChangeTheme from 'components/molecules/ToggleChangeTheme';
 import Timer from 'components/molecules/Timer';
 import WordAddButton from 'components/molecules/WordAddButton';
@@ -32,14 +30,6 @@ const StyledRightPage = styled.div`
   justify-content: space-between;
   align-items: center;
   align-content: center;
-`
-
-const StyledInput = styled(Input)`
-  margin-left: 10px;
-`
-
-const StyledButton = styled(Button)`
-  margin-left: 20px;
 `
 
 const Topbar = () => {
