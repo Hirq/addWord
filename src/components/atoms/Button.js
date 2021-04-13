@@ -11,7 +11,7 @@ const Button = styled.button`
   font-weight:  ${({ theme }) => theme.bold};
   font-size: 16px;
   text-transform: uppercase;
-  outline: none !important;
+  outline: none !important; 
 
   ${({ secondary }) =>
     secondary &&
@@ -20,6 +20,14 @@ const Button = styled.button`
       width: 105px;
       height: 30px;
       font-size: 10px;
+    `}
+
+  ${({ link }) =>
+    link &&
+    css`
+      padding: 13px 30px;
+      text-decoration: none;
+      color: black;
     `}
 `;
 

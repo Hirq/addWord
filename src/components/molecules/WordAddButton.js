@@ -6,9 +6,15 @@ import { useListUpdate, useWordAngUpdate, useWordPlUpdate, useWordAngUpdate2, us
 import { connect } from 'react-redux';
 import { addWord as addWordAction } from 'redux/actions';
 
-const StyledInput = styled(Input)`
-  margin-left: 10px;
+const StyledForm = styled.form`
+  margin: 10px 10px 10px 10px;
 `
+
+const StyledInput = styled(Input)`
+  margin-left: 5px;
+  margin-right: 10px;
+`
+
 const WordAddButton = ({ addWord }) => {
   // const addWord = useListUpdate(); 
   const wordAng = useWordAngUpdate();
@@ -28,16 +34,16 @@ const WordAddButton = ({ addWord }) => {
 
   return(
     <>
-    <form onSubmit={handleSubmit}>
-      <StyledInput value={wordAng || ''} name="wordAng" placeholder="ANG" onChange={handleChange}></StyledInput>
-      <StyledInput value={wordPl || ''} name="wordPl" placeholder="PL" onChange={e => setWordPl(e.target.value)}></StyledInput>
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledInput value={wordAng || ''} name="wordAng" placeholder="ANG" onChange={handleChange} maxLength='30'></StyledInput>
+      <StyledInput value={wordPl || ''} name="wordPl" placeholder="PL" onChange={e => setWordPl(e.target.value)} maxLength='30'></StyledInput>
       <Button type="submit" onClick={() => addWord({
         wordPl: wordPl,
         wordAng: wordAng,
       })
       }> Add Word</Button>
       {/* <Button type="submit" onClick={addWord()}> Add Word</Button> */}
-    </form>
+    </StyledForm>
     </>
     )
 }

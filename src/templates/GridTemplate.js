@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
 import Input from 'components/atoms/Input';
 import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
+import ButtonIcon from 'components/atoms/ButtonIcon';
+import NewBlogBar from 'components/organisms/NewBlogBar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -33,20 +35,40 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children }) => (
+const StyledButtonIcon = styled(ButtonIcon)`
+  position: fixed;
+  right: 10px;
+  bottom: 10px; 
+`
+
+
+const GridTemplate = ({ children, name, countItem }) => {
+  const [visibleBar, setVisibleBar] = useState(false);
+
+  const handleNewBlogBarToggle = () => {
+    setVisibleBar(state => !state)
+  }
+
+  const hideAddBar = () => {
+    {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
+  }
+
+return (
   <UserPageTemplate >
-    <StyledWrapper>
+    <StyledWrapper onClick={hideAddBar}>
       <StyledPageHeader>
         <Input search placeholder="Search" />
         <StyledHeading big as="h1">
-          BLOG
+          {name}
         </StyledHeading>
-        <StyledParagraph>6 notes</StyledParagraph>
+        <StyledParagraph>{countItem}</StyledParagraph>
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
     </StyledWrapper>
+    <StyledButtonIcon onClick={handleNewBlogBarToggle}> + </StyledButtonIcon>
+    <NewBlogBar isVisible={visibleBar} hideAddBar={hideAddBar}/>
   </UserPageTemplate>
-);
+)};
 
 // GridTemplate.propTypes = {
 //   children: PropTypes.arrayOf(PropTypes.object).isRequired,

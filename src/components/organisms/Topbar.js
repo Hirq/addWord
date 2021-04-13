@@ -9,7 +9,7 @@ const StyledWrapperTop = styled.div`
   left: 0;
   top: 0;
   width: 100vw;
-  height: 7vh;
+  height: 70px;
   background-color: ${({theme}) => (theme.topBar)};
   display: flex;
   flex-direction: row;

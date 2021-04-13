@@ -35,14 +35,6 @@ export function AddWordContext({children}) {
   const [wordPl, setWordPl] = useState("");
   const [wordAng, setWordAng] = useState("");
   const [list, setList] = useState([]);
-  
-  function NewWordAng(wordAng){
-    setWordAng(wordAng);
-  }
-
-  function NewWordPl(wordPl){
-    setWordPl(wordPl);
-  }
 
   function addToList(e){
     setList(prevState => [...prevState, { wordAng: wordAng, wordPl: wordPl }]);

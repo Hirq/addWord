@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from 'redux/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension'
 const store = createStore(rootReducer, composeWithDevTools(

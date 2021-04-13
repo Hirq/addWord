@@ -49,3 +49,38 @@ export const removeNote = (id) => {
     },
   };
 };
+
+export const addSet = (wordSetContent) => {
+  const getId = () =>
+    `_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+
+  return {
+    type: 'ADD_SET',
+    payload: {
+      note: {
+        id: getId(),
+        ...wordSetContent
+      }
+    }
+  }
+};
+
+export const removeSet = (id) => {
+  return {
+    type: 'REMOVE_SET',
+    payload: {
+      id
+    },
+  };
+};
+
+export const addWordToSet = (word, id) => {
+  return {
+    type: 'ADD_WORD_TO_SET',
+    payload: {
+      word
+    },
+  };
+};

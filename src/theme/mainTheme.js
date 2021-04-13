@@ -18,18 +18,20 @@ export const theme = {
 export const lightTheme = {
   ...theme,
   body: 'hsl(175, 68%, 82%)',
+  bodyExtra: 'hsl(175, 54%, 72%)',
   text: 'hsl(254, 12%, 9%)',
   leftBar: 'hsl(207, 81%, 33%)',
   topBar: 'hsl(207, 81%, 33%)',
   colorButton: 'orange',
   activeIconColor: 'orange',
-  colorButtonSecondary: 'grey',
+  colorButtonSecondary: 'white',
   colorBorder: '#FFF',
 }
 
 export const darkTheme = {
   ...theme,
   body: 'hsl(175, 47%, 14%)',
+  bodyExtra: 'hsl(177, 100%, 12%)',
   text: 'hsl(175, 69%, 85%)',
   leftBar: 'hsl(175, 34%, 28%)', 
   topBar: 'hsl(175, 34%, 28%)',
@@ -37,6 +39,9 @@ export const darkTheme = {
   activeIconColor: 'hsl(100, 20%, 80%)',
   colorButtonSecondary: 'white',
   colorBorder: '#6B8096',
+  colorButtonThird: 'hsl(105, 34%, 28%)',
+
+
   gradient: 'linear-gradient(#091236, #1E215D)', // czy potrzebne to nam?
 }
 

@@ -28,7 +28,13 @@ class Timer extends React.Component {
     status: true,
     timer: 0,
   }
-    
+  
+  componentDidMount = () => {
+    let timeLeftVar = this.secondsToTime(this.state.seconds);
+    this.setState({ time: timeLeftVar });
+    this.startAutoTimer()
+  }
+
   secondsToTime = (secs) => {
     let hours = Math.floor(secs / (60 * 60));
     let divisor_for_minutes = secs % (60 * 60);
@@ -41,12 +47,6 @@ class Timer extends React.Component {
       "s": seconds
     };
     return obj;
-  }
-
-  componentDidMount = () => {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
-    this.startAutoTimer()
   }
 
   startAutoTimer = () => {
