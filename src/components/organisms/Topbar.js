@@ -41,7 +41,7 @@ const Topbar = () => {
       </StyledLeftPage>
       <StyledRightPage>
         <ToggleChangeTheme/>
-        <Timer/>
+        {/* <Timer/> */}
       </StyledRightPage>
     </StyledWrapperTop>
     </>

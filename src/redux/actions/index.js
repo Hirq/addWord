@@ -84,3 +84,12 @@ export const addWordToSet = (word, id) => {
     },
   };
 };
+
+export const removeWordUseName = (item) => {
+  return {
+    type: 'REMOVE_WORD_USE_NAME',
+    payload: {
+      item
+    },
+  };
+};

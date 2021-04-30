@@ -47,7 +47,7 @@ const initialState = {
       id: 2,
       title: 'Nie robimy tego',
       content:
-        'Storybook ODPADA',
+        'Storybook ODPADA - Dwa bledy w consoli - jeden to zwiazany z styled-component ze podaje link jako true, a drugi to w TIMER do poprawy na potem',
       date: '05.01.1910',
       tag: 'home',
     },
@@ -73,23 +73,45 @@ const initialState = {
     {
       id: 1,
       title: 'SIZE',
-      words: ['big','small'],
+      wordsX: [
+        {
+          id: 1,
+          wordPl: 'aas',
+          wordAng: 'hodsause', 
+        },
+        {
+          id:2,
+          wordPl: 'dom',
+          wordAng: 'house', 
+        },
+      ],
     },
     {
       id: 2,
       title: 'SCHOOL',
-      words: ['class', 'chair'],
+      wordsX: [
+        {
+          id:3,
+          wordPl: 'dom',
+          wordAng: 'house', 
+        },
+        {
+          id:4,
+          wordPl: 'dom',
+          wordAng: 'house', 
+        },
+      ],
     },
-    {
-      id: 3,
-      title: 'WORK',
-      words: ['laptop'],
-    },
-    {
-      id: 4,
-      title: 'CITY',
-      words: ['capital', 'market'],
-    },
+    // {
+    //   id: 3,
+    //   title: 'WORK',
+    //   words: ['laptop'],
+    // },
+    // {
+    //   id: 4,
+    //   title: 'CITY',
+    //   words: ['capital', 'market'],
+    // },
   ]
 }
 
@@ -129,8 +151,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         wordSets: state.wordSets.filter((wordSets) => wordSets.id !== idSet)
       }; 
-    case 'ADD_WORD_TO_SET':
-       const idSetForWord = action.payload.id
+    // case 'ADD_WORD_TO_SET':
+    //    const idSetForWord = action.payload.id
       // return {
       //   ...state,
       //   wordSets: [...state.wordSets.words.concat(action.payload.word)]
@@ -140,6 +162,15 @@ const rootReducer = (state = initialState, action) => {
       //   action.payload.word,
       //   ...state.wordSets.words.slice(action.payload.id)
       // ]
+    case 'REMOVE_WORD_USE_NAME':
+      const item = action.payload.item; 
+      return {
+        ...state,
+        // wordSets: state.wordSets.filter((wordSets) => (wordSets.words.id !== item))
+        wordSets: state.wordSets.filter((wordsX) => wordsX.id !== item)
+        // wordSets: state.wordSets.filter(() => state.wordSets[1].words.id !== item)
+        
+      }; 
 
   default:
     return state;

@@ -5,13 +5,13 @@ import DetailsTemplate from 'templates/DetailsTemplate';
 import { connect } from 'react-redux';
 
 const SetDetail = ({wordSets, idActivate }) => {
-  const data = wordSets.filter((item) => item.id == idActivate).map(({id, title, words}) => ({id, title, words}))
+  const data = wordSets.filter((item) => item.id == idActivate).map(({id, title, wordsX}) => ({id, title, wordsX}))
 
   return (
     <DetailsTemplate
       id = {data[0].id}
       title = {data[0].title}
-      contentSet = {data[0].words}
+      contentSet = {data[0].wordsX}
       path="list"
     >
     </DetailsTemplate>

@@ -92,7 +92,7 @@ const StyledSelect = styled.select`
 const List = ({ words, wordSets, removeWord, addSet }) => {
   const [nameSet, setNameSet] = useState('');
   const [selectSet, setSelectSet] = useState();
-  const dataTest = wordSets[0].words;
+
 
   const handleChange = (e) => {
     setNameSet(e.target.value);
@@ -110,12 +110,22 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
   }
 
   const AddItemToSetAndRemoveFromList = (item) => {
-    selectSet.push(item.wordAng + ' - ' + item.wordPl);
+    if (wordSets.length == 1) {
+      const dataTest = wordSets[0].words;
+      setSelectSet(dataTest);
+    }
+    selectSet.push({
+      wordPl: item.wordPl,
+      wordAng: item.wordAng
+    });
     removeWord(item.id);
   }
 
   useEffect(() => {
-    setSelectSet(dataTest);;
+    if (wordSets.length > 0) {
+      const initialData = wordSets[0].words;
+      setSelectSet(initialData);
+    }
   }, [])
 
   // const list = useList();
@@ -124,7 +134,7 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
       <StyledWrapper>
         <StyledWrapperList>
           <StyledHeader> Word List </StyledHeader>      
-          {wordSets.length > 0 ?
+          {wordSets.length > 0 && words.length > 0  ?
             <>
             <StyledSelect onChange={handleChangeSelectSet}>
               {wordSets.map(({ title, id }) => (
@@ -137,8 +147,7 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
           {words.map((item) =>
             <StyledLi key={item.id}>
               {item.wordAng}-{item.wordPl}  
-              <StyledButtonTransferWord onClick={() => AddItemToSetAndRemoveFromList(item)} secondary> TEST </StyledButtonTransferWord>
-              <StyledButtonTransferWord onClick={() => selectSet.push(item.wordAng + ' - ' + item.wordPl)} secondary> ADD TO SELECT SET</StyledButtonTransferWord>
+              <StyledButtonTransferWord onClick={() => AddItemToSetAndRemoveFromList(item)} secondary> Add to set </StyledButtonTransferWord>
               <StyledButtonDelete onClick={() => removeWord(item.id)} secondary>DELETE</StyledButtonDelete>
             </StyledLi>
           )}
