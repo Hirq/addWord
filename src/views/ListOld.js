@@ -99,8 +99,8 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
   }
 
   const handleChangeSelectSet = (e) => {
-    const data = wordSets.allIds.find((item) => wordSets.byId[item].title == e.target.value);
-    setSelectSet(data);
+    const data = wordSets.find((item) => item.id == e.target.value);
+    setSelectSet(data.words);
     console.log(selectSet);
   }
   
@@ -110,7 +110,7 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
   }
 
   const AddItemToSetAndRemoveFromList = (item) => {
-    if (wordSets.allIds.length == 1) {
+    if (wordSets.length == 1) {
       const dataTest = wordSets[0].words;
       setSelectSet(dataTest);
     }
@@ -122,10 +122,9 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
   }
 
   useEffect(() => {
-    if (wordSets.allIds.length > 0) {
-      const initialData = wordSets.allIds[0];
+    if (wordSets.length > 0) {
+      const initialData = wordSets[0].words;
       setSelectSet(initialData);
-      console.log(selectSet);
     }
   }, [])
 
@@ -135,31 +134,24 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
       <StyledWrapper>
         <StyledWrapperList>
           <StyledHeader> Word List </StyledHeader>      
-          {/* {wordSets.allIds.length > 0 && words.allIds.length > 0  ?
+          {wordSets.length > 0 && words.length > 0  ?
             <>
             <StyledSelect onChange={handleChangeSelectSet}>
-              {wordSets.allIds.map((item) => (
-                <option value={wordSets.byId[item].id} key={wordSets.byId[item].id} >{wordSets.byId[item].title} </option>
+              {wordSets.map(({ title, id }) => (
+                <option value={id} key={id} >{title} </option>
               ))}
             </StyledSelect>
             </>
-          : null } */}
+          : null }
           <StyledUl>
-          {words.allIds.map((item) => 
-            <StyledLi key={item.id}>
-            {words.byId[item].wordPl}- {words.byId[item].wordAng}
-            <StyledButtonTransferWord onClick={() => AddItemToSetAndRemoveFromList(item)} secondary> Add to set </StyledButtonTransferWord>
-            <StyledButtonDelete onClick={() => removeWord(item)} secondary>DELETE</StyledButtonDelete>
-          </StyledLi>
-          )}
-
-          {/* {words.allIds((item) =>
+            
+          {words.map((item) =>
             <StyledLi key={item.id}>
               {item.wordAng}-{item.wordPl}  
               <StyledButtonTransferWord onClick={() => AddItemToSetAndRemoveFromList(item)} secondary> Add to set </StyledButtonTransferWord>
               <StyledButtonDelete onClick={() => removeWord(item.id)} secondary>DELETE</StyledButtonDelete>
             </StyledLi>
-          )} */}
+          )}
           </StyledUl>
           {/* <StyledWrapperPage>
           { words.length > 5 && <> <StyledPageNumber> 1 </StyledPageNumber><StyledPageNumber> 2 </StyledPageNumber></>}
@@ -182,12 +174,12 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
               </Button>
             </StyledForm>
             <StyleWordSet>
-              {wordSets.allIds.map((item) => (
+              {wordSets.map(({ title, id}) => (
               <Card 
-              id={wordSets.byId[item].id}
-              title={wordSets.byId[item].title}
+              id={id}
+              title={title}
               path="list"
-              key={wordSets.byId[item].id}
+              key={id}
               />
               ))}
             </StyleWordSet>
