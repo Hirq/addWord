@@ -179,12 +179,34 @@ const initialState = {
     allIds: [901,902],
     byId: {
       901: {
+        id: 901,
         title: 'SIZE',
-        words: [1],
+        allIdWords: [5,6],
+        words: {
+          5: {
+            wordPl: 'duzy',
+            wordAng: 'large'
+          },
+          6: {
+            wordPl: 'maly',
+            wordAng: 'small'
+          }  
+        },
       },
       902: {
+        id: 902,
         title: 'SCHOOL',
-        words: [2],
+        allIdWords: [7,8],
+        words: {
+          7: {
+            wordPl: 'klasa',
+            wordAng: 'class'
+          },
+          8: {
+            wordPl: 'nauczyciel',
+            wordAng: 'teacher'
+          }  
+        },
       },
     }
   }
@@ -193,20 +215,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_WORD':
-    return {
-      ...state,
-      words : { 
-        allIds:[...state.words.allIds, action.payload.word.id], 
-        byId:{...state.words.byId, [action.payload.word.id]: action.payload.word}
-      }
-
-//  {...state.words.byId, [action.payload.word.id]: action.payload.word}
-
-
-      // words: [...state.words.allIds, action.payload.word.id]
-      // words: {...state.words.byId, [action.payload.word.id]: action.payload.word}
-    }
     // case 'ADD_WORD':
     // return {
     //   ...state,
@@ -217,46 +225,87 @@ const rootReducer = (state = initialState, action) => {
     //   return {
     //     ...state,
     //     words: state.words.filter((words) => words.id !== idd)
-    //   };    
+    //   };  
+
+    // case 'ADD_SET':
+    //   return {
+    //     ...state,
+    //     wordSets: [...state.wordSets, action.payload.note],
+    //   }
+    // case 'REMOVE_SET':
+    //   const idSet = action.payload.id      
+    //   return {
+    //     ...state,
+    //     wordSets: state.wordSets.filter((wordSets) => wordSets.id !== idSet)
+    //   }; 
+    case 'ADD_WORD':
+      return {
+        ...state, 
+        words : { 
+          allIds:[...state.words.allIds, action.payload.word.id], 
+          byId:{...state.words.byId, [action.payload.word.id]: action.payload.word}
+        }
+      };
     case 'REMOVE_WORD':
-      const idd = action.payload.id      
+      const id_word = action.payload.id   
+      delete state.words.byId[id_word]
       return {
         ...state,
-        words: state.words.allIds.filter((words) => words !== idd),
-      }; 
+        words : { 
+          allIds: state.words.allIds.filter((id) => id !== id_word),
+          byId: state.words.byId
+        }
+      };
     case 'ADD_NOTE':
       return {
         ...state,
         notes: [...state.notes, action.payload.note],
       }
     case 'REMOVE_NOTE':
-      const id = action.payload.id      
+      const id_note = action.payload.id      
       return {
         ...state,
-        notes: state.notes.filter((notes) => notes.id !== id)
+        notes: state.notes.filter((notes) => notes.id !== id_note)
       }; 
-    case 'ADD_SET':
-      return {
+      case 'ADD_SET':
+        return {
+          ...state,
+          wordSets : { 
+            allIds:[...state.wordSets.allIds, action.payload.wordSet.id], 
+            byId:{...state.wordSets.byId, [action.payload.wordSet.id]: action.payload.wordSet}
+          }
+        }
+      case 'REMOVE_SET':
+        const idSet = action.payload.id   
+        delete state.wordSets.byId[idSet]   
+        return {
+          ...state,
+          wordSets: {
+            allIds: state.wordSets.allIds.filter((id) => id !== idSet),
+            byId: state.wordSets.byId
+          }
+        }; 
+
+    case 'ADD_WORD_TO_SET':
+      const idWord = action.payload.idWord
+      const idSetWord = action.payload.idSet
+      const nameSet = action.payload.nameSet;
+      const newWord = action.payload.newWord;
+       return {
         ...state,
-        wordSets: [...state.wordSets, action.payload.note],
+        wordSets : { 
+          allIds: [...state.wordSets.allIds],
+          byId:{...state.wordSets.byId, 
+            [idSetWord]: {
+              'id': idSetWord, 
+              'title': nameSet,
+              ['allIdWords']: [...state.wordSets.byId[idSetWord].allIdWords,idWord], 
+              ['words']: {...state.wordSets.byId[idSetWord].words, [idWord]: action.payload.newWord}}}
+          
+          // byId:{...state.wordSets.byId, [action.payload.idSet]: {[idWord]: action.payload.newWord}}
+        }
       }
-    case 'REMOVE_SET':
-      const idSet = action.payload.id      
-      return {
-        ...state,
-        wordSets: state.wordSets.filter((wordSets) => wordSets.id !== idSet)
-      }; 
-    // case 'ADD_WORD_TO_SET':
-    //    const idSetForWord = action.payload.id
-      // return {
-      //   ...state,
-      //   wordSets: [...state.wordSets.words.concat(action.payload.word)]
-      // };
-      // return [
-      //   ...state.wordSets.words.slice(0, action.payload.id),
-      //   action.payload.word,
-      //   ...state.wordSets.words.slice(action.payload.id)
-      // ]
+
     case 'REMOVE_WORD_USE_NAME':
       const item = action.payload.item; 
       return {

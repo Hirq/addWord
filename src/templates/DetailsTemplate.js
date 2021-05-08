@@ -77,15 +77,13 @@ const StyledButtonWordRemove = styled(Button)`
 //   padding: 10px;
 // `
 
-const DetailsTemplate = ({ title, content, date, tag, contentSet = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
+const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList, path, id, removeSet, removeWordUseName, wordSets  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
-  const [NewcontentSet, SetNewContentSet] = useState(contentSet);
 
-  // const [NewcontentSet2, SetNewContentSet2] = useState(wordSets.filter((item) => item.id == id));
-  const [NewcontentSet2, SetNewContentSet2] = useState(...wordSets.filter((item) => item.id == id));
+  // const [NewcontentSet2, SetNewContentSet2] = useState(...wordSets.filter((item) => item.id == id));
 
-
+  const [NewcontentSet2, SetNewContentSet2] = useState(wordSets.byId[id]);
   // const data = wordSets.filter((item) => item.id == idActivate).map(({id, title, words}) => ({id, title, words}))
 
 
@@ -107,10 +105,8 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = [], path, id,
   const testFunction = (item) => {
     const data = contentSet.find((word) => word == item);
     console.log(data);
-    console.log(NewcontentSet);
 
-    SetNewContentSet(NewcontentSet.filter(word => word !== item));
-    console.log(NewcontentSet)
+    // wordSetList.filter(word => word !== item));
   }
 
 
@@ -139,9 +135,9 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = [], path, id,
       SetNewContentSet2(NewcontentSet2)
 
       console.log(NewcontentSet2);
-
-
     }
+
+
   }, [])
 
  return(
@@ -154,7 +150,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = [], path, id,
         <StyledParagraph></StyledParagraph>
       </StyledPageHeader>
       <Paragraph>{content}</Paragraph>
-      {NewcontentSet.length > 0  ?
+      {/* {NewcontentSet.length > 0  ?
         <>
         <select onChange={handleChangeSelectWord} >
           {NewcontentSet.map(( item ) => (
@@ -165,10 +161,12 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = [], path, id,
         <StyledButtonWordRemove onClick={() => testFunction(selectWord)} secondary> Remove </StyledButtonWordRemove>
 
         </>
-      : null }
-      { NewcontentSet === [] 
+      : null } */}
+
+      { wordSetList === {} 
       ? null 
-      : NewcontentSet.map((item) => (<Paragraph key={item.wordAng}>{item.wordAng} - {item.wordPl}  </Paragraph> ))
+      : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
+
       }
       <Paragraph>{date}</Paragraph>
       <Paragraph>{tag}</Paragraph>

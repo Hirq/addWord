@@ -59,7 +59,7 @@ export const addSet = (wordSetContent) => {
   return {
     type: 'ADD_SET',
     payload: {
-      note: {
+      wordSet: {
         id: getId(),
         ...wordSetContent
       }
@@ -76,11 +76,16 @@ export const removeSet = (id) => {
   };
 };
 
-export const addWordToSet = (word, id) => {
+export const addWordToSet = (word, idWord, idSet, nameSet) => {
   return {
     type: 'ADD_WORD_TO_SET',
     payload: {
-      word
+      idSet: idSet,
+      idWord: idWord,
+      nameSet: nameSet,
+      newWord: {
+        ...word,
+      },
     },
   };
 };

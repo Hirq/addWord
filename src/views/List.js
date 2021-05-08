@@ -89,17 +89,19 @@ const StyledSelect = styled.select`
   border-color: ${({theme}) => theme.colorBorder};
 `
 
-const List = ({ words, wordSets, removeWord, addSet }) => {
+const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
   const [nameSet, setNameSet] = useState('');
   const [selectSet, setSelectSet] = useState();
-
+  const [selectSetName, setSelectSetName] = useState();
 
   const handleChange = (e) => {
     setNameSet(e.target.value);
   }
 
   const handleChangeSelectSet = (e) => {
-    const data = wordSets.allIds.find((item) => wordSets.byId[item].title == e.target.value);
+    const data = wordSets.allIds.find((item) => wordSets.byId[item].id == e.target.value);
+    console.log(wordSets.byId[data].title);
+    setSelectSetName(wordSets.byId[data].title);
     setSelectSet(data);
     console.log(selectSet);
   }
@@ -121,10 +123,18 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
     removeWord(item.id);
   }
 
+
+  const AddWordToSetAndDeleteFromList = (word, idWord, idSet, nameSet) => {
+    addWordToSet(word, idWord, idSet, nameSet)
+    removeWord(idWord);
+  }
+
+
   useEffect(() => {
     if (wordSets.allIds.length > 0) {
       const initialData = wordSets.allIds[0];
       setSelectSet(initialData);
+      setSelectSetName(wordSets.byId[initialData].title);
       console.log(selectSet);
     }
   }, [])
@@ -135,7 +145,7 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
       <StyledWrapper>
         <StyledWrapperList>
           <StyledHeader> Word List </StyledHeader>      
-          {/* {wordSets.allIds.length > 0 && words.allIds.length > 0  ?
+          {wordSets.allIds.length > 0 && words.allIds.length > 0  ?
             <>
             <StyledSelect onChange={handleChangeSelectSet}>
               {wordSets.allIds.map((item) => (
@@ -143,16 +153,18 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
               ))}
             </StyledSelect>
             </>
-          : null } */}
+          : null }
           <StyledUl>
           {words.allIds.map((item) => 
             <StyledLi key={item.id}>
             {words.byId[item].wordPl}- {words.byId[item].wordAng}
-            <StyledButtonTransferWord onClick={() => AddItemToSetAndRemoveFromList(item)} secondary> Add to set </StyledButtonTransferWord>
+            <StyledButtonTransferWord onClick={() => AddWordToSetAndDeleteFromList(words.byId[item], item, selectSet, selectSetName)} secondary> Add to set </StyledButtonTransferWord>
             <StyledButtonDelete onClick={() => removeWord(item)} secondary>DELETE</StyledButtonDelete>
           </StyledLi>
           )}
 
+          {/* Stary kod  */}
+          
           {/* {words.allIds((item) =>
             <StyledLi key={item.id}>
               {item.wordAng}-{item.wordPl}  
@@ -161,13 +173,13 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
             </StyledLi>
           )} */}
           </StyledUl>
-          {/* <StyledWrapperPage>
-          { words.length > 5 && <> <StyledPageNumber> 1 </StyledPageNumber><StyledPageNumber> 2 </StyledPageNumber></>}
-          { words.length > 10 && <StyledPageNumber> 3 </StyledPageNumber> }
-          { words.length > 11 && <StyledPageNumber> 3 </StyledPageNumber> }
-          { words.length > 12 && <StyledPageNumber> 3 </StyledPageNumber> }
-          { words.length > 13 && <StyledPageNumber> 3 </StyledPageNumber> }
-          </StyledWrapperPage> */}
+          <StyledWrapperPage>
+          { words.allIds.length > 5 && <> <StyledPageNumber> 1 </StyledPageNumber><StyledPageNumber> 2 </StyledPageNumber></>}
+          { words.allIds.length > 10 && <StyledPageNumber> 3 </StyledPageNumber> }
+          { words.allIds.length > 11 && <StyledPageNumber> 3 </StyledPageNumber> }
+          { words.allIds.length > 12 && <StyledPageNumber> 3 </StyledPageNumber> }
+          { words.allIds.length > 13 && <StyledPageNumber> 3 </StyledPageNumber> }
+          </StyledWrapperPage>
         </StyledWrapperList>
 
         <StyledWrapperSet>
@@ -176,7 +188,13 @@ const List = ({ words, wordSets, removeWord, addSet }) => {
               <Input value={nameSet|| ''} placeholder="name set" onChange={handleChange}/>
               <Button onClick={() => addSet({
                 title: nameSet,
-                words: ['last samuraj', 'casino']
+                allIdWords: [10],
+                words: {
+                  10: {
+                    wordPl: 'testowa wiadomosc',
+                    wordAng: 'test text'
+                  } 
+                }
               })}>
                 Add set
               </Button>
@@ -205,7 +223,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   removeWord: (id) => dispatch(removeWordAction(id)),
   addSet: (id) => dispatch(addSetAction(id)),
-  addWordToSet: (id) => dispatch(addWordToSetAction(id)),
+  addWordToSet: (word, idWord, idSet, nameSet) => dispatch(addWordToSetAction(word, idWord, idSet, nameSet)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
