@@ -93,28 +93,25 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
 
   const handleChangeSelectWord = (e) => {
     e.preventDefault();
-    const data = contentSet.find((item) => item.wordAng == e.target.value);
-    setSelectWord(data);
-    console.log(data);
+    setSelectWord(e.target.value);
+
+    // console.log(contentSet[e.target.value]);
+    // (wordSets.byId[data].title);
+    // setSelectSetName(wordSets.byId[data].title);
+    // // setSelectWord(data);
+    // console.log(data);
   }
 
   const hideConfirmBox = () => {
     {visibleBox ? setVisibleBox(false) : setVisibleBox(false)}
   }
 
-  const testFunction = (item) => {
-    const data = contentSet.find((word) => word == item);
-    console.log(data);
-
-    // wordSetList.filter(word => word !== item));
-  }
-
-
   const deleteWord2 = (id, idSet) => {
 
     console.log(id);
+    console.log(idSet);
     // console.log(idSet);
-    removeWordUseName(id)
+    removeWordUseName(id, idSet)
 
 
 
@@ -150,18 +147,18 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         <StyledParagraph></StyledParagraph>
       </StyledPageHeader>
       <Paragraph>{content}</Paragraph>
-      {/* {NewcontentSet.length > 0  ?
+      {wordSetList.length > 0  ?
         <>
         <select onChange={handleChangeSelectWord} >
-          {NewcontentSet.map(( item ) => (
-            <option value={item.wordAng} key={item.wordAng} > {item.wordAng} </option>
+          {wordSetList.map(( item ) => (
+            <option value={item} key={item} > {contentSet[item].wordAng} </option>
           ))}
         </select>
-        <StyledButtonWordRemove onClick={() => deleteWord2(selectWord.id, NewcontentSet2.id)} secondary> Remove REDUX </StyledButtonWordRemove>
-        <StyledButtonWordRemove onClick={() => testFunction(selectWord)} secondary> Remove </StyledButtonWordRemove>
+
+        <StyledButtonWordRemove onClick={() => deleteWord2(selectWord, id)} secondary> Remove REDUX </StyledButtonWordRemove>
 
         </>
-      : null } */}
+      : null }
 
       { wordSetList === {} 
       ? null 
@@ -220,7 +217,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   removeSet: (id) => dispatch(removeSetAction(id)),
-  removeWordUseName: (item) => dispatch(removeWordUseNameAction(item)),
+  removeWordUseName: (idWord, idSet) => dispatch(removeWordUseNameAction(idWord, idSet)),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(DetailsTemplate);

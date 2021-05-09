@@ -90,11 +90,12 @@ export const addWordToSet = (word, idWord, idSet, nameSet) => {
   };
 };
 
-export const removeWordUseName = (item) => {
+export const removeWordUseName = (idWord, idSet) => {
   return {
     type: 'REMOVE_WORD_USE_NAME',
     payload: {
-      item
+      idWord: idWord,
+      idSet: idSet
     },
   };
 };

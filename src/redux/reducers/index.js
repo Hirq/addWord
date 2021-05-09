@@ -274,21 +274,21 @@ const rootReducer = (state = initialState, action) => {
             allIds:[...state.wordSets.allIds, action.payload.wordSet.id], 
             byId:{...state.wordSets.byId, [action.payload.wordSet.id]: action.payload.wordSet}
           }
-        }
+        };
       case 'REMOVE_SET':
-        const idSet = action.payload.id   
-        delete state.wordSets.byId[idSet]   
+        const idSetRemove = action.payload.id   
+        delete state.wordSets.byId[idSetRemove]   
         return {
           ...state,
           wordSets: {
-            allIds: state.wordSets.allIds.filter((id) => id !== idSet),
+            allIds: state.wordSets.allIds.filter((id) => id !== idSetRemove),
             byId: state.wordSets.byId
           }
         }; 
 
     case 'ADD_WORD_TO_SET':
       const idWord = action.payload.idWord
-      const idSetWord = action.payload.idSet
+      const idSet = action.payload.idSet
       const nameSet = action.payload.nameSet;
       const newWord = action.payload.newWord;
        return {
@@ -296,25 +296,38 @@ const rootReducer = (state = initialState, action) => {
         wordSets : { 
           allIds: [...state.wordSets.allIds],
           byId:{...state.wordSets.byId, 
-            [idSetWord]: {
-              'id': idSetWord, 
+            [idSet]: {
+              'id': idSet, 
               'title': nameSet,
-              ['allIdWords']: [...state.wordSets.byId[idSetWord].allIdWords,idWord], 
-              ['words']: {...state.wordSets.byId[idSetWord].words, [idWord]: action.payload.newWord}}}
-          
+              ['allIdWords']: [...state.wordSets.byId[idSet].allIdWords,idWord], 
+              ['words']: {...state.wordSets.byId[idSet].words, [idWord]: newWord}
+            }
+          }
           // byId:{...state.wordSets.byId, [action.payload.idSet]: {[idWord]: action.payload.newWord}}
         }
       }
 
     case 'REMOVE_WORD_USE_NAME':
-      const item = action.payload.item; 
+      const idWordDel = action.payload.idWord 
+      const idSetDel = action.payload.idSet 
+      delete state.wordSets.byId[idSetDel].words[idWordDel]
       return {
         ...state,
-        // wordSets: state.wordSets.filter((wordSets) => (wordSets.words.id !== item))
-        wordSets: state.wordSets.filter((wordsX) => wordsX.id !== item)
-        // wordSets: state.wordSets.filter(() => state.wordSets[1].words.id !== item)
-        
-      }; 
+        wordSets: {
+          allIds: [...state.wordSets.allIds],
+          byId:{...state.wordSets.byId, 
+            [idSetDel]: {
+              'id': idSetDel, 
+              'title': state.wordSets.byId[idSetDel].title,
+
+                      // id z filter zrobic z inta na string i porownac dopiero
+
+              ['allIdWords']: state.wordSets.byId[idSetDel].allIdWords.filter((id) => id + '' !== idWordDel),  // +idWordDel - change String to Int // id + '' - change Int to String
+              ['words']: state.wordSets.byId[idSetDel].words
+            }
+          }
+        } 
+      };
 
   default:
     return state;
