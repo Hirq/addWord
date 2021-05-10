@@ -1,113 +1,113 @@
-const initialStateOld = {
-  words: [
-    {
-      id: 1,
-      wordPl: 'mug',
-      wordAng: 'kubek',
-      created: '1 day',
-    },
-    {
-      id: 2,
-      wordPl: 'mysz',
-      wordAng: 'mouse',
-      created: '1 day',
-    },
-    {
-      id: 3,
-      wordPl: 'obraz',
-      wordAng: 'picture',
-      created: '1 day',
-    },
-    {
-      id: 4,
-      wordPl: 'dom',
-      wordAng: 'house',
-      created: '1 day',
-    },
-  ],
+// const initialStateOld = {
+//   words: [
+//     {
+//       id: 1,
+//       wordPl: 'mug',
+//       wordAng: 'kubek',
+//       created: '1 day',
+//     },
+//     {
+//       id: 2,
+//       wordPl: 'mysz',
+//       wordAng: 'mouse',
+//       created: '1 day',
+//     },
+//     {
+//       id: 3,
+//       wordPl: 'obraz',
+//       wordAng: 'picture',
+//       created: '1 day',
+//     },
+//     {
+//       id: 4,
+//       wordPl: 'dom',
+//       wordAng: 'house',
+//       created: '1 day',
+//     },
+//   ],
 
-  notes: [
-    {
-      id: 0,
-      title: 'pierwsza strona',
-      content:
-        'zrobic przycisk dla dodawania set listy - nastepnie pytanie czy na poewno chcesz usunac set liste? - przycisk przenies slowo do setlisty - select box, do ktorej, a najlepiej multibox, ze do 2 naraz i usuwamy przycisk z listy wtedy',
-      date: '12.12.2012',
-      tag: 'work',
-    },
-    {
-      id: 1,
-      title: 'Cele',
-      content:
-        'Poprawić CARD + GridTemplate + Blog - odpowienie propsy przekazać. Następnie REDUX - Dodawania, usuwanie i na koncu edycja bloga - react select dla nowego wpisu na blog',
-      date: '12.12.2012',
-      tag: 'work',
-    },
-    {
-      id: 2,
-      title: 'Nie robimy tego',
-      content:
-        'Storybook ODPADA - Dwa bledy w consoli - jeden to zwiazany z styled-component ze podaje link jako true, a drugi to w TIMER do poprawy na potem',
-      date: '05.01.1910',
-      tag: 'home',
-    },
-    {
-      id: 3,
-      title: 'tez zrobić trzeba to',
-      content:
-        'Poprawić widok listy + dodać notatki podobne do bloga - coś w stylu to do zrobić i tez panel po prawej stronie z możliwościa ',
-      date: '11.07.2018',
-      tag: 'adventure',
-    },
-    {
-      id: 4,
-      title: 'Rejestracje ogarnac i logowanie ? Chyba ze coś innego sie pojawi szybciej no i firebase podpiąc w końcu kiedyś - ale to chyba na końcu',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      date: '31.03.2022',
-      tag: 'work',
-    },
-  ],
+//   notes: [
+//     {
+//       id: 0,
+//       title: 'pierwsza strona',
+//       content:
+//         'zrobic przycisk dla dodawania set listy - nastepnie pytanie czy na poewno chcesz usunac set liste? - przycisk przenies slowo do setlisty - select box, do ktorej, a najlepiej multibox, ze do 2 naraz i usuwamy przycisk z listy wtedy',
+//       date: '12.12.2012',
+//       tag: 'work',
+//     },
+//     {
+//       id: 1,
+//       title: 'Cele',
+//       content:
+//         'Poprawić CARD + GridTemplate + Blog - odpowienie propsy przekazać. Następnie REDUX - Dodawania, usuwanie i na koncu edycja bloga - react select dla nowego wpisu na blog',
+//       date: '12.12.2012',
+//       tag: 'work',
+//     },
+//     {
+//       id: 2,
+//       title: 'Nie robimy tego',
+//       content:
+//         'Storybook ODPADA - Dwa bledy w consoli - jeden to zwiazany z styled-component ze podaje link jako true, a drugi to w TIMER do poprawy na potem',
+//       date: '05.01.1910',
+//       tag: 'home',
+//     },
+//     {
+//       id: 3,
+//       title: 'tez zrobić trzeba to',
+//       content:
+//         'Poprawić widok listy + dodać notatki podobne do bloga - coś w stylu to do zrobić i tez panel po prawej stronie z możliwościa ',
+//       date: '11.07.2018',
+//       tag: 'adventure',
+//     },
+//     {
+//       id: 4,
+//       title: 'Rejestracje ogarnac i logowanie ? Chyba ze coś innego sie pojawi szybciej no i firebase podpiąc w końcu kiedyś - ale to chyba na końcu',
+//       content:
+//         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+//       date: '31.03.2022',
+//       tag: 'work',
+//     },
+//   ],
 
-  wordSets: [
-    {
-      id: 1,
-      title: 'SIZE',
-      wordsX: [
-        {
-          id: 1,
-          wordPl: 'aas',
-          wordAng: 'hodsause', 
-        },
-        {
-          id:2,
-          wordPl: 'dom',
-          wordAng: 'house', 
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: 'SCHOOL',
-      wordsX: [
-        {
-          id:3,
-          wordPl: 'dom',
-          wordAng: 'house', 
-        },
-        {
-          id:4,
-          wordPl: 'dom',
-          wordAng: 'house', 
-        },
-      ],
-    },
-  ]
-}
+//   wordSets: [
+//     {
+//       id: 1,
+//       title: 'SIZE',
+//       wordsX: [
+//         {
+//           id: 1,
+//           wordPl: 'aas',
+//           wordAng: 'hodsause', 
+//         },
+//         {
+//           id:2,
+//           wordPl: 'dom',
+//           wordAng: 'house', 
+//         },
+//       ],
+//     },
+//     {
+//       id: 2,
+//       title: 'SCHOOL',
+//       wordsX: [
+//         {
+//           id:3,
+//           wordPl: 'dom',
+//           wordAng: 'house', 
+//         },
+//         {
+//           id:4,
+//           wordPl: 'dom',
+//           wordAng: 'house', 
+//         },
+//       ],
+//     },
+//   ]
+// }
 
 const initialState = {
   words: {
-    allIds: [1,2,3,4],
+    allIds: ['1','2','3','4'],
     byId:{
       1: {
         wordPl: 'kubek',
@@ -137,7 +137,9 @@ const initialState = {
       id: 0,
       title: 'pierwsza strona',
       content:
-        'zrobic przycisk dla dodawania set listy - nastepnie pytanie czy na poewno chcesz usunac set liste? - przycisk przenies slowo do setlisty - select box, do ktorej, a najlepiej multibox, ze do 2 naraz i usuwamy przycisk z listy wtedy',
+        'zrobic przycisk dla dodawania set listy - nastepnie pytanie czy na poewno chcesz usunac set liste? - przycisk przenies slowo do setlisty - select box, do ktorej, a najlepiej multibox, ze do 2 naraz i usuwamy przycisk z listy wtedy' +
+        ' &&  usuwanie z setlisty pierwszego elementu dobrze- ale jak chcemy usunac odrazu drugi(czyli w sumie juz pierwszy to nie dziala za 1 przycisikem tylko drugim - dlaczego ? '
+        ,
       date: '12.12.2012',
       tag: 'work',
     },
@@ -181,7 +183,7 @@ const initialState = {
       901: {
         id: 901,
         title: 'SIZE',
-        allIdWords: [5,6],
+        allIdWords: ['5','6'],
         words: {
           5: {
             wordPl: 'duzy',
@@ -196,7 +198,7 @@ const initialState = {
       902: {
         id: 902,
         title: 'SCHOOL',
-        allIdWords: [7,8],
+        allIdWords: ['7','8'],
         words: {
           7: {
             wordPl: 'klasa',
@@ -319,14 +321,11 @@ const rootReducer = (state = initialState, action) => {
             [idSetDel]: {
               'id': idSetDel, 
               'title': state.wordSets.byId[idSetDel].title,
-
-                      // id z filter zrobic z inta na string i porownac dopiero
-
               ['allIdWords']: state.wordSets.byId[idSetDel].allIdWords.filter((id) => id + '' !== idWordDel),  // +idWordDel - change String to Int // id + '' - change Int to String
               ['words']: state.wordSets.byId[idSetDel].words
-            }
-          }
-        } 
+            },
+          },
+        }, 
       };
 
   default:

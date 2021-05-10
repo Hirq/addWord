@@ -77,15 +77,9 @@ const StyledButtonWordRemove = styled(Button)`
 //   padding: 10px;
 // `
 
-const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList, path, id, removeSet, removeWordUseName, wordSets  }) => {
+const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
-
-  // const [NewcontentSet2, SetNewContentSet2] = useState(...wordSets.filter((item) => item.id == id));
-
-  const [NewcontentSet2, SetNewContentSet2] = useState(wordSets.byId[id]);
-  // const data = wordSets.filter((item) => item.id == idActivate).map(({id, title, words}) => ({id, title, words}))
-
 
   const handleConfirmBox = () => {
     setVisibleBox(state => !state)
@@ -94,47 +88,34 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   const handleChangeSelectWord = (e) => {
     e.preventDefault();
     setSelectWord(e.target.value);
-
-    // console.log(contentSet[e.target.value]);
-    // (wordSets.byId[data].title);
-    // setSelectSetName(wordSets.byId[data].title);
-    // // setSelectWord(data);
-    // console.log(data);
+    console.log(selectWord);
   }
 
-  const hideConfirmBox = () => {
-    {visibleBox ? setVisibleBox(false) : setVisibleBox(false)}
-  }
-
-  const deleteWord2 = (id, idSet) => {
-
+  const deleteWord = (id, idSet) => {
     console.log(id);
-    console.log(idSet);
     // console.log(idSet);
-    removeWordUseName(id, idSet)
-
-
-
-    // const SetDetail = ({wordSets, idActivate }) => {
-    //   const data = wordSets.filter((item) => item.id == idActivate).map(({id, title, words}) => ({id, title, words}))
+    removeWordUseName(id, idSet);
+    console.log(id);
+    setFirstWord(idSet)
+    console.log(selectWord);
   }
 
+  const setFirstWord = (idSet) => {
+    if (wordSetList.length > 0) {
+      const data = wordSets.byId[idSet].allIdWords[0];
+      const initialData = wordSetList[0];
+      setSelectWord(data);
+      // console.log(data);
+    }
+  };
+
+  const sprawdz = (data) => {
+    setFirstWord(id)
+    console.log(data);
+  }
 
   useEffect(() => {
-    if (contentSet.length > 0) {
-      const initialData = contentSet[0];
-      setSelectWord(initialData);
-      console.log(initialData);
-      console.log(NewcontentSet2);
-      console.log(NewcontentSet2.words);
-      // const data = NewcontentSet2.words;
-      // SetNewContentSet2(NewcontentSet2.words)
-      SetNewContentSet2(NewcontentSet2)
-
-      console.log(NewcontentSet2);
-    }
-
-
+    setFirstWord(id)
   }, [])
 
  return(
@@ -155,16 +136,17 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
           ))}
         </select>
 
-        <StyledButtonWordRemove onClick={() => deleteWord2(selectWord, id)} secondary> Remove REDUX </StyledButtonWordRemove>
+        <StyledButtonWordRemove type="button"  onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
 
+        <StyledButtonWordRemove onClick={() => sprawdz(selectWord)} secondary> sprawdz </StyledButtonWordRemove>
         </>
       : null }
 
       { wordSetList === {} 
       ? null 
       : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
-
       }
+      
       <Paragraph>{date}</Paragraph>
       <Paragraph>{tag}</Paragraph>
       { path === 'blog'
@@ -173,9 +155,6 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
       <>
         <Button as={Link} to={`/list`} link> back </Button>
         <Button onClick={handleConfirmBox}>Delete set</Button>
-        
-        {/* <Button onClick={() => contentSet.push('ele')}  >ADD ele AS WORD</Button> */}
-
         <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
           <StyledHeadingModal>You are sure want to delete this set list?</StyledHeadingModal>
           <StyledButtonsModal>
@@ -183,10 +162,8 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
             <StyledButtonModalRemove onClick={() => removeSet(id)} as={Link} to={`/list`}  link>REMOVE</StyledButtonModalRemove>
           </StyledButtonsModal>
         </ConfirmBox>
-
       </>
       }
-       
     </StyledWrapper>
   </UserPageTemplate>
  )

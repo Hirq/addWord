@@ -111,24 +111,10 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
     setNameSet('');
   }
 
-  const AddItemToSetAndRemoveFromList = (item) => {
-    if (wordSets.allIds.length == 1) {
-      const dataTest = wordSets[0].words;
-      setSelectSet(dataTest);
-    }
-    selectSet.push({
-      wordPl: item.wordPl,
-      wordAng: item.wordAng
-    });
-    removeWord(item.id);
-  }
-
-
   const AddWordToSetAndDeleteFromList = (word, idWord, idSet, nameSet) => {
     addWordToSet(word, idWord, idSet, nameSet)
     removeWord(idWord);
   }
-
 
   useEffect(() => {
     if (wordSets.allIds.length > 0) {
@@ -163,15 +149,6 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
           </StyledLi>
           )}
 
-          {/* Stary kod  */}
-          
-          {/* {words.allIds((item) =>
-            <StyledLi key={item.id}>
-              {item.wordAng}-{item.wordPl}  
-              <StyledButtonTransferWord onClick={() => AddItemToSetAndRemoveFromList(item)} secondary> Add to set </StyledButtonTransferWord>
-              <StyledButtonDelete onClick={() => removeWord(item.id)} secondary>DELETE</StyledButtonDelete>
-            </StyledLi>
-          )} */}
           </StyledUl>
           <StyledWrapperPage>
           { words.allIds.length > 5 && <> <StyledPageNumber> 1 </StyledPageNumber><StyledPageNumber> 2 </StyledPageNumber></>}
@@ -188,12 +165,12 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
               <Input value={nameSet|| ''} placeholder="name set" onChange={handleChange}/>
               <Button onClick={() => addSet({
                 title: nameSet,
-                allIdWords: [10],
+                allIdWords: [],
                 words: {
-                  10: {
-                    wordPl: 'testowa wiadomosc',
-                    wordAng: 'test text'
-                  } 
+                  // 10: {
+                  //   wordPl: 'testowa wiadomosc',
+                  //   wordAng: 'test text'
+                  // } 
                 }
               })}>
                 Add set
