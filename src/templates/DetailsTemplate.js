@@ -86,37 +86,27 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   }
 
   const handleChangeSelectWord = (e) => {
-    e.preventDefault();
     setSelectWord(e.target.value);
-    console.log(selectWord);
   }
 
   const deleteWord = (id, idSet) => {
     console.log(id);
-    // console.log(idSet);
+    console.log(idSet);
     removeWordUseName(id, idSet);
-    console.log(id);
-    setFirstWord(idSet)
-    console.log(selectWord);
+    setSelectWord(idSet);
   }
 
   const setFirstWord = (idSet) => {
     if (wordSetList.length > 0) {
       const data = wordSets.byId[idSet].allIdWords[0];
-      const initialData = wordSetList[0];
       setSelectWord(data);
-      // console.log(data);
     }
   };
 
-  const sprawdz = (data) => {
+  // do zeszytu opis ocb
+  useEffect(() => {         
     setFirstWord(id)
-    console.log(data);
-  }
-
-  useEffect(() => {
-    setFirstWord(id)
-  }, [])
+  }, [wordSets])
 
  return(
  <UserPageTemplate>
@@ -136,9 +126,10 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
           ))}
         </select>
 
-        <StyledButtonWordRemove type="button"  onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
+        <StyledButtonWordRemove onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
+        <StyledButtonWordRemove onClick={() => setSelectWord(wordSets.byId[id].allIdWords[0])} secondary> Set 1 element array </StyledButtonWordRemove>
 
-        <StyledButtonWordRemove onClick={() => sprawdz(selectWord)} secondary> sprawdz </StyledButtonWordRemove>
+              {selectWord}
         </>
       : null }
 
