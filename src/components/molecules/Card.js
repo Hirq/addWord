@@ -4,7 +4,7 @@ import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
 import Button from 'components/atoms/Button';
 import { connect } from 'react-redux';
-import { removeNote as removeNoteAction } from 'redux/actions';
+import { removeBlog as removeBlogAction, removeNote as removeNoteAction } from 'redux/actions';
 import { Redirect } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
@@ -42,11 +42,39 @@ const StyledParagraph = styled(Paragraph)`
   margin-top: auto;
 `;
 
-const Card = ({ id, title, content, date, tag, removeNote, path }) => {
+const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) => {
   const [redirect, setRedirect] = useState(false); 
 
   const handleCardClick = () => {
     setRedirect(state => !state)
+  }
+
+  const determinePath = (path) => {
+    if (path === 'blog'){
+      return(
+        <StyledWrapper onClick={handleCardClick}>
+        <InnerWrapper>
+          <Heading> {title} </Heading>
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{content}</Paragraph>
+          <StyledParagraph>{tag}</StyledParagraph>
+          <Paragraph>{date}</Paragraph>
+          <Button onClick={() => removeBlog(id)} secondary>REMOVE</Button>
+        </InnerWrapper>
+        </StyledWrapper>
+      )
+    }
+    if (path === 'note'){
+      return(      
+        <StyledWrapper set onClick={handleCardClick}>
+        <InnerWrapper>
+          <Heading> {title} </Heading>
+        </InnerWrapper>
+        <Button onClick={() => removeNote(id)} secondary>REMOVE</Button>
+        </StyledWrapper>
+      )
+    }
   }
 
   if (redirect)  {
@@ -56,22 +84,15 @@ const Card = ({ id, title, content, date, tag, removeNote, path }) => {
     if (path === 'list') {
       return <Redirect to={`list/${id}`} />;
     }
+    if (path === 'note') {
+      return <Redirect to={`note/${id}`} />;
+    }
   } 
 
   return (
   <>
-    {path === 'blog' ?
-    <StyledWrapper onClick={handleCardClick}>
-      <InnerWrapper>
-        <Heading> {title} </Heading>
-      </InnerWrapper>
-      <InnerWrapper flex>
-        <Paragraph>{content}</Paragraph>
-        <StyledParagraph>{tag}</StyledParagraph>
-        <Paragraph>{date}</Paragraph>
-        <Button onClick={() => removeNote(id)} secondary>REMOVE</Button>
-      </InnerWrapper>
-    </StyledWrapper>
+    {( path === 'blog' || path === 'note' ) ?
+     determinePath(path)
     :
     <StyledWrapper set onClick={handleCardClick}>
       <InnerWrapper>
@@ -84,6 +105,7 @@ const Card = ({ id, title, content, date, tag, removeNote, path }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  removeBlog: (id) => dispatch(removeBlogAction(id)),
   removeNote: (id) => dispatch(removeNoteAction(id)),
 })
 

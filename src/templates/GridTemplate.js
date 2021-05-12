@@ -41,7 +41,6 @@ const StyledButtonIcon = styled(ButtonIcon)`
   bottom: 10px; 
 `
 
-
 const GridTemplate = ({ children, name, countItem }) => {
   const [visibleBar, setVisibleBar] = useState(false);
 

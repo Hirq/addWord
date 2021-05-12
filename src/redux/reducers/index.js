@@ -132,7 +132,7 @@ const initialState = {
     }
   },
 
-  notes: [
+  blogs: [
     {
       id: 0,
       title: 'pierwsza strona',
@@ -211,7 +211,24 @@ const initialState = {
         },
       },
     }
-  }
+  },
+
+  notes: [
+    {
+      id: 0,
+      title: 'NewBlogBar - wyciagnac z reduxa na jakiej jest sciezce DevToolsRedux i wtedy na podstawie tych danych dodać albo bloga albo notatke',
+      content:
+        'test',
+      date: '12.12.2012',
+    },
+    {
+      id: 1,
+      title: 'Poprawic widok notatek',
+      content:
+        'ToDO',
+      date: '12.12.2012',
+    }
+  ],
 }
 
 
@@ -258,16 +275,16 @@ const rootReducer = (state = initialState, action) => {
           byId: state.words.byId
         }
       };
-    case 'ADD_NOTE':
+    case 'ADD_BLOG':
       return {
         ...state,
-        notes: [...state.notes, action.payload.note],
+        blogs: [...state.blogs, action.payload.blog],
       }
-    case 'REMOVE_NOTE':
-      const id_note = action.payload.id      
+    case 'REMOVE_BLOG':
+      const id_blog = action.payload.id      
       return {
         ...state,
-        notes: state.notes.filter((notes) => notes.id !== id_note)
+        blogs: state.blogs.filter((blogs) => blogs.id !== id_blog)
       }; 
       case 'ADD_SET':
         return {
@@ -327,6 +344,17 @@ const rootReducer = (state = initialState, action) => {
           },
         }, 
       };
+      case 'ADD_NOTE':
+        return {
+          ...state,
+          notes: [...state.notes, action.payload.note],
+        }
+      case 'REMOVE_NOTE':
+        const id_note = action.payload.id      
+        return {
+          ...state,
+          notes: state.notes.filter((notes) => notes.id !== id_note)
+        }; 
 
   default:
     return state;

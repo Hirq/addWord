@@ -24,26 +24,26 @@ export const removeWord = (id) => {
   };
 };
 
-export const addNote = (noteContent) => {
+export const addBlog = (blogContent) => {
   const getId = () =>
     `_${Math.random()
       .toString(36)
       .substr(2, 9)}`;
 
   return {
-    type: 'ADD_NOTE',
+    type: 'ADD_BLOG',
     payload: {
-      note: {
+      blog: {
         id: getId(),
-        ...noteContent
+        ...blogContent
       }
     }
   }
 };
 
-export const removeNote = (id) => {
+export const removeBlog = (id) => {
   return {
-    type: 'REMOVE_NOTE',
+    type: 'REMOVE_BLOG',
     payload: {
       id
     },
@@ -96,6 +96,32 @@ export const removeWordUseName = (idWord, idSet) => {
     payload: {
       idWord: idWord,
       idSet: idSet
+    },
+  };
+};
+
+export const addNote = (noteContent) => {
+  const getId = () =>
+    `_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+
+  return {
+    type: 'ADD_NOTE',
+    payload: {
+      note: {
+        id: getId(),
+        ...noteContent
+      }
+    }
+  }
+};
+
+export const removeNote = (id) => {
+  return {
+    type: 'REMOVE_NOTE',
+    payload: {
+      id
     },
   };
 };

@@ -58,7 +58,7 @@ const Leftbar = () => {
           <ButtonIcon as={NavLink} to={routes.blog} icon={twitterIcon} activeclass="active" />
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
+          <ButtonIcon as={NavLink} to={routes.note} icon={bulbIcon} activeclass="active" />
         </li>
       </StyledLinksList>
       <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />

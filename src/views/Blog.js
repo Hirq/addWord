@@ -4,11 +4,11 @@ import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card';
 import { connect } from 'react-redux';
 
-const Blog = ({ notes }) => {
+const Blog = ({ blogs }) => {
   return (
     <>
-    <GridTemplate name="BLOG" countItem={notes.length}>
-      {notes.map(({ title, content, date, tag, id }) => (
+    <GridTemplate name="BLOG" countItem={blogs.length}>
+      {blogs.map(({ title, content, date, tag, id }) => (
         <Card 
           id={id}
           title={title}
@@ -25,8 +25,8 @@ const Blog = ({ notes }) => {
 }
 
 const mapStateToProps = state  => {
-  const { notes } = state;
-  return { notes };
+  const { blogs } = state;
+  return { blogs };
 }
 
 export default connect(mapStateToProps)(Blog);

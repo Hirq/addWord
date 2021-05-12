@@ -8,7 +8,6 @@ import Paragraph from 'components/atoms/Paragraph';
 import Button from 'components/atoms/Button';
 import { connect } from 'react-redux';
 import { removeSet as removeSetAction, removeWordUseName as removeWordUseNameAction, } from 'redux/actions';
-// import Modal from 'react-modal';
 import ConfirmBox from 'components/atoms/ConfirmBox';
 
 const StyledWrapper = styled.div`
@@ -64,19 +63,6 @@ const StyledButtonWordRemove = styled(Button)`
   height: 30px;
 `
 
-// const StyledModal = styled(Modal)`
-//   background-color: red;
-//   position: absolute;
-//   width: 300px;
-//   height: 200px;
-//   top: 50%;
-//   left: 50%;
-//   margin-top: -100px;
-//   margin-left: -150px;
-//   border: 3px solid green;
-//   padding: 10px;
-// `
-
 const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
@@ -103,6 +89,15 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
     }
   };
 
+  const determinePath = (path) => {
+    if (path === 'blog'){
+      return <Button as={Link} to={`/blog`} link> save </Button>;
+    }
+    if (path === 'note') {
+      return <Button as={Link} to={`/note`} link> save </Button>;
+    }
+  } 
+
   // do zeszytu opis ocb
   useEffect(() => {         
     setFirstWord(id)
@@ -125,23 +120,19 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
             <option value={item} key={item} > {contentSet[item].wordAng} </option>
           ))}
         </select>
-
         <StyledButtonWordRemove onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
-        <StyledButtonWordRemove onClick={() => setSelectWord(wordSets.byId[id].allIdWords[0])} secondary> Set 1 element array </StyledButtonWordRemove>
-
-              {selectWord}
         </>
       : null }
-
       { wordSetList === {} 
       ? null 
       : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
       }
-      
       <Paragraph>{date}</Paragraph>
       <Paragraph>{tag}</Paragraph>
-      { path === 'blog'
-      ? <Button as={Link} to={`/blog`} link> save </Button>
+
+
+      { path === 'blog' || path === 'note'
+      ? determinePath(path)
       : 
       <>
         <Button as={Link} to={`/list`} link> back </Button>

@@ -9,6 +9,9 @@ import List from 'views/List';
 import Blog from 'views/Blog';
 import BlogDetail from 'views/BlogDetail';
 import SetDetail from 'views/SetDetail';
+import Note from 'views/Note';
+import NoteDetail from 'views/NoteDetail';
+
 
 const Root = () => (
   <Provider store={store}>
@@ -21,9 +24,8 @@ const Root = () => (
             <Route exact path={routes.setList} component={SetDetail} />
             <Route exact path={routes.blog} component={Blog} />
             <Route exact path={routes.blogs} component={BlogDetail} />
-
-            {/* <Route exact path={routes.note} component={Notes} />
-            <Route path={routes.notes} component={DetailsPage} /> */}
+            <Route exact path={routes.note} component={Note} />
+            <Route exact path={routes.notes} component={NoteDetail} />
           </Switch>
         </MainTemplate>
       </ThemeProviderDark>

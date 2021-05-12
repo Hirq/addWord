@@ -5,7 +5,7 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import { connect } from 'react-redux';
-import { addNote as addNoteAction } from 'redux/actions';
+import { addBlog as addBlogAction } from 'redux/actions';
 
 const StyledWrapper = styled.div`
   background-color: ${({theme}) => theme.topBar};;
@@ -63,7 +63,7 @@ var tags = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewBlogBar = ({ isVisible, addNote, hideAddBar }) => {
+const NewBlogBar = ({ isVisible, addBlog, hideAddBar }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
@@ -98,7 +98,7 @@ const NewBlogBar = ({ isVisible, addNote, hideAddBar }) => {
       <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
       <StyledButtonSave
         onClick={() =>
-          addNote({
+          addBlog({
             title: title,
             content: content,
             date: today,
@@ -125,7 +125,7 @@ const NewBlogBar = ({ isVisible, addNote, hideAddBar }) => {
 // };
 
 const mapDispatchToProps = dispatch => ({
-  addNote: (noteContent) => dispatch(addNoteAction(noteContent))
+  addBlog: (noteContent) => dispatch(addBlogAction(noteContent))
 });
 
 export default connect(null, mapDispatchToProps)(NewBlogBar);
