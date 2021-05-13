@@ -227,6 +227,13 @@ const initialState = {
       content:
         'ToDO',
       date: '12.12.2012',
+    },
+    {
+      id: 2,
+      title: '',
+      content:
+        'asdas',
+      date: '12.12.2012',
     }
   ],
 }

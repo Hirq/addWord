@@ -6,7 +6,7 @@ import Input from 'components/atoms/Input';
 import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon';
-import NewBlogBar from 'components/organisms/NewBlogBar';
+import NewElementBar from 'components/organisms/NewElementBar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -24,7 +24,7 @@ const StyledPageHeader = styled.div`
 
 const StyledHeading = styled(Heading)`
   margin: 25px 0 0 0;
-
+  /* text-transform: uppercase; */
   ::first-letter {
     text-transform: uppercase;
   }
@@ -39,12 +39,17 @@ const StyledButtonIcon = styled(ButtonIcon)`
   position: fixed;
   right: 10px;
   bottom: 10px; 
+  :hover {
+    background-color: ${({ theme }) => (theme.colorButtonSecondary)};
+    border: inset;
+    border-color: ${({ theme }) => (theme.colorButtonSecondary)};
+  }
 `
 
 const GridTemplate = ({ children, name, countItem }) => {
   const [visibleBar, setVisibleBar] = useState(false);
 
-  const handleNewBlogBarToggle = () => {
+  const handleNewElementBarToggle = () => {
     setVisibleBar(state => !state)
   }
 
@@ -64,8 +69,8 @@ return (
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
     </StyledWrapper>
-    <StyledButtonIcon onClick={handleNewBlogBarToggle}> + </StyledButtonIcon>
-    <NewBlogBar isVisible={visibleBar} hideAddBar={hideAddBar}/>
+    <StyledButtonIcon onClick={handleNewElementBarToggle}> + </StyledButtonIcon>
+    <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={name}/>
   </UserPageTemplate>
 )};
 

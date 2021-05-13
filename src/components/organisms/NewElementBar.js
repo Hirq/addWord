@@ -5,7 +5,7 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import { connect } from 'react-redux';
-import { addBlog as addBlogAction } from 'redux/actions';
+import { addBlog as addBlogAction, addNote as addNoteAction } from 'redux/actions';
 
 const StyledWrapper = styled.div`
   background-color: ${({theme}) => theme.topBar};;
@@ -63,7 +63,7 @@ var tags = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewBlogBar = ({ isVisible, addBlog, hideAddBar }) => {
+const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
@@ -88,17 +88,12 @@ const NewBlogBar = ({ isVisible, addBlog, hideAddBar }) => {
     hideAddBar();
   }
 
-  return(
-  <form onSubmit={handleSubmit}>
-    <StyledWrapper isVisible={isVisible}>
-      <Heading big>Create new </Heading>
-      <StyledButtonClose>X</StyledButtonClose>
-      <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
-      <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
-      <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
-      <StyledButtonSave
-        onClick={() =>
-          addBlog({
+  const determinePath = (path) => {
+    if (path === 'blog'){
+      return(
+        <>
+        <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
+        <StyledButtonSave onClick={() => addBlog({
             title: title,
             content: content,
             date: today,
@@ -106,8 +101,35 @@ const NewBlogBar = ({ isVisible, addBlog, hideAddBar }) => {
           })
         }
       >
-      Add Note
+      Add {path}
       </StyledButtonSave>
+      </>
+      )
+    }
+    if (path === 'note') {
+      return(
+        <StyledButtonSave
+        onClick={() =>
+          addNote({
+            title: title,
+            content: content,
+            date: today,
+          })
+        }
+      >
+      Add {path}
+      </StyledButtonSave>
+      )
+    } 
+  }
+  return(
+  <form onSubmit={handleSubmit}>
+    <StyledWrapper isVisible={isVisible}>
+      <Heading big>Create new </Heading>
+      <StyledButtonClose>X</StyledButtonClose>
+      <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
+      <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
+      {determinePath(path)}
     </StyledWrapper>
   </form>
 
@@ -125,7 +147,8 @@ const NewBlogBar = ({ isVisible, addBlog, hideAddBar }) => {
 // };
 
 const mapDispatchToProps = dispatch => ({
-  addBlog: (noteContent) => dispatch(addBlogAction(noteContent))
+  addBlog: (blogContent) => dispatch(addBlogAction(blogContent)),
+  addNote: (noteContent) => dispatch(addNoteAction(noteContent))
 });
 
-export default connect(null, mapDispatchToProps)(NewBlogBar);
+export default connect(null, mapDispatchToProps)(NewElementBar);

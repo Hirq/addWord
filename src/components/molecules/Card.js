@@ -34,13 +34,22 @@ const InnerWrapper = styled.div`
     css`
       display:flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
     `}
 `;
+
+const WrapperToDown = styled.div`
+  margin-top: auto;
+`
 
 const StyledParagraph = styled(Paragraph)`
   margin-top: auto;
 `;
+
+const StyledButton = styled(Button)`
+  margin-top: auto;
+`;
+
 
 const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) => {
   const [redirect, setRedirect] = useState(false); 
@@ -58,20 +67,25 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <StyledParagraph>{tag}</StyledParagraph>
-          <Paragraph>{date}</Paragraph>
-          <Button onClick={() => removeBlog(id)} secondary>REMOVE</Button>
+          <WrapperToDown>
+            <Paragraph>{tag}</Paragraph>
+            <Paragraph>{date}</Paragraph>
+            <Button onClick={() => removeBlog(id)} secondary>REMOVE</Button>
+          </WrapperToDown>
         </InnerWrapper>
         </StyledWrapper>
       )
     }
     if (path === 'note'){
       return(      
-        <StyledWrapper set onClick={handleCardClick}>
+        <StyledWrapper onClick={handleCardClick}>
         <InnerWrapper>
           <Heading> {title} </Heading>
         </InnerWrapper>
-        <Button onClick={() => removeNote(id)} secondary>REMOVE</Button>
+
+        <InnerWrapper flex>
+        <StyledButton onClick={() => removeNote(id)} secondary>REMOVE</StyledButton>
+        </InnerWrapper>
         </StyledWrapper>
       )
     }
