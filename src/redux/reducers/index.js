@@ -223,16 +223,16 @@ const initialState = {
     },
     {
       id: 1,
-      title: 'Poprawic widok notatek',
+      title: 'NewElementBar - action przekazac jako parametr, a nie jako stringa - i przemyslec w jaki sposob czytelny zaprogramowac ten plik .js nastepnie ogarnac REDUX',
       content:
         'ToDO',
       date: '12.12.2012',
     },
     {
       id: 2,
-      title: '',
+      title: 'Zrobione',
       content:
-        'asdas',
+        'Poprawic widok notatek',
       date: '12.12.2012',
     }
   ],
@@ -293,6 +293,24 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         blogs: state.blogs.filter((blogs) => blogs.id !== id_blog)
       }; 
+
+
+    case 'EDIT_BLOG':
+      const id_blog_edit = action.payload.id
+      const titile_blog_edit = action.payload.title
+      const content_blog_edit = action.payload.content
+      const tag_blog_edit = action.payload.tag
+
+      state.blogs[id_blog_edit] = {
+        ...state.blogs[id_blog_edit],
+        ...titile_blog_edit,
+      }
+      return {
+        ...state
+      };
+
+
+
       case 'ADD_SET':
         return {
           ...state,

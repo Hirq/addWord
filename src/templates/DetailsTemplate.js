@@ -6,9 +6,11 @@ import UserPageTemplate from 'templates/UserPageTemplate';
 import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
 import Button from 'components/atoms/Button';
+import ButtonIcon from 'components/atoms/ButtonIcon';
 import { connect } from 'react-redux';
 import { removeSet as removeSetAction, removeWordUseName as removeWordUseNameAction, } from 'redux/actions';
 import ConfirmBox from 'components/atoms/ConfirmBox';
+import NewElementBar from 'components/organisms/NewElementBar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 170px;
@@ -63,9 +65,29 @@ const StyledButtonWordRemove = styled(Button)`
   height: 30px;
 `
 
+const StyledButtonIcon = styled(ButtonIcon)`
+  position: fixed;
+  right: 10px;
+  bottom: 10px; 
+  :hover {
+    background-color: ${({ theme }) => (theme.colorButtonSecondary)};
+    border: inset;
+    border-color: ${({ theme }) => (theme.colorButtonSecondary)};
+  }
+`
+
 const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
+  const [visibleBar, setVisibleBar] = useState(false);
+
+  const handleNewElementBarToggle = () => {
+    setVisibleBar(state => !state)
+  }
+
+  const hideAddBar = () => {
+    {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
+  }
 
   const handleConfirmBox = () => {
     setVisibleBox(state => !state)
@@ -91,10 +113,22 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
 
   const determinePath = (path) => {
     if (path === 'blog'){
-      return <Button as={Link} to={`/blog`} link> save </Button>;
+      return(
+      <>
+        <Button as={Link} to={`/blog`} link> save </Button>
+        <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
+        <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit'/>
+      </>
+      )
     }
     if (path === 'note') {
-      return <Button as={Link} to={`/note`} link> save </Button>;
+      return (
+        <>
+          <Button as={Link} to={`/note`} link> save </Button>
+          <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
+          <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit'/>
+      </>
+      )
     }
   } 
 

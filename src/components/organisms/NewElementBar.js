@@ -63,7 +63,7 @@ var tags = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path }) => {
+const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
@@ -124,12 +124,18 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path }) => {
   }
   return(
   <form onSubmit={handleSubmit}>
+
     <StyledWrapper isVisible={isVisible}>
-      <Heading big>Create new </Heading>
+    { action === 'Add' ?
+    <>
+      <Heading big> {action} {path} </Heading>
       <StyledButtonClose>X</StyledButtonClose>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
       {determinePath(path)}
+    </>
+      : <h1>asdas</h1>
+    }
     </StyledWrapper>
   </form>
 

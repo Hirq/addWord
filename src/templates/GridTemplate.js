@@ -70,7 +70,7 @@ return (
       <StyledGrid>{children}</StyledGrid>
     </StyledWrapper>
     <StyledButtonIcon onClick={handleNewElementBarToggle}> + </StyledButtonIcon>
-    <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={name}/>
+    <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={name} action='Add'/>
   </UserPageTemplate>
 )};
 

@@ -50,6 +50,18 @@ export const removeBlog = (id) => {
   };
 };
 
+export const editBlog = (id, title, content, tag) => {
+  return {
+    type: 'EDIT_BLOG',
+    payload: {
+      id,
+      title,
+      content,
+      tag
+    },
+  };
+};
+
 export const addSet = (wordSetContent) => {
   const getId = () =>
     `_${Math.random()
