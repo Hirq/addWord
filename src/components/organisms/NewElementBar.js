@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Input from 'components/atoms/Input';
@@ -63,7 +63,7 @@ var tags = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action }) => {
+const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
@@ -88,7 +88,61 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action }
     hideAddBar();
   }
 
+  useEffect(() => {
+    if (action === 'Edit'){
+      if (path === 'blog'){
+        const data = blogs.filter((blogs) => blogs.id === id)
+        setTitle(data[0].title);
+        setContent(data[0].content);
+        setTag(data[0].tag);
+      }
+      if (path === 'note'){
+        const data = notes.filter((notes) => notes.id === id)
+        setTitle(data[0].title);
+        setContent(data[0].content);
+      }
+    }
+  }, [] );
+
+
   const determinePath = (path) => {
+    if (action === 'Add'){
+      if (path === 'blog'){
+        return(
+          <>
+          <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
+          <StyledButtonSave onClick={() => addBlog({
+              title: title,
+              content: content,
+              date: today,
+              tag: tag,
+            })
+          }
+        >
+        {action} {path}
+        </StyledButtonSave>
+        </>
+        )
+      }
+      if (path === 'note') {
+        return(
+          <>
+          <StyledButtonSave
+          onClick={() =>
+            addNote({
+              title: title,
+              content: content,
+              date: today,
+            })
+          }
+        >
+        {action} {path}
+        </StyledButtonSave>
+        </>
+        )
+      } 
+    }
+  if (action === 'Edit'){
     if (path === 'blog'){
       return(
         <>
@@ -101,13 +155,14 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action }
           })
         }
       >
-      Add {path}
+      {action} {path}
       </StyledButtonSave>
       </>
       )
     }
     if (path === 'note') {
       return(
+        <>
         <StyledButtonSave
         onClick={() =>
           addNote({
@@ -117,25 +172,23 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action }
           })
         }
       >
-      Add {path}
+      {action} {path}
       </StyledButtonSave>
+      </>
       )
     } 
   }
+  }
+  
   return(
   <form onSubmit={handleSubmit}>
 
     <StyledWrapper isVisible={isVisible}>
-    { action === 'Add' ?
-    <>
-      <Heading big> {action} {path} </Heading>
+      <Heading big> {action} {path} {id}</Heading>
       <StyledButtonClose>X</StyledButtonClose>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
       {determinePath(path)}
-    </>
-      : <h1>asdas</h1>
-    }
     </StyledWrapper>
   </form>
 
@@ -152,9 +205,17 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action }
 //   isVisible: false,
 // };
 
+const mapStateToProps = ( state ) => {
+  const { notes, blogs } = state;
+  return {
+    notes,
+    blogs
+  };
+}
+
 const mapDispatchToProps = dispatch => ({
   addBlog: (blogContent) => dispatch(addBlogAction(blogContent)),
   addNote: (noteContent) => dispatch(addNoteAction(noteContent))
 });
 
-export default connect(null, mapDispatchToProps)(NewElementBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NewElementBar);

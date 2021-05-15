@@ -215,21 +215,21 @@ const initialState = {
 
   notes: [
     {
-      id: 0,
+      id: 90,
       title: 'NewBlogBar - wyciagnac z reduxa na jakiej jest sciezce DevToolsRedux i wtedy na podstawie tych danych dodać albo bloga albo notatke',
       content:
         'test',
       date: '12.12.2012',
     },
     {
-      id: 1,
+      id: 91,
       title: 'NewElementBar - action przekazac jako parametr, a nie jako stringa - i przemyslec w jaki sposob czytelny zaprogramowac ten plik .js nastepnie ogarnac REDUX',
       content:
         'ToDO',
       date: '12.12.2012',
     },
     {
-      id: 2,
+      id: 92,
       title: 'Zrobione',
       content:
         'Poprawic widok notatek',

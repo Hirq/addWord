@@ -117,7 +117,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
       <>
         <Button as={Link} to={`/blog`} link> save </Button>
         <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
-        <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit'/>
+        <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id} />
       </>
       )
     }
@@ -126,7 +126,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         <>
           <Button as={Link} to={`/note`} link> save </Button>
           <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
-          <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit'/>
+          <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id}/>
       </>
       )
     }
