@@ -297,16 +297,14 @@ const rootReducer = (state = initialState, action) => {
 
     case 'EDIT_BLOG':
       const id_blog_edit = action.payload.id
-      const titile_blog_edit = action.payload.title
+      const title_blog_edit = action.payload.title
       const content_blog_edit = action.payload.content
       const tag_blog_edit = action.payload.tag
 
-      state.blogs[id_blog_edit] = {
-        ...state.blogs[id_blog_edit],
-        ...titile_blog_edit,
-      }
+
       return {
-        ...state
+        ...state,
+
       };
 
 
