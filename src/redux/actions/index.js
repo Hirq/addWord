@@ -57,7 +57,7 @@ export const editBlog = (id, title, content, tag) => {
       id,
       title,
       content,
-      tag
+      tag,
     },
   };
 };

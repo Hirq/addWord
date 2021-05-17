@@ -296,18 +296,23 @@ const rootReducer = (state = initialState, action) => {
 
 
     case 'EDIT_BLOG':
-      const id_blog_edit = action.payload.id
-      const title_blog_edit = action.payload.title
-      const content_blog_edit = action.payload.content
-      const tag_blog_edit = action.payload.tag
-
-
+      const id_blog_edit = action.payload.id;
+      const title_blog_edit = action.payload.title;
+      const content_blog_edit = action.payload.content;
+      const tag_blog_edit = action.payload.tag;
+      
       return {
         ...state,
-
+        blogs: state.blogs.map(blog => blog.id === id_blog_edit ?
+          {
+            id: id_blog_edit,
+            title: title_blog_edit,
+            content: content_blog_edit,
+            tag: tag_blog_edit
+          } :      
+        blog
+        )
       };
-
-
 
       case 'ADD_SET':
         return {

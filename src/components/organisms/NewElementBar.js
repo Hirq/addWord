@@ -5,7 +5,7 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import { connect } from 'react-redux';
-import { addBlog as addBlogAction, addNote as addNoteAction } from 'redux/actions';
+import { addBlog as addBlogAction, addNote as addNoteAction, editBlog as editBlogAction } from 'redux/actions';
 
 const StyledWrapper = styled.div`
   background-color: ${({theme}) => theme.topBar};;
@@ -63,7 +63,7 @@ var tags = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs }) => {
+const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
@@ -147,12 +147,12 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       return(
         <>
         <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
-        <StyledButtonSave onClick={() => addBlog({
-            title: title,
-            content: content,
-            date: today,
-            tag: tag,
-          })
+        <StyledButtonSave onClick={() => editBlog(
+          id,
+          title,
+          content,
+          tag,
+          )
         }
       >
       {action} {path}
@@ -215,7 +215,8 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = dispatch => ({
   addBlog: (blogContent) => dispatch(addBlogAction(blogContent)),
-  addNote: (noteContent) => dispatch(addNoteAction(noteContent))
+  addNote: (noteContent) => dispatch(addNoteAction(noteContent)),
+  editBlog: (id, title, content, tag) => dispatch(editBlogAction(id, title, content, tag))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewElementBar);
