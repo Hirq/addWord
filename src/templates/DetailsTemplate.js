@@ -14,7 +14,8 @@ import NewElementBar from 'components/organisms/NewElementBar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 170px;
-  max-width: 50vw;
+  height: 90vh;
+  max-width: 80vw;
   position: relative;
 
   @media (max-width: 1200px) {
@@ -115,7 +116,6 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
     if (path === 'blog'){
       return(
       <>
-        <Button as={Link} to={`/blog`} link> save </Button>
         <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
         <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id} />
       </>
@@ -124,7 +124,6 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
     if (path === 'note') {
       return (
         <>
-          <Button as={Link} to={`/note`} link> save </Button>
           <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
           <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id}/>
       </>
@@ -133,13 +132,14 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   } 
 
   // do zeszytu opis ocb
+
   useEffect(() => {         
     setFirstWord(id)
   }, [wordSets])
 
  return(
  <UserPageTemplate>
-    <StyledWrapper>
+    <StyledWrapper onClick={hideAddBar}>
       <StyledPageHeader>
         <StyledHeading big as="h1">
           {title}
@@ -163,13 +163,9 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
       }
       <Paragraph>{date}</Paragraph>
       <Paragraph>{tag}</Paragraph>
-
-
-      { path === 'blog' || path === 'note'
-      ? determinePath(path)
-      : 
+      <Button as={Link} to={'/'+path} link> save </Button>
+      { path === 'list' &&
       <>
-        <Button as={Link} to={`/list`} link> back </Button>
         <Button onClick={handleConfirmBox}>Delete set</Button>
         <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
           <StyledHeadingModal>You are sure want to delete this set list?</StyledHeadingModal>
@@ -180,7 +176,14 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         </ConfirmBox>
       </>
       }
-    </StyledWrapper>
+      </StyledWrapper>
+      { path === 'blog' || path === 'note'
+      ? 
+      determinePath(path)
+      : null
+      }
+
+    
   </UserPageTemplate>
  )
 };

@@ -10,6 +10,7 @@ import NewElementBar from 'components/organisms/NewElementBar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
+  height: 90vh;
 `;
 
 const StyledGrid = styled.div`
