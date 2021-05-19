@@ -14,9 +14,7 @@ import NewElementBar from 'components/organisms/NewElementBar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 170px;
-  height: 90vh;
   max-width: 80vw;
-  position: relative;
 
   @media (max-width: 1200px) {
     max-width: 80vw;

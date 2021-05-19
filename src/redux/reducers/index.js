@@ -216,24 +216,45 @@ const initialState = {
   notes: [
     {
       id: 90,
-      title: 'NewBlogBar - wyciagnac z reduxa na jakiej jest sciezce DevToolsRedux i wtedy na podstawie tych danych dodać albo bloga albo notatke',
+      title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',
       content:
         'test',
-      date: '12.12.2012',
+      date: '19.05.2021',
     },
     {
       id: 91,
-      title: 'NewElementBar - action przekazac jako parametr, a nie jako stringa - i przemyslec w jaki sposob czytelny zaprogramowac ten plik .js nastepnie ogarnac REDUX',
+      title: 'PropsType',
       content:
         'ToDO',
-      date: '12.12.2012',
+      date: '19.05.2021',
+    },
+    {
+      id: 91,
+      title: 'Filtorowanie po nazwie lub tagu i dodac input select, zeby moc dodac kilka słówek do jego zbioru z /list',
+      content:
+        '',
+      date: '19.05.2021',
     },
     {
       id: 92,
+      title: 'podczas psiania bloga lub notatki przechodzenie do nowej lini, a nie w ciągłym tekscie content',
+      content:
+        '',
+      date: '19.05.2021',
+    },
+    {
+      id: 93,
       title: 'Zrobione',
       content:
-        'Poprawic widok notatek',
-      date: '12.12.2012',
+        'Poprawic widok notatek' + ' NewBlogBar - wyciagnac z reduxa na jakiej jest sciezce DevToolsRedux i wtedy na podstawie tych danych dodać albo bloga albo notatke',
+      date: '13.05.2021',
+    },
+    {
+      id: 94,
+      title: 'Zrobione',
+      content:
+        'NewElementBar - action przekazac jako parametr, a nie jako stringa - i przemyslec w jaki sposob czytelny zaprogramowac ten plik .js nastepnie ogarnac REDUX',
+      date: '08.05.2021',
     }
   ],
 }
@@ -252,18 +273,6 @@ const rootReducer = (state = initialState, action) => {
     //     ...state,
     //     words: state.words.filter((words) => words.id !== idd)
     //   };  
-
-    // case 'ADD_SET':
-    //   return {
-    //     ...state,
-    //     wordSets: [...state.wordSets, action.payload.note],
-    //   }
-    // case 'REMOVE_SET':
-    //   const idSet = action.payload.id      
-    //   return {
-    //     ...state,
-    //     wordSets: state.wordSets.filter((wordSets) => wordSets.id !== idSet)
-    //   }; 
     case 'ADD_WORD':
       return {
         ...state, 
@@ -293,14 +302,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         blogs: state.blogs.filter((blogs) => blogs.id !== id_blog)
       }; 
-
-
     case 'EDIT_BLOG':
       const id_blog_edit = action.payload.id;
       const title_blog_edit = action.payload.title;
       const content_blog_edit = action.payload.content;
       const tag_blog_edit = action.payload.tag;
-      
       return {
         ...state,
         blogs: state.blogs.map(blog => blog.id === id_blog_edit ?
@@ -308,31 +314,29 @@ const rootReducer = (state = initialState, action) => {
             id: id_blog_edit,
             title: title_blog_edit,
             content: content_blog_edit,
-            tag: tag_blog_edit
-          } :      
-        blog
+            tag: tag_blog_edit,
+            date: blog.date,
+          } : blog
         )
       };
-
-      case 'ADD_SET':
-        return {
-          ...state,
-          wordSets : { 
-            allIds:[...state.wordSets.allIds, action.payload.wordSet.id], 
-            byId:{...state.wordSets.byId, [action.payload.wordSet.id]: action.payload.wordSet}
-          }
-        };
-      case 'REMOVE_SET':
-        const idSetRemove = action.payload.id   
-        delete state.wordSets.byId[idSetRemove]   
-        return {
-          ...state,
-          wordSets: {
-            allIds: state.wordSets.allIds.filter((id) => id !== idSetRemove),
-            byId: state.wordSets.byId
-          }
-        }; 
-
+    case 'ADD_SET':
+      return {
+        ...state,
+        wordSets : { 
+          allIds:[...state.wordSets.allIds, action.payload.wordSet.id], 
+          byId:{...state.wordSets.byId, [action.payload.wordSet.id]: action.payload.wordSet}
+        }
+      };
+    case 'REMOVE_SET':
+      const idSetRemove = action.payload.id   
+      delete state.wordSets.byId[idSetRemove]   
+      return {
+        ...state,
+        wordSets: {
+          allIds: state.wordSets.allIds.filter((id) => id !== idSetRemove),
+          byId: state.wordSets.byId,
+        }
+      }; 
     case 'ADD_WORD_TO_SET':
       const idWord = action.payload.idWord
       const idSet = action.payload.idSet
@@ -347,13 +351,12 @@ const rootReducer = (state = initialState, action) => {
               'id': idSet, 
               'title': nameSet,
               ['allIdWords']: [...state.wordSets.byId[idSet].allIdWords,idWord], 
-              ['words']: {...state.wordSets.byId[idSet].words, [idWord]: newWord}
+              ['words']: {...state.wordSets.byId[idSet].words, [idWord]: newWord},
             }
           }
           // byId:{...state.wordSets.byId, [action.payload.idSet]: {[idWord]: action.payload.newWord}}
         }
-      }
-
+      };
     case 'REMOVE_WORD_USE_NAME':
       const idWordDel = action.payload.idWord 
       const idSetDel = action.payload.idSet 
@@ -367,23 +370,38 @@ const rootReducer = (state = initialState, action) => {
               'id': idSetDel, 
               'title': state.wordSets.byId[idSetDel].title,
               ['allIdWords']: state.wordSets.byId[idSetDel].allIdWords.filter((id) => id + '' !== idWordDel),  // +idWordDel - change String to Int // id + '' - change Int to String
-              ['words']: state.wordSets.byId[idSetDel].words
+              ['words']: state.wordSets.byId[idSetDel].words,
             },
           },
         }, 
       };
-      case 'ADD_NOTE':
-        return {
-          ...state,
-          notes: [...state.notes, action.payload.note],
-        }
-      case 'REMOVE_NOTE':
-        const id_note = action.payload.id      
-        return {
-          ...state,
-          notes: state.notes.filter((notes) => notes.id !== id_note)
-        }; 
-
+    case 'ADD_NOTE':
+      return {
+        ...state,
+        notes: [...state.notes, action.payload.note],
+      };
+    case 'REMOVE_NOTE':
+      const id_note = action.payload.id      
+      return {
+        ...state,
+        notes: state.notes.filter((notes) => notes.id !== id_note)
+      }; 
+    case 'EDIT_NOTE':
+      const id_note_edit = action.payload.id;
+      const title_note_edit = action.payload.title;
+      const content_note_edit = action.payload.content;
+      return {
+        ...state,
+        notes: state.notes.map(note => note.id === id_note_edit ? 
+          {
+            id: id_note_edit,
+            title: title_note_edit,
+            content: content_note_edit,
+            date: note.date,
+          } 
+          : note
+        )
+      };
   default:
     return state;
   }

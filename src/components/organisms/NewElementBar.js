@@ -5,7 +5,7 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import { connect } from 'react-redux';
-import { addBlog as addBlogAction, addNote as addNoteAction, editBlog as editBlogAction } from 'redux/actions';
+import { addBlog as addBlogAction, addNote as addNoteAction, editBlog as editBlogAction, editNote as editNoteAction } from 'redux/actions';
 
 const StyledWrapper = styled.div`
   background-color: ${({theme}) => theme.topBar};;
@@ -63,7 +63,7 @@ var tags = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog }) => {
+const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog, editNote }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
@@ -81,11 +81,17 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setTitle('');
-    setContent('');
-    setTag('');
-    hideAddBar();
+    if (action === 'Add'){
+      e.preventDefault();
+      setTitle('');
+      setContent('');
+      setTag('');
+      hideAddBar();
+    }
+    if (action === 'Edit'){
+      e.preventDefault();
+      hideAddBar();
+    }
   }
 
   useEffect(() => {
@@ -165,11 +171,11 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         <>
         <StyledButtonSave
         onClick={() =>
-          addNote({
-            title: title,
-            content: content,
-            date: today,
-          })
+          editNote(
+            id,
+            title,
+            content,
+          )
         }
       >
       {action} {path}
@@ -216,7 +222,8 @@ const mapStateToProps = ( state ) => {
 const mapDispatchToProps = dispatch => ({
   addBlog: (blogContent) => dispatch(addBlogAction(blogContent)),
   addNote: (noteContent) => dispatch(addNoteAction(noteContent)),
-  editBlog: (id, title, content, tag) => dispatch(editBlogAction(id, title, content, tag))
+  editBlog: (id, title, content, tag) => dispatch(editBlogAction(id, title, content, tag)),
+  editNote: (id, title, content) => dispatch(editNoteAction(id, title, content)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewElementBar);
