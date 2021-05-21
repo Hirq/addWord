@@ -68,7 +68,7 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
           <WrapperToDown>
-            <Paragraph>{tag}</Paragraph>
+            <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
             <Paragraph>{date}</Paragraph>
             <Button onClick={() => removeBlog(id)} secondary>REMOVE</Button>
           </WrapperToDown>

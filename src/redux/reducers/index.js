@@ -141,7 +141,7 @@ const initialState = {
         ' &&  usuwanie z setlisty pierwszego elementu dobrze- ale jak chcemy usunac odrazu drugi(czyli w sumie juz pierwszy to nie dziala za 1 przycisikem tylko drugim - dlaczego ? '
         ,
       date: '12.12.2012',
-      tag: 'work',
+      tag: ['work'],
     },
     {
       id: 1,
@@ -149,7 +149,7 @@ const initialState = {
       content:
         'Poprawić CARD + GridTemplate + Blog - odpowienie propsy przekazać. Następnie REDUX - Dodawania, usuwanie i na koncu edycja bloga - react select dla nowego wpisu na blog',
       date: '12.12.2012',
-      tag: 'work',
+      tag: ['work'],
     },
     {
       id: 2,
@@ -157,7 +157,7 @@ const initialState = {
       content:
         'Storybook ODPADA - Dwa bledy w consoli - jeden to zwiazany z styled-component ze podaje link jako true, a drugi to w TIMER do poprawy na potem',
       date: '05.01.1910',
-      tag: 'home',
+      tag: ['home'],
     },
     {
       id: 3,
@@ -165,7 +165,7 @@ const initialState = {
       content:
         'Poprawić widok listy + dodać notatki podobne do bloga - coś w stylu to do zrobić i tez panel po prawej stronie z możliwościa ',
       date: '11.07.2018',
-      tag: 'adventure',
+      tag: ['adventure'],
     },
     {
       id: 4,
@@ -173,7 +173,7 @@ const initialState = {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
       date: '31.03.2022',
-      tag: 'work',
+      tag: ['work', 'job'],
     },
   ],
 
@@ -214,6 +214,13 @@ const initialState = {
   },
 
   notes: [
+    {
+      id: 89,
+      title: 'select react - w tablicy naszej options przeszukac pod jakim ID są nasze zaznaczone elementy na EDIT i wtedy takie wyswietlic w react select',
+      content:
+        'test',
+      date: '19.05.2021',
+    },
     {
       id: 90,
       title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',

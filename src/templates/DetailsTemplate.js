@@ -160,7 +160,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
       : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
       }
       <Paragraph>{date}</Paragraph>
-      <Paragraph>{tag}</Paragraph>
+      <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
       <Button as={Link} to={'/'+path} link> save </Button>
       { path === 'list' &&
       <>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Select from 'react-select';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
@@ -60,13 +61,25 @@ var tags = [
   'Shopping',
 ];
 
+const options = [
+  { value: 'Book', label: 'Book' },
+  { value: 'Video', label: 'Video' },
+  { value: 'Internet', label: 'Internet' },
+  { value: 'Story', label: 'Story' },
+  { value: 'Diary', label: 'Diary' },
+  { value: 'Job', label: 'Job' },
+  { value: 'Holiday', label: 'Holiday' },
+  { value: 'Shopping', label: 'Shopping' }
+]
+
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
 const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog, editNote }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
+  // const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
+  const [tag, setTag] = useState('');
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -79,6 +92,12 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   const handleChangeTag = (e) => {
     setTag(e.target.value);
   }
+
+  const handleChangeTagSelect = (newValue, actionMeta) => {
+    console.log(newValue.map((i) => i.value));
+    console.log(`action: ${actionMeta.action}`);
+    setTag(newValue.map((i) => i.value));
+  };
 
   const handleSubmit = (e) => {
     if (action === 'Add'){
@@ -101,6 +120,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         setTitle(data[0].title);
         setContent(data[0].content);
         setTag(data[0].tag);
+        console.log(tag);
       }
       if (path === 'note'){
         const data = notes.filter((notes) => notes.id === id)
@@ -116,7 +136,8 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'blog'){
         return(
           <>
-          <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
+          <Select isMulti options={options} onChange={handleChangeTagSelect}/>
+          {/* <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/> */}
           <StyledButtonSave onClick={() => addBlog({
               title: title,
               content: content,
@@ -152,7 +173,8 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     if (path === 'blog'){
       return(
         <>
-        <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/>
+        <Select defaultValue={[options[0]]} isMulti options={options} onChange={handleChangeTagSelect}/>
+        {/* <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/> */}
         <StyledButtonSave onClick={() => editBlog(
           id,
           title,
