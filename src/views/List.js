@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Select from 'react-select';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
 import Input from 'components/atoms/Input';

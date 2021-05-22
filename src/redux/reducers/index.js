@@ -216,7 +216,7 @@ const initialState = {
   notes: [
     {
       id: 89,
-      title: 'select react - w tablicy naszej options przeszukac pod jakim ID są nasze zaznaczone elementy na EDIT i wtedy takie wyswietlic w react select',
+      title: 'select react - w tablicy naszej options przeszukac pod jakim ID są nasze zaznaczone elementy na EDIT i wtedy takie wyswietlic w react select - Chyba nalezy przeslać parametr z Details, bo w NewElementBar jako default nie chce wyswietlic, choc dotarlem do ID elementow z naszej listy Tagow',
       content:
         'test',
       date: '19.05.2021',

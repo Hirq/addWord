@@ -159,9 +159,6 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
       ? null 
       : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
       }
-      <Paragraph>{date}</Paragraph>
-      <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
-      <Button as={Link} to={'/'+path} link> save </Button>
       { path === 'list' &&
       <>
         <Button onClick={handleConfirmBox}>Delete set</Button>
@@ -174,14 +171,23 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         </ConfirmBox>
       </>
       }
-      </StyledWrapper>
-      { path === 'blog' || path === 'note'
-      ? 
-      determinePath(path)
-      : null
+      { path === 'blog' &&
+      <>
+        <Paragraph>{date}</Paragraph>
+        <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
+      </>
       }
-
-    
+      { path === 'note' &&
+      <>
+        <Paragraph>{date}</Paragraph>
+      </>
+      }
+      <Button as={Link} to={'/'+path} link> save </Button>
+    </StyledWrapper>
+    { path === 'blog' || 'note' ?
+    determinePath(path)
+    : null
+    }
   </UserPageTemplate>
  )
 };

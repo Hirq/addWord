@@ -62,14 +62,14 @@ var tags = [
 ];
 
 const options = [
-  { value: 'Book', label: 'Book' },
-  { value: 'Video', label: 'Video' },
-  { value: 'Internet', label: 'Internet' },
-  { value: 'Story', label: 'Story' },
-  { value: 'Diary', label: 'Diary' },
-  { value: 'Job', label: 'Job' },
-  { value: 'Holiday', label: 'Holiday' },
-  { value: 'Shopping', label: 'Shopping' }
+  { value: 'Book', label: 'Book', id: 1},
+  { value: 'Video', label: 'Video', id: 2 },
+  { value: 'Internet', label: 'Internet', id: 3 },
+  { value: 'Story', label: 'Story', id: 4 },
+  { value: 'Diary', label: 'Diary', id: 5 },
+  { value: 'job', label: 'job', id: 6 },
+  { value: 'Holiday', label: 'Holiday', id: 7 },
+  { value: 'work', label: 'work', id: 8 }
 ]
 
 var dateCurrent = new Date(),
@@ -80,6 +80,8 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   const [content, setContent] = useState('');
   // const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
   const [tag, setTag] = useState('');
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [findId, setFindId] = useState([]);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -119,8 +121,18 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         const data = blogs.filter((blogs) => blogs.id === id)
         setTitle(data[0].title);
         setContent(data[0].content);
-        setTag(data[0].tag);
-        console.log(tag);
+        console.log(data[0]);
+        setTag(data[0].tag.map((i) =>
+          {
+            let filter = options.filter(item => item.value.includes(i))
+            setFilterOptions(filterOptions => filterOptions.concat(filter))
+            setFindId(findId => findId.concat(filter[0].id))
+          }
+        ));
+        
+
+        console.log(data[0].tag.map((i) => i + ' '));
+        console.log(data[0]);
       }
       if (path === 'note'){
         const data = notes.filter((notes) => notes.id === id)
@@ -173,7 +185,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     if (path === 'blog'){
       return(
         <>
-        <Select defaultValue={[options[0]]} isMulti options={options} onChange={handleChangeTagSelect}/>
+        <Select defaultValue={[options[findId[0]]]} isMulti options={options} onChange={handleChangeTagSelect}/>
         {/* <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/> */}
         <StyledButtonSave onClick={() => editBlog(
           id,
@@ -214,6 +226,8 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     <StyledWrapper isVisible={isVisible}>
       <Heading big> {action} {path} {id}</Heading>
       <StyledButtonClose>X</StyledButtonClose>
+      <Button onClick={ console.log(filterOptions)}>Click</Button>
+      <Button onClick={ console.log(findId[0])}>ID FIND</Button>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
       {determinePath(path)}
