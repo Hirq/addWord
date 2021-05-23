@@ -62,15 +62,21 @@ var tags = [
 ];
 
 const options = [
-  { value: 'Book', label: 'Book', id: 1},
-  { value: 'Video', label: 'Video', id: 2 },
-  { value: 'Internet', label: 'Internet', id: 3 },
-  { value: 'Story', label: 'Story', id: 4 },
-  { value: 'Diary', label: 'Diary', id: 5 },
-  { value: 'job', label: 'job', id: 6 },
-  { value: 'Holiday', label: 'Holiday', id: 7 },
-  { value: 'work', label: 'work', id: 8 }
+  { value: 'Book', label: 'Book', id: 0},
+  { value: 'Video', label: 'Video', id: 1 },
+  { value: 'Internet', label: 'Internet', id: 2 },
+  { value: 'Story', label: 'Story', id: 3 },
+  { value: 'Diary', label: 'Diary', id: 4 },
+  { value: 'job', label: 'job', id: 5 },
+  { value: 'Holiday', label: 'Holiday', id: 6 },
+  { value: 'work', label: 'work', id: 7 }
 ]
+
+const defaultOptions = [
+  { value: 'Book', label: 'Book', id: 1},
+  { value: 'Video', label: 'Video', id: 2 }
+]
+
 
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
@@ -129,10 +135,9 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
             setFindId(findId => findId.concat(filter[0].id))
           }
         ));
-        
+        console.log(findId)
 
-        console.log(data[0].tag.map((i) => i + ' '));
-        console.log(data[0]);
+        console.log(data[0].tag.map((i) => i ));
       }
       if (path === 'note'){
         const data = notes.filter((notes) => notes.id === id)
@@ -184,8 +189,12 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   if (action === 'Edit'){
     if (path === 'blog'){
       return(
+        
         <>
-        <Select defaultValue={[options[findId[0]]]} isMulti options={options} onChange={handleChangeTagSelect}/>
+        {/* trzeba przekzac jakos szybciej, bo nawet obiektu z ktorej wyfiltorwalem nie chec odczytac nam danych */}
+
+        {/* [ findId.map((i) => options[i]) ] */}
+        <Select defaultValue={filterOptions} isMulti options={options} onChange={handleChangeTagSelect}/>
         {/* <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/> */}
         <StyledButtonSave onClick={() => editBlog(
           id,
@@ -226,8 +235,10 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     <StyledWrapper isVisible={isVisible}>
       <Heading big> {action} {path} {id}</Heading>
       <StyledButtonClose>X</StyledButtonClose>
-      <Button onClick={ console.log(filterOptions)}>Click</Button>
-      <Button onClick={ console.log(findId[0])}>ID FIND</Button>
+      <Button onClick={ console.log(filterOptions)}>heh</Button>
+      <Button onClick={ console.log(options)}>heh</Button>
+      <Button onClick={ console.log(findId)}>ID FIND</Button>
+      <Button onClick={ console.log(findId.map((i) => options[i]))}>test</Button>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
       {determinePath(path)}
