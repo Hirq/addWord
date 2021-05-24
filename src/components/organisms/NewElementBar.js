@@ -87,7 +87,6 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   // const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
   const [tag, setTag] = useState('');
   const [filterOptions, setFilterOptions] = useState([]);
-  const [findId, setFindId] = useState([]);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -102,9 +101,10 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   }
 
   const handleChangeTagSelect = (newValue, actionMeta) => {
-    console.log(newValue.map((i) => i.value));
-    console.log(`action: ${actionMeta.action}`);
+    // console.log(newValue.map((i) => i.value));
+    // console.log(`action: ${actionMeta.action}`);
     setTag(newValue.map((i) => i.value));
+    setFilterOptions(newValue);
   };
 
   const handleSubmit = (e) => {
@@ -127,17 +127,13 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         const data = blogs.filter((blogs) => blogs.id === id)
         setTitle(data[0].title);
         setContent(data[0].content);
-        console.log(data[0]);
-        setTag(data[0].tag.map((i) =>
-          {
-            let filter = options.filter(item => item.value.includes(i))
-            setFilterOptions(filterOptions => filterOptions.concat(filter))
-            setFindId(findId => findId.concat(filter[0].id))
-          }
-        ));
-        console.log(findId)
+        data[0].tag.map((i) =>
+        {
+          const filter = options.filter(item => item.value.includes(i))
+          setFilterOptions(filterOptions => filterOptions.concat(filter))
 
-        console.log(data[0].tag.map((i) => i ));
+        })   
+        setTag(filterOptions.map((i) => i.value + ' '))
       }
       if (path === 'note'){
         const data = notes.filter((notes) => notes.id === id)
@@ -146,7 +142,6 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       }
     }
   }, [] );
-
 
   const determinePath = (path) => {
     if (action === 'Add'){
@@ -191,11 +186,8 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       return(
         
         <>
-        {/* trzeba przekzac jakos szybciej, bo nawet obiektu z ktorej wyfiltorwalem nie chec odczytac nam danych */}
-
-        {/* [ findId.map((i) => options[i]) ] */}
-        <Select defaultValue={filterOptions} isMulti options={options} onChange={handleChangeTagSelect}/>
-        {/* <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/> */}
+        {tag}
+        <Select value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
         <StyledButtonSave onClick={() => editBlog(
           id,
           title,
@@ -231,14 +223,9 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   
   return(
   <form onSubmit={handleSubmit}>
-
     <StyledWrapper isVisible={isVisible}>
       <Heading big> {action} {path} {id}</Heading>
       <StyledButtonClose>X</StyledButtonClose>
-      <Button onClick={ console.log(filterOptions)}>heh</Button>
-      <Button onClick={ console.log(options)}>heh</Button>
-      <Button onClick={ console.log(findId)}>ID FIND</Button>
-      <Button onClick={ console.log(findId.map((i) => options[i]))}>test</Button>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
       {determinePath(path)}
@@ -258,7 +245,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
 //   isVisible: false,
 // };
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = ( state, ownProps ) => {
   const { notes, blogs } = state;
   return {
     notes,
