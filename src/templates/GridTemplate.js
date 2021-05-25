@@ -25,7 +25,6 @@ const StyledPageHeader = styled.div`
 
 const StyledHeading = styled(Heading)`
   margin: 25px 0 0 0;
-  /* text-transform: uppercase; */
   ::first-letter {
     text-transform: uppercase;
   }
@@ -58,22 +57,23 @@ const GridTemplate = ({ children, name, countItem }) => {
     {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
   }
 
-return (
-  <UserPageTemplate >
-    <StyledWrapper onClick={hideAddBar}>
-      <StyledPageHeader>
-        <Input search placeholder="Search" />
-        <StyledHeading big as="h1">
-          {name}
-        </StyledHeading>
-        <StyledParagraph>{countItem}</StyledParagraph>
-      </StyledPageHeader>
-      <StyledGrid>{children}</StyledGrid>
-    </StyledWrapper>
-    <StyledButtonIcon onClick={handleNewElementBarToggle}> + </StyledButtonIcon>
-    <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={name} action='Add'/>
-  </UserPageTemplate>
-)};
+  return (
+    <UserPageTemplate >
+      <StyledWrapper onClick={hideAddBar}>
+        <StyledPageHeader>
+          <Input search placeholder="Search" />
+          <StyledHeading big as="h1">
+            {name}
+          </StyledHeading>
+          <StyledParagraph>{countItem}</StyledParagraph>
+        </StyledPageHeader>
+        <StyledGrid>{children}</StyledGrid>
+      </StyledWrapper>
+      <StyledButtonIcon onClick={handleNewElementBarToggle}> + </StyledButtonIcon>
+      <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={name} action='Add'/>
+    </UserPageTemplate>
+  )
+};
 
 // GridTemplate.propTypes = {
 //   children: PropTypes.arrayOf(PropTypes.object).isRequired,

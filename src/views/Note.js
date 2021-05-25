@@ -4,22 +4,22 @@ import Card from 'components/molecules/Card';
 import { connect } from 'react-redux';
 
 const Note = ({ notes }) => {
-return (
-  <>
-  <GridTemplate name="note" countItem={notes.length}>
-    {notes.map(({title, content, date, id }) => (
-      <Card
-      id={id}
-      title={title}
-      content={content}
-      date={date}
-      key={id}
-      path="note"
-    />
-    ))}
-  </GridTemplate>
-  </>
-)
+  return (
+    <>
+      <GridTemplate name="note" countItem={notes.length}>
+        {notes.map(({title, content, date, id }) => (
+          <Card
+          id={id}
+          title={title}
+          content={content}
+          date={date}
+          key={id}
+          path="note"
+          />
+        ))}
+      </GridTemplate>
+    </>
+  )
 }
 
 const mapStateToProps = state => {

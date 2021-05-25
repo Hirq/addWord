@@ -8,11 +8,11 @@ const StyledWrapper = styled.div`
 
 const ListTemplate = ({children}) => {
   return(
-  <UserPageTemplate>
-    <StyledWrapper> 
-      {children}
-    </StyledWrapper>
-  </UserPageTemplate>
+    <UserPageTemplate>
+      <StyledWrapper> 
+        {children}
+      </StyledWrapper>
+    </UserPageTemplate>
   )
 }
 

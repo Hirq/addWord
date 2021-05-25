@@ -3,7 +3,6 @@ import DetailsTemplate from 'templates/DetailsTemplate';
 import { connect } from 'react-redux';
 
 const SetDetail = ({wordSets, idActivate }) => {
-  // const data = wordSets.filter((item) => item.id == idActivate).map(({id, title, wordsX}) => ({id, title, wordsX}))
   const data = wordSets.byId[idActivate];
   return (
     <DetailsTemplate

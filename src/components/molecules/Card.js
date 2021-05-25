@@ -42,10 +42,6 @@ const WrapperToDown = styled.div`
   margin-top: auto;
 `
 
-const StyledParagraph = styled(Paragraph)`
-  margin-top: auto;
-`;
-
 const StyledButton = styled(Button)`
   margin-top: auto;
 `;
@@ -58,12 +54,24 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
     setRedirect(state => !state)
   }
 
+  if (redirect)  {
+    if (path === 'blog'){
+      return <Redirect to={`blog/${id}`} />;
+    }
+    if (path === 'list') {
+      return <Redirect to={`list/${id}`} />;
+    }
+    if (path === 'note') {
+      return <Redirect to={`note/${id}`} />;
+    }
+  } 
+
   const determinePath = (path) => {
     if (path === 'blog'){
       return(
         <StyledWrapper onClick={handleCardClick}>
         <InnerWrapper>
-          <Heading> {title} </Heading>
+          <Heading> {title}</Heading>
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
@@ -82,7 +90,6 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
         <InnerWrapper>
           <Heading> {title} </Heading>
         </InnerWrapper>
-
         <InnerWrapper flex>
         <StyledButton onClick={() => removeNote(id)} secondary>REMOVE</StyledButton>
         </InnerWrapper>
@@ -90,18 +97,6 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
       )
     }
   }
-
-  if (redirect)  {
-    if (path === 'blog'){
-      return <Redirect to={`blog/${id}`} />;
-    }
-    if (path === 'list') {
-      return <Redirect to={`list/${id}`} />;
-    }
-    if (path === 'note') {
-      return <Redirect to={`note/${id}`} />;
-    }
-  } 
 
   return (
   <>
@@ -123,4 +118,4 @@ const mapDispatchToProps = dispatch => ({
   removeNote: (id) => dispatch(removeNoteAction(id)),
 })
 
-export default connect(null, mapDispatchToProps,)(Card);
+export default connect(null, mapDispatchToProps)(Card);

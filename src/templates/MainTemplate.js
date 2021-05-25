@@ -10,14 +10,14 @@ const MainTemplate = ({ children }) => {
   const setDarkMode = useTheme();
 
   return(
-      <ThemeProvider theme={setDarkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={setDarkMode ? darkTheme : lightTheme}>
       <>
         <GlobalStyle />
         <AddWordContext>
           {children}
         </AddWordContext>
       </>
-      </ThemeProvider>
+    </ThemeProvider>
   )
 };
 

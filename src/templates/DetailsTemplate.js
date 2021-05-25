@@ -113,10 +113,10 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   const determinePath = (path) => {
     if (path === 'blog'){
       return(
-      <>
-        <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
-        <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id} />
-      </>
+        <>
+          <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
+          <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id} />
+        </>
       )
     }
     if (path === 'note') {
@@ -124,7 +124,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         <>
           <StyledButtonIcon onClick={handleNewElementBarToggle}> EDIT </StyledButtonIcon>
           <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Edit' id={id}/>
-      </>
+        </>
       )
     }
   } 
@@ -135,61 +135,61 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
     setFirstWord(id)
   }, [wordSets])
 
- return(
- <UserPageTemplate>
-    <StyledWrapper onClick={hideAddBar}>
-      <StyledPageHeader>
-        <StyledHeading big as="h1">
-          {title}
-        </StyledHeading>
-        <StyledParagraph></StyledParagraph>
-      </StyledPageHeader>
-      <Paragraph>{content}</Paragraph>
-      {wordSetList.length > 0  ?
-        <>
-        <select onChange={handleChangeSelectWord} >
-          {wordSetList.map(( item ) => (
-            <option value={item} key={item} > {contentSet[item].wordAng} </option>
-          ))}
-        </select>
-        <StyledButtonWordRemove onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
-        </>
-      : null }
-      { wordSetList === {} 
-      ? null 
-      : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
+  return(
+    <UserPageTemplate>
+      <StyledWrapper onClick={hideAddBar}>
+        <StyledPageHeader>
+          <StyledHeading big as="h1">
+            {title}
+          </StyledHeading>
+          <StyledParagraph></StyledParagraph>
+        </StyledPageHeader>
+        <Paragraph>{content}</Paragraph>
+        {wordSetList.length > 0  ?
+          <>
+            <select onChange={handleChangeSelectWord} >
+              {wordSetList.map(( item ) => (
+                <option value={item} key={item} > {contentSet[item].wordAng} </option>
+              ))}
+            </select>
+            <StyledButtonWordRemove onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
+          </>
+        : null }
+        { wordSetList === {} 
+        ? null 
+        : wordSetList.map((item) => (<Paragraph key={item}>{contentSet[item].wordAng} - {contentSet[item].wordPl} </Paragraph> ))
+        }
+        { path === 'list' &&
+          <>
+            <Button onClick={handleConfirmBox}>Delete set</Button>
+            <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
+              <StyledHeadingModal>You are sure want to delete this set list?</StyledHeadingModal>
+              <StyledButtonsModal>
+                <StyledButtonModalBack onClick={handleConfirmBox}>back</StyledButtonModalBack>
+                <StyledButtonModalRemove onClick={() => removeSet(id)} as={Link} to={`/list`}  link>REMOVE</StyledButtonModalRemove>
+              </StyledButtonsModal>
+            </ConfirmBox>
+          </>
+        }
+        { path === 'blog' &&
+          <>
+            <Paragraph>{date}</Paragraph>
+            <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
+          </>
+        }
+        { path === 'note' &&
+          <>
+            <Paragraph>{date}</Paragraph>
+          </>
+        }
+        <Button as={Link} to={'/'+path} link> save </Button>
+      </StyledWrapper>
+      { path === 'blog' || 'note' ?
+      determinePath(path)
+      : null
       }
-      { path === 'list' &&
-      <>
-        <Button onClick={handleConfirmBox}>Delete set</Button>
-        <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
-          <StyledHeadingModal>You are sure want to delete this set list?</StyledHeadingModal>
-          <StyledButtonsModal>
-            <StyledButtonModalBack onClick={handleConfirmBox}>back</StyledButtonModalBack>
-            <StyledButtonModalRemove onClick={() => removeSet(id)} as={Link} to={`/list`}  link>REMOVE</StyledButtonModalRemove>
-          </StyledButtonsModal>
-        </ConfirmBox>
-      </>
-      }
-      { path === 'blog' &&
-      <>
-        <Paragraph>{date}</Paragraph>
-        <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
-      </>
-      }
-      { path === 'note' &&
-      <>
-        <Paragraph>{date}</Paragraph>
-      </>
-      }
-      <Button as={Link} to={'/'+path} link> save </Button>
-    </StyledWrapper>
-    { path === 'blog' || 'note' ?
-    determinePath(path)
-    : null
-    }
-  </UserPageTemplate>
- )
+    </UserPageTemplate>
+  )
 };
 
 // DetailsTemplate.propTypes = {

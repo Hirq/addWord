@@ -11,11 +11,11 @@ const StyledWrapper = styled.div`
 const UserPageTemplate = ({ children, theme}) => {
   return(
     <>
-    <StyledWrapper>
-      <Topbar theme={theme} />
-      <Leftbar theme={theme} />
-      {children}
-    </StyledWrapper>
+      <StyledWrapper>
+        <Topbar theme={theme} />
+        <Leftbar theme={theme} />
+        {children}
+      </StyledWrapper>
     </>
   )
 };

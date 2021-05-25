@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import DetailsTemplate from 'templates/DetailsTemplate';
 import { connect } from 'react-redux';
 

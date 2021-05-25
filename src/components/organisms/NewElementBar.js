@@ -50,33 +50,16 @@ const StyledButtonClose = styled(Button)`
   background-color: ${(theme) => theme.activeIconColor};
 `
 
-var tags = [
-  'Book',
-  'Video',
-  'Internet',
-  'Story',
-  'Diary',
-  'Job',
-  'Holiday',
-  'Shopping',
-];
-
 const options = [
   { value: 'Book', label: 'Book', id: 0},
   { value: 'Video', label: 'Video', id: 1 },
   { value: 'Internet', label: 'Internet', id: 2 },
   { value: 'Story', label: 'Story', id: 3 },
   { value: 'Diary', label: 'Diary', id: 4 },
-  { value: 'job', label: 'job', id: 5 },
+  { value: 'Job', label: 'Job', id: 5 },
   { value: 'Holiday', label: 'Holiday', id: 6 },
-  { value: 'work', label: 'work', id: 7 }
+  { value: 'Work', label: 'Work', id: 7 }
 ]
-
-const defaultOptions = [
-  { value: 'Book', label: 'Book', id: 1},
-  { value: 'Video', label: 'Video', id: 2 }
-]
-
 
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
@@ -84,7 +67,6 @@ today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + d
 const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog, editNote }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [tag, setTag] = useState(tags[Math.floor(Math.random() * tags.length)]);
   const [tag, setTag] = useState('');
   const [filterOptions, setFilterOptions] = useState([]);
 
@@ -96,13 +78,9 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     setContent(e.target.value);
   }
 
-  const handleChangeTag = (e) => {
-    setTag(e.target.value);
-  }
-
   const handleChangeTagSelect = (newValue, actionMeta) => {
-    // console.log(newValue.map((i) => i.value));
-    // console.log(`action: ${actionMeta.action}`);
+    console.log(newValue.map((i) => i.value));
+    console.log(`action: ${actionMeta.action}`);
     setTag(newValue.map((i) => i.value));
     setFilterOptions(newValue);
   };
@@ -133,7 +111,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
           setFilterOptions(filterOptions => filterOptions.concat(filter))
 
         })   
-        setTag(filterOptions.map((i) => i.value + ' '))
+        setTag(filterOptions.map((i) => i.value + ' '));
       }
       if (path === 'note'){
         const data = notes.filter((notes) => notes.id === id)
@@ -148,83 +126,72 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'blog'){
         return(
           <>
-          <Select isMulti options={options} onChange={handleChangeTagSelect}/>
-          {/* <StyledInput placeholder="tag" value={tag || ''} onChange={handleChangeTag}/> */}
-          <StyledButtonSave onClick={() => addBlog({
-              title: title,
-              content: content,
-              date: today,
-              tag: tag,
-            })
-          }
-        >
-        {action} {path}
-        </StyledButtonSave>
-        </>
+            <Select isMulti options={options} onChange={handleChangeTagSelect}/>
+            <StyledButtonSave onClick={() => addBlog({
+                title: title,
+                content: content,
+                date: today,
+                tag: tag,
+              })}
+            >
+            {action} {path}
+            </StyledButtonSave>
+          </>
         )
       }
       if (path === 'note') {
         return(
           <>
-          <StyledButtonSave
-          onClick={() =>
-            addNote({
-              title: title,
-              content: content,
-              date: today,
-            })
-          }
-        >
-        {action} {path}
-        </StyledButtonSave>
-        </>
+            <StyledButtonSave onClick={() => addNote({
+                title: title,
+                content: content,
+                date: today,
+              })}
+            >
+            {action} {path}
+            </StyledButtonSave>
+          </>
         )
       } 
     }
-  if (action === 'Edit'){
-    if (path === 'blog'){
-      return(
-        
-        <>
-        {tag}
-        <Select value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
-        <StyledButtonSave onClick={() => editBlog(
-          id,
-          title,
-          content,
-          tag,
-          )
-        }
-      >
-      {action} {path}
-      </StyledButtonSave>
-      </>
-      )
+    if (action === 'Edit'){
+      if (path === 'blog'){
+        return(
+          <>
+            <Select value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
+            <StyledButtonSave onClick={() => editBlog(
+              id,
+              title,
+              content,
+              tag,
+              )}
+            >
+            {action} {path}
+            </StyledButtonSave>
+          </>
+        )
+      }
+      if (path === 'note') {
+        return(
+          <>
+            <StyledButtonSave onClick={() => editNote(
+              id,
+              title,
+              content,
+            )}
+            >   
+            {action} {path}
+            </StyledButtonSave>
+          </>
+        )
+      } 
     }
-    if (path === 'note') {
-      return(
-        <>
-        <StyledButtonSave
-        onClick={() =>
-          editNote(
-            id,
-            title,
-            content,
-          )
-        }
-      >
-      {action} {path}
-      </StyledButtonSave>
-      </>
-      )
-    } 
-  }
   }
   
   return(
   <form onSubmit={handleSubmit}>
     <StyledWrapper isVisible={isVisible}>
-      <Heading big> {action} {path} {id}</Heading>
+      <Heading big> {action} {path} </Heading>
       <StyledButtonClose>X</StyledButtonClose>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
@@ -245,7 +212,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
 //   isVisible: false,
 // };
 
-const mapStateToProps = ( state, ownProps ) => {
+const mapStateToProps = ( state ) => {
   const { notes, blogs } = state;
   return {
     notes,
