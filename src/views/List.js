@@ -94,6 +94,7 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
   const [nameSet, setNameSet] = useState('');
   const [selectSet, setSelectSet] = useState();
   const [selectSetName, setSelectSetName] = useState();
+  const [optionSelect, setOptionSelect] = useState([]);
 
   const handleChange = (e) => {
     setNameSet(e.target.value);
@@ -104,7 +105,6 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
     console.log(wordSets.byId[data].title);
     setSelectSetName(wordSets.byId[data].title);
     setSelectSet(data);
-    console.log(selectSet);
   }
   
   const handleSubmit = (e) => {
@@ -117,12 +117,23 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
     removeWord(idWord);
   }
 
+  const handleChangeWordSelect = (newValue, actionMeta) => {
+    setSelectSetName(newValue.value);
+    setSelectSet(newValue.id);
+  };
+
   useEffect(() => {
     if (wordSets.allIds.length > 0) {
       const initialData = wordSets.allIds[0];
       setSelectSet(initialData);
       setSelectSetName(wordSets.byId[initialData].title);
       console.log(selectSet);
+
+      wordSets.allIds.map((i) => 
+      {
+        setOptionSelect(optionSelect => optionSelect.concat({value: wordSets.byId[i].title, label: wordSets.byId[i].title, id: wordSets.byId[i].id }))
+      })
+
     }
   }, [])
 
@@ -134,11 +145,12 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
           <StyledHeader> Word List </StyledHeader>      
           {wordSets.allIds.length > 0 && words.allIds.length > 0  ?
             <>
-            <StyledSelect onChange={handleChangeSelectSet}>
+            {/* <StyledSelect onChange={handleChangeSelectSet}>
               {wordSets.allIds.map((item) => (
                 <option value={wordSets.byId[item].id} key={wordSets.byId[item].id} >{wordSets.byId[item].title} </option>
               ))}
-            </StyledSelect>
+            </StyledSelect> */}
+            <Select options={optionSelect} onChange={handleChangeWordSelect}/>
             </>
           : null }
           <StyledUl>
