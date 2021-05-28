@@ -142,7 +142,7 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
     <ListTemplate>
       <StyledWrapper>
         <StyledWrapperList>
-          <StyledHeader> Word ListT </StyledHeader>      
+          <StyledHeader> Word List </StyledHeader>      
           {wordSets.allIds.length > 0 && words.allIds.length > 0  ?
             <>
             {/* <StyledSelect onChange={handleChangeSelectSet}>
