@@ -90,6 +90,10 @@ const StyledSelect = styled.select`
   border-color: ${({theme}) => theme.colorBorder};
 `
 
+const StyledReactSelect = styled(Select)`
+  color: black;
+`
+
 const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
   const [nameSet, setNameSet] = useState('');
   const [selectSet, setSelectSet] = useState();
@@ -150,7 +154,7 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
                 <option value={wordSets.byId[item].id} key={wordSets.byId[item].id} >{wordSets.byId[item].title} </option>
               ))}
             </StyledSelect> */}
-            <Select options={optionSelect} onChange={handleChangeWordSelect}/>
+            <StyledReactSelect options={optionSelect} onChange={handleChangeWordSelect}/>
             </>
           : null }
           <StyledUl>

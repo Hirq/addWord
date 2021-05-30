@@ -50,6 +50,10 @@ const StyledButtonClose = styled(Button)`
   background-color: ${(theme) => theme.activeIconColor};
 `
 
+const StyledReactSelect = styled(Select)`
+  color: black;
+`
+
 const options = [
   { value: 'Book', label: 'Book', id: 0},
   { value: 'Video', label: 'Video', id: 1 },
@@ -126,7 +130,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'blog'){
         return(
           <>
-            <Select isMulti options={options} onChange={handleChangeTagSelect}/>
+            <StyledReactSelect isMulti options={options} onChange={handleChangeTagSelect}/>
             <StyledButtonSave onClick={() => addBlog({
                 title: title,
                 content: content,
@@ -158,7 +162,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'blog'){
         return(
           <>
-            <Select value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
+            <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
             <StyledButtonSave onClick={() => editBlog(
               id,
               title,
