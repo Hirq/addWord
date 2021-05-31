@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UserPageTemplate from 'templates/UserPageTemplate';
