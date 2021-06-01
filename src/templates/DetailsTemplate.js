@@ -76,6 +76,10 @@ const StyledButtonIcon = styled(ButtonIcon)`
   }
 `
 
+const StyledReactSelect = styled(Select)`
+  color: black;
+`
+
 const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
