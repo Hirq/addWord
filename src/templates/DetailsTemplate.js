@@ -168,7 +168,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
           <>
             <Button onClick={handleConfirmBox}>Delete set</Button>
             <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
-              <StyledHeadingModal>You are sure want to delete this set list?</StyledHeadingModal>
+              <StyledHeadingModal>You are sure want to delete this set list ?</StyledHeadingModal>
               <StyledButtonsModal>
                 <StyledButtonModalBack onClick={handleConfirmBox}>back</StyledButtonModalBack>
                 <StyledButtonModalRemove onClick={() => removeSet(id)} as={Link} to={`/list`}  link>REMOVE</StyledButtonModalRemove>
