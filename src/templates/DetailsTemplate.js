@@ -135,7 +135,6 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   } 
 
   // do zeszytu opis ocb
-
   useEffect(() => {         
     setFirstWord(id)
   }, [wordSets])
