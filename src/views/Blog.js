@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const Blog = ({ blogs }) => {
   return (
     <>
-      <GridTemplate name="blog" countItem={blogs.length}>
+      <GridTemplate path="blog" countItem={blogs.length}>
         {blogs.map(({ title, content, date, tag, id }) => (
           <Card 
             id={id}

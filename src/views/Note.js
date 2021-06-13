@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const Note = ({ notes }) => {
   return (
     <>
-      <GridTemplate name="note" countItem={notes.length}>
+      <GridTemplate path="note" countItem={notes.length}>
         {notes.map(({title, content, date, id }) => (
           <Card
           id={id}

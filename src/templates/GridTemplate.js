@@ -46,7 +46,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
   }
 `
 
-const GridTemplate = ({ children, name, countItem }) => {
+const GridTemplate = ({ children, path, countItem }) => {
   const [visibleBar, setVisibleBar] = useState(false);
 
   const handleNewElementBarToggle = () => {
@@ -57,20 +57,38 @@ const GridTemplate = ({ children, name, countItem }) => {
     {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
   }
 
+  const determinePath = (path) => {
+    if (path == 'blog'){
+      return(
+        <>
+          <StyledGrid>{children}</StyledGrid>
+        </>
+      )
+    }
+    if (path == 'note'){
+      return(
+        <>
+          {/* <StyledGrid>{children}</StyledGrid> */}
+        </>
+      )
+    }
+
+  }
+
   return (
     <UserPageTemplate >
       <StyledWrapper onClick={hideAddBar}>
         <StyledPageHeader>
           <Input search placeholder="Search" />
           <StyledHeading big as="h1">
-            {name}
+            {path}
           </StyledHeading>
           <StyledParagraph>{countItem}</StyledParagraph>
         </StyledPageHeader>
-        <StyledGrid>{children}</StyledGrid>
+        {determinePath(path)}
       </StyledWrapper>
       <StyledButtonIcon onClick={handleNewElementBarToggle}> + </StyledButtonIcon>
-      <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={name} action='Add'/>
+      <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Add'/>
     </UserPageTemplate>
   )
 };
