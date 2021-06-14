@@ -8,7 +8,7 @@ import { removeBlog as removeBlogAction, removeNote as removeNoteAction } from '
 import { Redirect } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
-  min-height: 400px;
+  min-height: 300px;
   border-radius: 10px;
   border-color: ${({theme}) => theme.colorBorder};
   background-color: ${({ theme }) => (theme.bodyExtra)};
@@ -20,9 +20,10 @@ const StyledWrapper = styled.div`
     set &&
     css`
       min-height: 100px;
-      grid-template-rows: repeat(auto-fill, minmax(100px, auto));
+      grid-template-rows: repeat(auto-fit, minmax(100px, auto));
       margin: 10px 10px;
-    `}
+    `
+  }
   &:hover{
     background-color: ${({ theme }) => (theme.topBar)};
   }
@@ -41,11 +42,6 @@ const InnerWrapper = styled.div`
 const WrapperToDown = styled.div`
   margin-top: auto;
 `
-
-const StyledButton = styled(Button)`
-  margin-top: auto;
-`;
-
 
 const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) => {
   const [redirect, setRedirect] = useState(false); 
@@ -86,12 +82,12 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
     }
     if (path === 'note'){
       return(      
-        <StyledWrapper onClick={handleCardClick}>
-        <InnerWrapper>
+        <StyledWrapper set onClick={handleCardClick}>
+        <InnerWrapper> 
           <Heading> {title} </Heading>
         </InnerWrapper>
         <InnerWrapper flex>
-        <StyledButton onClick={() => removeNote(id)} secondary>REMOVE</StyledButton>
+          <Button onClick={() => removeNote(id)} secondary>REMOVE</Button>
         </InnerWrapper>
         </StyledWrapper>
       )

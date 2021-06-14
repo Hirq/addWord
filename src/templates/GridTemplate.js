@@ -68,7 +68,7 @@ const GridTemplate = ({ children, path, countItem }) => {
     if (path == 'note'){
       return(
         <>
-          {/* <StyledGrid>{children}</StyledGrid> */}
+          <StyledGrid>{children}</StyledGrid>
         </>
       )
     }
