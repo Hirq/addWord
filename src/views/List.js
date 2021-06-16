@@ -149,12 +149,12 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
           <StyledHeader> Word List </StyledHeader>      
           {wordSets.allIds.length > 0 && words.allIds.length > 0  ?
             <>
-            {/* <StyledSelect onChange={handleChangeSelectSet}>
+            <StyledSelect onChange={handleChangeSelectSet}>
               {wordSets.allIds.map((item) => (
                 <option value={wordSets.byId[item].id} key={wordSets.byId[item].id} >{wordSets.byId[item].title} </option>
               ))}
-            </StyledSelect> */}
-            <StyledReactSelect options={optionSelect} onChange={handleChangeWordSelect}/>
+            </StyledSelect>
+            {/* <StyledReactSelect options={optionSelect} onChange={handleChangeWordSelect}/> */}
             </>
           : null }
           <StyledUl>
