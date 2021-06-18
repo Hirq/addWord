@@ -26,14 +26,15 @@ const StyledWrapper = styled.nav`
 
 const StyledLogoLink = styled(NavLink)`
   display: block;
-  width: 67px;
-  height: 67px;
+  width: 105px;
+  height: 105px;
   background-image: url(${logoIcon});
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 80%;
   border: none;
   margin-bottom: 10vh;
+  margin-top: -10px;
 `;
 
 const StyledLogoutButton = styled(ButtonIcon)`
