@@ -27,7 +27,7 @@ const StyledWrapper = styled.nav`
 const StyledLogoLink = styled(NavLink)`
   display: block;
   width: 105px;
-  height: 105px;
+  height: 106px;
   background-image: url(${logoIcon});
   background-repeat: no-repeat;
   background-position: 50% 50%;
