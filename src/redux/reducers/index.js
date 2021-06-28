@@ -215,6 +215,13 @@ const initialState = {
 
   notes: [
     {
+      id: 90,
+      title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',
+      content:
+        'test',
+      date: '19.05.2021',
+    },
+    {
       id: 88,
       title: 'select react - dodac do listy',
       content:
@@ -224,13 +231,6 @@ const initialState = {
     {
       id: 89,
       title: 'select react - w tablicy naszej options przeszukac pod jakim ID są nasze zaznaczone elementy na EDIT i wtedy takie wyswietlic w react select - Chyba nalezy przeslać parametr z Details, bo w NewElementBar jako default nie chce wyswietlic, choc dotarlem do ID elementow z naszej listy Tagow',
-      content:
-        'test',
-      date: '19.05.2021',
-    },
-    {
-      id: 90,
-      title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',
       content:
         'test',
       date: '19.05.2021',
