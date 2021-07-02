@@ -198,7 +198,6 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     <StyledWrapper isVisible={isVisible}>
       <Heading big> {action} {path} </Heading>
       <StyledButtonClose>X</StyledButtonClose>
-      <Button onClick={console.log(filterOptions)}>asdass</Button>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
       {determinePath(path)}
