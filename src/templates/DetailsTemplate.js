@@ -76,6 +76,10 @@ const StyledButtonIcon = styled(ButtonIcon)`
   }
 `
 
+const StyledMainParagraph = styled(Paragraph)`
+  white-space: pre-line;
+`
+
 const StyledReactSelect = styled(Select)`
   color: black;
 `
@@ -148,7 +152,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
           </StyledHeading>
           <StyledParagraph></StyledParagraph>
         </StyledPageHeader>
-        <Paragraph>{content}</Paragraph>
+        <StyledMainParagraph>{content}</StyledMainParagraph>
         {wordSetList.length > 0  ?
           <>
             <select onChange={handleChangeSelectWord} >

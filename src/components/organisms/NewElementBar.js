@@ -30,6 +30,7 @@ const StyledTextArea = styled(Input)`
   border-radius: 20px;
   height: 30vh;
   width: 500px;
+
 `;
 
 const StyledInput = styled(Input)`
