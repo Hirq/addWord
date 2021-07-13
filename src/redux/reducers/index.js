@@ -215,6 +215,27 @@ const initialState = {
 
   notes: [
     {
+      id: 85,
+      title: 'Settigs - tam ustawiamy jakie mamy filtry, lub jakis przycisk na blogu, gdzie otwieramy okno, w którym ustalamy filtry - jak usuniemy istniejacy to ustawiamy na brak filtrow - po potwierdzeniu ze taki jest (przeszukanie bazy)',
+      content:
+        'test',
+      date: '19.05.2021',
+    },
+    {
+      id: 86,
+      title: 'Filtry - szukanie po nazwie, a przy blogu po nazwie lub tagu, ktory wybieramy z listy',
+      content:
+        'test',
+      date: '19.05.2021',
+    },
+    {
+      id: 87,
+      title: 'Dodać archiwum dla notatek - ktore wyświetalmy po nacisnieciu przycisku',
+      content:
+        'test',
+      date: '19.05.2021',
+    },
+    {
       id: 90,
       title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',
       content:
@@ -251,7 +272,7 @@ const initialState = {
     },
     {
       id: 92,
-      title: 'podczas psiania bloga lub notatki przechodzenie do nowej lini, a nie w ciągłym tekscie content',
+      title: 'Zegar ogarnąc',
       content:
         '',
       date: '19.05.2021',
@@ -268,6 +289,13 @@ const initialState = {
       title: 'Zrobione',
       content:
         'NewElementBar - action przekazac jako parametr, a nie jako stringa - i przemyslec w jaki sposob czytelny zaprogramowac ten plik .js nastepnie ogarnac REDUX',
+      date: '08.05.2021',
+    },
+    {
+      id: 94,
+      title: 'Panel logowania / rejestraci',
+      content:
+        'test',
       date: '08.05.2021',
     }
   ],
