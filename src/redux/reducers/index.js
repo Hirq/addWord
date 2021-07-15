@@ -293,7 +293,7 @@ const initialState = {
     },
     {
       id: 94,
-      title: 'Panel logowania / rejestraci',
+      title: 'Panel logowania / rejestracji',
       content:
         'test',
       date: '08.05.2021',
