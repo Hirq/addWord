@@ -220,6 +220,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 86,
@@ -227,6 +228,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 87,
@@ -234,6 +236,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 90,
@@ -241,6 +244,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 88,
@@ -248,6 +252,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 89,
@@ -255,6 +260,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 91,
@@ -262,6 +268,7 @@ const initialState = {
       content:
         'ToDO',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 91,
@@ -269,6 +276,7 @@ const initialState = {
       content:
         '',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 92,
@@ -276,6 +284,7 @@ const initialState = {
       content:
         '',
       date: '19.05.2021',
+      archived: false,
     },
     {
       id: 93,
@@ -283,6 +292,7 @@ const initialState = {
       content:
         'Poprawic widok notatek' + ' NewBlogBar - wyciagnac z reduxa na jakiej jest sciezce DevToolsRedux i wtedy na podstawie tych danych dodać albo bloga albo notatke',
       date: '13.05.2021',
+      archived: true,
     },
     {
       id: 94,
@@ -290,6 +300,7 @@ const initialState = {
       content:
         'NewElementBar - action przekazac jako parametr, a nie jako stringa - i przemyslec w jaki sposob czytelny zaprogramowac ten plik .js nastepnie ogarnac REDUX',
       date: '08.05.2021',
+      archived: true,
     },
     {
       id: 94,
@@ -297,6 +308,7 @@ const initialState = {
       content:
         'test',
       date: '08.05.2021',
+      archived: false,
     }
   ],
 }

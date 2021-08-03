@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
 import Input from 'components/atoms/Input';
 import Heading from 'components/atoms/Heading';
+import Button from 'components/atoms/Button';
 import Paragraph from 'components/atoms/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon';
 import NewElementBar from 'components/organisms/NewElementBar';
+import Card from 'components/molecules/Card';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -47,7 +49,19 @@ const StyledButtonIcon = styled(ButtonIcon)`
 `
 
 const GridTemplate = ({ children, path, countItem }) => {
+  // const archiveNote = notes.filter(note => note.archived == true).map(({title, content, date, id }) => (
+  //   <Card
+  //   id={id}
+  //   title={title}
+  //   content={content}
+  //   date={date}
+  //   key={id}
+  //   path="note"
+  //   />
+  // ))
+  // const archiveNote = notes.filter(note => note.archived == false).map(archivedNote => (<li> {notes.title} </li>)) 
   const [visibleBar, setVisibleBar] = useState(false);
+  const [withArchive, setWithArchive] = useState(false);
 
   const handleNewElementBarToggle = () => {
     setVisibleBar(state => !state)
@@ -56,6 +70,23 @@ const GridTemplate = ({ children, path, countItem }) => {
   const hideAddBar = () => {
     {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
   }
+
+  const hideArchive = () => {
+    setWithArchive(state => !state)
+  }
+
+  // const checkArchive = () => {
+  //   if (withArchive == false){
+  //     return(
+  //     <StyledGrid>{children}</StyledGrid>
+  //     )
+  //   }
+  //   else{
+  //     return(
+  //     <StyledGrid>{archiveNote}</StyledGrid>
+  //     )
+  //   }
+  // }
 
   const determinePath = (path) => {
     if (path == 'blog'){
@@ -68,7 +99,11 @@ const GridTemplate = ({ children, path, countItem }) => {
     if (path == 'note'){
       return(
         <>
+          {/* <Button onClick={hideArchive}> Archive </Button>
+          <input type="checkbox" checked={withArchive}/>
+          {checkArchive(withArchive)} */}
           <StyledGrid>{children}</StyledGrid>
+
         </>
       )
     }

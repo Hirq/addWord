@@ -115,7 +115,6 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         {
           const filter = options.filter(item => item.value.includes(i))
           setFilterOptions(filterOptions => filterOptions.concat(filter))
-
         })   
         setTag(filterOptions.map((i) => i.value + ' '));
       }
@@ -152,6 +151,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
                 title: title,
                 content: content,
                 date: today,
+                archived: false,
               })}
             >
             {action} {path}
