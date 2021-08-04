@@ -215,6 +215,14 @@ const initialState = {
 
   notes: [
     {
+      id: 84,
+      title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',
+      content:
+        'test',
+      date: '19.05.2021',
+      archived: false,
+    },
+    {
       id: 85,
       title: 'Settigs - tam ustawiamy jakie mamy filtry, lub jakis przycisk na blogu, gdzie otwieramy okno, w którym ustalamy filtry - jak usuniemy istniejacy to ustawiamy na brak filtrow - po potwierdzeniu ze taki jest (przeszukanie bazy)',
       content:
@@ -239,14 +247,6 @@ const initialState = {
       archived: false,
     },
     {
-      id: 90,
-      title: 'Notatki w wersji todo - czyli dodawanie nowego elementu do tego zbioru',
-      content:
-        'test',
-      date: '19.05.2021',
-      archived: false,
-    },
-    {
       id: 88,
       title: 'select react - dodac do listy',
       content:
@@ -263,7 +263,7 @@ const initialState = {
       archived: false,
     },
     {
-      id: 91,
+      id: 90,
       title: 'PropsType',
       content:
         'ToDO',
@@ -303,7 +303,7 @@ const initialState = {
       archived: true,
     },
     {
-      id: 94,
+      id: 95,
       title: 'Panel logowania / rejestracji',
       content:
         'test',

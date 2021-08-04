@@ -48,18 +48,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
   }
 `
 
-const GridTemplate = ({ children, path, countItem }) => {
-  // const archiveNote = notes.filter(note => note.archived == true).map(({title, content, date, id }) => (
-  //   <Card
-  //   id={id}
-  //   title={title}
-  //   content={content}
-  //   date={date}
-  //   key={id}
-  //   path="note"
-  //   />
-  // ))
-  // const archiveNote = notes.filter(note => note.archived == false).map(archivedNote => (<li> {notes.title} </li>)) 
+const GridTemplate = ({ children, path, countItem, archiveNote, countItemArchive }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
 
@@ -75,18 +64,18 @@ const GridTemplate = ({ children, path, countItem }) => {
     setWithArchive(state => !state)
   }
 
-  // const checkArchive = () => {
-  //   if (withArchive == false){
-  //     return(
-  //     <StyledGrid>{children}</StyledGrid>
-  //     )
-  //   }
-  //   else{
-  //     return(
-  //     <StyledGrid>{archiveNote}</StyledGrid>
-  //     )
-  //   }
-  // }
+  const checkArchive = () => {
+    if (withArchive === false ){
+      return(
+      <StyledGrid>{children}</StyledGrid>
+      )
+    }
+    else{
+      return(
+      <StyledGrid>{archiveNote}</StyledGrid>
+      )
+    }
+  }
 
   const determinePath = (path) => {
     if (path == 'blog'){
@@ -99,15 +88,12 @@ const GridTemplate = ({ children, path, countItem }) => {
     if (path == 'note'){
       return(
         <>
-          {/* <Button onClick={hideArchive}> Archive </Button>
+          <Button onClick={hideArchive}> Archive </Button>
           <input type="checkbox" checked={withArchive}/>
-          {checkArchive(withArchive)} */}
-          <StyledGrid>{children}</StyledGrid>
-
+          {checkArchive()}
         </>
       )
     }
-
   }
 
   return (
@@ -118,7 +104,7 @@ const GridTemplate = ({ children, path, countItem }) => {
           <StyledHeading big as="h1">
             {path}
           </StyledHeading>
-          <StyledParagraph>{countItem}</StyledParagraph>
+          <StyledParagraph>{withArchive ? countItemArchive : countItem }</StyledParagraph>
         </StyledPageHeader>
         {determinePath(path)}
       </StyledWrapper>
