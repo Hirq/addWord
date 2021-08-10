@@ -48,7 +48,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
   }
 `
 
-const GridTemplate = ({ children, path, countItem, archiveNote, countItemArchive }) => {
+const GridTemplate = ({ path, notes, countNotes, archiveNote, countArchiveNote }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
 
@@ -67,7 +67,7 @@ const GridTemplate = ({ children, path, countItem, archiveNote, countItemArchive
   const checkArchive = () => {
     if (withArchive === false ){
       return(
-      <StyledGrid>{children}</StyledGrid>
+      <StyledGrid>{notes}</StyledGrid>
       )
     }
     else{
@@ -81,7 +81,7 @@ const GridTemplate = ({ children, path, countItem, archiveNote, countItemArchive
     if (path == 'blog'){
       return(
         <>
-          <StyledGrid>{children}</StyledGrid>
+          <StyledGrid>{notes}</StyledGrid>
         </>
       )
     }
@@ -104,7 +104,7 @@ const GridTemplate = ({ children, path, countItem, archiveNote, countItemArchive
           <StyledHeading big as="h1">
             {path}
           </StyledHeading>
-          <StyledParagraph>{withArchive ? countItemArchive : countItem }</StyledParagraph>
+          <StyledParagraph>{withArchive ? countArchiveNote : countNotes }</StyledParagraph>
         </StyledPageHeader>
         {determinePath(path)}
       </StyledWrapper>

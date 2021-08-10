@@ -444,6 +444,7 @@ const rootReducer = (state = initialState, action) => {
       const id_note_edit = action.payload.id;
       const title_note_edit = action.payload.title;
       const content_note_edit = action.payload.content;
+      const archived_note_edit = action.payload.archived;
       return {
         ...state,
         notes: state.notes.map(note => note.id === id_note_edit ? 
@@ -452,6 +453,7 @@ const rootReducer = (state = initialState, action) => {
             title: title_note_edit,
             content: content_note_edit,
             date: note.date,
+            archived: archived_note_edit 
           } 
           : note
         )

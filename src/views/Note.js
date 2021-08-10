@@ -15,20 +15,20 @@ const Note = ({ notes }) => {
     />
   ))
 
+  const currentNote = notes.filter(note => note.archived === false).map(({title, content, date, id }) => (
+    <Card
+    id={id}
+    title={title}
+    content={content}
+    date={date}
+    key={id}
+    path="note"
+    />
+  ))
+
   return (
     <>
-      <GridTemplate path="note" countItem={notes.length} archiveNote={archiveNote} countItemArchive={archiveNote.length} >
-        {notes.map(({title, content, date, id }) => (
-          <Card
-          id={id}
-          title={title}
-          content={content}
-          date={date}
-          key={id}
-          path="note"
-          />
-        ))}
-      </GridTemplate>
+      <GridTemplate path="note" notes= {currentNote} countNotes={currentNote.length} archiveNote={archiveNote} countArchiveNote={archiveNote.length} />
     </>
   )
 }

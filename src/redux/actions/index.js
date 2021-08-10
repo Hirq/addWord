@@ -138,13 +138,14 @@ export const removeNote = (id) => {
   };
 };
 
-export const editNote = (id, title, content) => {
+export const editNote = (id, title, content, archived) => {
   return {
     type: 'EDIT_NOTE',
     payload: {
       id,
       title,
-      content
+      content,
+      archived
     },
   };
 };

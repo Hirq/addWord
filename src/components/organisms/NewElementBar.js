@@ -74,6 +74,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState('');
+  const [archived, setArchived] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
 
   const handleChangeTitle = (e) => {
@@ -91,12 +92,17 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
     setFilterOptions(newValue);
   };
 
+  const handleChangeArchived = () => {
+    setArchived(state => !state)
+  }
+
   const handleSubmit = (e) => {
     if (action === 'Add'){
       e.preventDefault();
       setTitle('');
       setContent('');
       setTag('');
+      setArchived(false);
       hideAddBar();
     }
     if (action === 'Edit'){
@@ -122,6 +128,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         const data = notes.filter((notes) => notes.id === id)
         setTitle(data[0].title);
         setContent(data[0].content);
+        setArchived(data[0].archived);
       }
     }
   }, [] );
@@ -180,10 +187,13 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'note') {
         return(
           <>
+            <p>Archived<input type="checkbox" checked={archived} onChange={handleChangeArchived}/>
+            </p> 
             <StyledButtonSave onClick={() => editNote(
               id,
               title,
               content,
+              archived,
             )}
             >   
             {action} {path}
@@ -201,6 +211,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       <StyledButtonClose>X</StyledButtonClose>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
+
       {determinePath(path)}
     </StyledWrapper>
   </form>
@@ -230,7 +241,7 @@ const mapDispatchToProps = dispatch => ({
   addBlog: (blogContent) => dispatch(addBlogAction(blogContent)),
   addNote: (noteContent) => dispatch(addNoteAction(noteContent)),
   editBlog: (id, title, content, tag) => dispatch(editBlogAction(id, title, content, tag)),
-  editNote: (id, title, content) => dispatch(editNoteAction(id, title, content)),
+  editNote: (id, title, content, archived) => dispatch(editNoteAction(id, title, content, archived)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewElementBar);
