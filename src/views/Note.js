@@ -28,7 +28,7 @@ const Note = ({ notes }) => {
 
   return (
     <>
-      <GridTemplate path="note" notes= {currentNote} countNotes={currentNote.length} archiveNote={archiveNote} countArchiveNote={archiveNote.length} />
+      <GridTemplate path="note" notes={currentNote} countNotes={currentNote.length} archiveNote={archiveNote} countArchiveNote={archiveNote.length}/>
     </>
   )
 }

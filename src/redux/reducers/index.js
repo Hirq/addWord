@@ -173,7 +173,7 @@ const initialState = {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
       date: '31.03.2022',
-      tag: ['Work', 'Job'],
+      tag: ['Work','Job'],
     },
   ],
 
