@@ -9,7 +9,6 @@ import Paragraph from 'components/atoms/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon';
 import NewElementBar from 'components/organisms/NewElementBar';
 import Card from 'components/molecules/Card';
-import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -49,15 +48,11 @@ const StyledButtonIcon = styled(ButtonIcon)`
   }
 `
 
-const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, arrayTag, blogs }) => {
+const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
   const [searchTag, setSearchTag] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [arrayTags, setArrayTags] = useState([]);
   
-  // const people3 = arrayTag.map((item) => `${item}`).join(' ');
-
   const handleSearchTag = (e) => {
     setSearchTag(e.target.value);
   }
@@ -77,35 +72,67 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, a
   const checkArchive = () => {
     if (withArchive === false ){
       return(
-      <StyledGrid>{notes}</StyledGrid>
+        <StyledGrid>
+          {notes.filter(item => (item.title.toLowerCase().includes(searchTag))).map(({ title, content, date, id }) => (
+            <Card
+            id={id}
+            title={title}
+            content={content}
+            date={date}
+            key={id}
+            path="note"
+            />
+          ))}
+        </StyledGrid>
       )
     }
     else{
       return(
-      <StyledGrid>{archiveNote}</StyledGrid>
+        <StyledGrid>
+          {archiveNote.filter(item => (item.title.toLowerCase().includes(searchTag))).map(({ title, content, date, id }) => (
+            <Card
+            id={id}
+            title={title}
+            content={content}
+            date={date}
+            key={id}
+            path="note"
+            />
+          ))}
+        </StyledGrid>
       )
     }
   }
 
-  const determinePath = (path) => {
+  const determinePathSearch = (path) => {
     if (path === 'blog'){
       return(
-        <>
-          <StyledGrid>
-            {/* {blogs.filter(item => (item.tag[0].toLowerCase().includes(searchTag))).map(({ title, content, date, tag, id }) => ( */}
-            {blogs.filter(item => (item.tag.find((test) => test.toLowerCase().includes(searchTag)))).map(({ title, content, date, tag, id }) => (
-              <Card
-              id={id}
-              title={title}
-              content={content}
-              date={date}
-              tag={tag}
-              key={id}
-              path="blog"
-              />
-            ))}
-          </StyledGrid>
-        </>
+        <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/>
+      )
+    }
+    if (path === 'note'){
+      return(
+        <Input search placeholder="Search note" value={searchTag} onChange={handleSearchTag}/>
+      )
+    }
+  }
+
+  const determinePathGird = (path) => {
+    if (path === 'blog'){
+      return(
+        <StyledGrid>
+          {blogs.filter(item => (item.tag.find((test) => test.toLowerCase().includes(searchTag)))).map(({ title, content, date, tag, id }) => (
+            <Card
+            id={id}
+            title={title}
+            content={content}
+            date={date}
+            tag={tag}
+            key={id}
+            path="blog"
+            />
+          ))}
+        </StyledGrid>
       )
     }
     if (path == 'note'){
@@ -119,37 +146,23 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, a
     }
   }
 
-  useEffect(() => {
-    if (path === 'blog'){
-    setArrayTags(arrayTag);
-    const results = arrayTags.filter(tag => (
-      tag.toLowerCase().includes(searchTag))
-    );
-    setSearchResults(results);
-  }}, [searchTag]);
-
   return (
     <UserPageTemplate >
       <StyledWrapper onClick={hideAddBar}>
         <StyledPageHeader>
-          <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/>
+          {determinePathSearch(path)}
           <StyledHeading big as="h1">
             {path}
           </StyledHeading>
           <StyledParagraph>{withArchive ? countArchiveNote : countNotes }</StyledParagraph>
         </StyledPageHeader>
-        {determinePath(path)}
+        {determinePathGird(path)}
       </StyledWrapper>
       <StyledButtonIcon onClick={handleNewElementBarToggle}> + </StyledButtonIcon>
       <NewElementBar isVisible={visibleBar} hideAddBar={hideAddBar} path={path} action='Add'/>
     </UserPageTemplate>
   )
 };
-
-// const mapStateToProps = state => {
-//   const { blogs } = state;
-//   return { blogs };
-// }
 
 // GridTemplate.propTypes = {
 //   children: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -160,4 +173,3 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, a
 // };
 
 export default GridTemplate;
-// export default connect(mapStateToProps, null)(GridTemplate);
