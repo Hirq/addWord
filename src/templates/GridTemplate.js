@@ -9,6 +9,7 @@ import Paragraph from 'components/atoms/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon';
 import NewElementBar from 'components/organisms/NewElementBar';
 import Card from 'components/molecules/Card';
+import Select from 'react-select';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -47,14 +48,46 @@ const StyledButtonIcon = styled(ButtonIcon)`
     border-color: ${({ theme }) => (theme.colorButtonSecondary)};
   }
 `
+const StyledReactSelect = styled(Select)`
+  color: black;
+`
 
+const options = [
+  { value: 'Book', label: 'Book', id: 0},
+  { value: 'Video', label: 'Video', id: 1 },  
+  { value: 'Internet', label: 'Internet', id: 2 },
+  { value: 'Story', label: 'Story', id: 3 },
+  { value: 'Diary', label: 'Diary', id: 4 },
+  { value: 'Job', label: 'Job', id: 5 },
+  { value: 'Holiday', label: 'Holiday', id: 6 },
+  { value: 'Work', label: 'Work', id: 7 }
+]
+ 
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
-  const [searchTag, setSearchTag] = useState("");
+  const [searchTag, setSearchTag] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [addFilter, setAddFilter] = useState([]);
   
+  const handleChangeTagSelect = (newValue, actionMeta) => {
+    setAddFilter(...newValue.map((i) => i.value));
+    // setFilterOptions(filterOptions[0]);
+
+    setSearchTag(searchTag.concat(addFilter));
+
+    console.log(filterOptions)
+    console.log(searchTag)
+    setFilterOptions(newValue);
+  };
+
   const handleSearchTag = (e) => {
     setSearchTag(e.target.value);
+  }
+
+  const handleSearchName = (e) => {
+    setSearchName(e.target.value);
   }
 
   const handleNewElementBarToggle = () => {
@@ -73,7 +106,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (withArchive === false ){
       return(
         <StyledGrid>
-          {notes.filter(item => (item.title.toLowerCase().includes(searchTag))).map(({ title, content, date, id }) => (
+          {notes.filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, id }) => (
             <Card
             id={id}
             title={title}
@@ -89,7 +122,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     else{
       return(
         <StyledGrid>
-          {archiveNote.filter(item => (item.title.toLowerCase().includes(searchTag))).map(({ title, content, date, id }) => (
+          {archiveNote.filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, id }) => (
             <Card
             id={id}
             title={title}
@@ -107,12 +140,16 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   const determinePathSearch = (path) => {
     if (path === 'blog'){
       return(
-        <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/>
+        <>  
+          <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
+          <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/>
+          <Input search placeholder="Search blog" value={searchName} onChange={handleSearchName}/>
+        </>
       )
     }
     if (path === 'note'){
       return(
-        <Input search placeholder="Search note" value={searchTag} onChange={handleSearchTag}/>
+        <Input search placeholder="Search note" value={searchName} onChange={handleSearchName}/>
       )
     }
   }
@@ -121,7 +158,9 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (path === 'blog'){
       return(
         <StyledGrid>
-          {blogs.filter(item => (item.tag.find((test) => test.toLowerCase().includes(searchTag)))).map(({ title, content, date, tag, id }) => (
+          {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
+
+          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
