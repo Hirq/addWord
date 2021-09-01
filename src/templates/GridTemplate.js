@@ -62,23 +62,28 @@ const options = [
   { value: 'Holiday', label: 'Holiday', id: 6 },
   { value: 'Work', label: 'Work', id: 7 }
 ]
- 
+
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
   const [searchTag, setSearchTag] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [filterOptions, setFilterOptions] = useState([]);
-  const [addFilter, setAddFilter] = useState([]);
+  const [change, setChange] = useState(false);
+  
+  
   
   const handleChangeTagSelect = (newValue, actionMeta) => {
-    setAddFilter(...newValue.map((i) => i.value));
-    // setFilterOptions(filterOptions[0]);
+    // console.log(newValue[newValue.length-1].value) // OK
+    console.log(newValue);
+    setChange(true);
 
-    setSearchTag(searchTag.concat(addFilter));
+    // setAddFilter(newValue.map((i) => i.value));
 
-    console.log(filterOptions)
-    console.log(searchTag)
+
+    // setSearchTag(searchTag.concat(addFilter));
+    // setSearchTag(searchTag.concat((newValue[newValue.length-1].value)));
+    // setSearchTag(newValue[newValue.length-1].value);
     setFilterOptions(newValue);
   };
 
@@ -160,6 +165,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
         <StyledGrid>
           {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
 
+          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(testFilter)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
           {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
@@ -184,6 +190,16 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
       )
     }
   }
+
+
+  useEffect(() => {
+    if (change == true) {
+      console.log(filterOptions)
+      setSearchTag(filterOptions.map((i) => i.value));
+      console.log(searchTag)
+      setChange(false)
+    }
+  })
 
   return (
     <UserPageTemplate >
