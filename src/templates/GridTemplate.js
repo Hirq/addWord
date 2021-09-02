@@ -163,10 +163,14 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (path === 'blog'){
       return(
         <StyledGrid>
+
+          {/* porównuje string do array - dlatego nie dziala - trzeba porownac array do array, lub znaleźć metode, która kazdego stringa przszuka po tablicy */}
+
+
           {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
 
-          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(testFilter)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
-          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => (
+          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
+          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
@@ -177,6 +181,11 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             path="blog"
             />
           ))}
+          <ul>
+          {blogs.map(({ title, tag}) => (
+            <li> {tag}</li>
+          ))}
+          </ul>
         </StyledGrid>
       )
     }
