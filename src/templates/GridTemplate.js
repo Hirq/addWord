@@ -70,6 +70,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   const [searchName, setSearchName] = useState("");
   const [filterOptions, setFilterOptions] = useState([]);
   const [change, setChange] = useState(false);
+  const [test, setTest] = useState("");
   
   
   
@@ -170,7 +171,8 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
           {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
 
           {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
-          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => (
+          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag.toString())))).map(({ title, content, date, tag, id }) => ( */}
+          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag.toString())))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
@@ -183,7 +185,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
           ))}
           <ul>
           {blogs.map(({ title, tag}) => (
-            <li> {tag}</li>
+            <li> {test} ---- {searchTag.toString()}</li>
           ))}
           </ul>
         </StyledGrid>
@@ -205,7 +207,9 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (change == true) {
       console.log(filterOptions)
       setSearchTag(filterOptions.map((i) => i.value));
+      setTest(searchTag.toString());
       console.log(searchTag)
+      console.log(test)
       setChange(false)
     }
   })
