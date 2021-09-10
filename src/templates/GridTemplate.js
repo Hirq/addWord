@@ -63,6 +63,8 @@ const options = [
   { value: 'Work', label: 'Work', id: 7 }
 ]
 
+const table = ['1','2','3','4'];
+
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
@@ -188,6 +190,19 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             <li> {test} ---- {searchTag.toString()}</li>
           ))}
           </ul>
+
+          Sprawdzic na tablicy co i jak sie dzieje
+
+          <ul>
+            {table.map((element) => (
+              <li>{element}</li>
+            ))
+            }
+          </ul>
+          
+          {/* {table.filter(item => (item = '1')} */}
+
+
         </StyledGrid>
       )
     }
