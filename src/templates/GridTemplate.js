@@ -64,6 +64,7 @@ const options = [
 ]
 
 const table = ['1','2','3','4'];
+const table2 = ['1','3'];
 
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
   const [visibleBar, setVisibleBar] = useState(false);
@@ -172,9 +173,8 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
 
           {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
 
-          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
-          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag.toString())))).map(({ title, content, date, tag, id }) => ( */}
-          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag.toString())))).map(({ title, content, date, tag, id }) => (
+          {/* {blogs.filter(item => (item.tag.find((tags) => !tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
+          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
@@ -200,7 +200,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             }
           </ul>
           
-          {/* {table.filter(item => (item = '1')} */}
+          {table.filter(item => !table2.includes(item))}
 
 
         </StyledGrid>
