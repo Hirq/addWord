@@ -174,7 +174,8 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
           {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
 
           {/* {blogs.filter(item => (item.tag.find((tags) => !tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
-          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => (
+          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => ( */}
+          {blogs.filter(item => (item.tag.find((tags) => !searchTag.includes(tags)))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
