@@ -63,7 +63,8 @@ const options = [
   { value: 'Work', label: 'Work', id: 7 }
 ]
 
-const options2 = ['Book', 'Video','Internet', 'Story', 'Diary', 'Job','Holiday', 'Work']
+const options2 = ['Book', 'Video','Internet', 'Story', 'Diary', 'Job','Holiday', 'Work'];
+const optionsTest = ['Job', 'Work'];
 
 const table = ['1','2','3','4'];
 const table2 = ['1','3'];
@@ -75,7 +76,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   const [searchName, setSearchName] = useState("");
   const [filterOptions, setFilterOptions] = useState([]);
   const [change, setChange] = useState(false);
-  const [test, setTest] = useState("");
+  const [lengthTagFilter, setLengthTagFilter] = useState(0);
   
   
   
@@ -167,23 +168,32 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
 
   const determinePathGird = (path) => {
     if (path === 'blog'){
-      return(
+      if (lengthTagFilter === 0) {
+        return (
+          <StyledGrid>
+            {blogs.map(({ title, content, date, tag, id }) => (
+                <Card
+                id={id}
+                title={title}
+                content={content}
+                date={date}
+                tag={tag}
+                key={id}
+                path="blog"
+                />
+              ))}
+          </StyledGrid>
+        )
+      }
+      else {
         <StyledGrid>
-          {/* <ul>
-          {options2.filter(item => !searchTag.includes(item)).map((item) => (
-            <li>{item}</li>
-          ))}
-          </ul> */}
-
-          {/* {options2.filter(item => !searchTag.includes(item))} */}
-
-          {/* porównuje string do array - dlatego nie dziala - trzeba porownac array do array, lub znaleźć metode, która kazdego stringa przszuka po tablicy */}
-
-
-          {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
-
-          {/* {blogs.filter(item => (item.tag.find((tags) => !tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
-          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => (
+          {blogs
+          // .map((searchTag) => (
+          //   .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
+          // ))
+          .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
+          .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))
+          .map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
@@ -194,9 +204,82 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             path="blog"
             />
           ))}
+      </StyledGrid>
+      }
+      return(
+        <StyledGrid>
+
+          <ul>
+          {optionsTest.filter(item => !searchTag.includes(item)).map((item) => (
+            <li>
+              {item}
+            </li>
+          ))}
+          </ul>
+
+          {/* {options2.filter(item => !searchTag.includes(item))} */}
+
+          {/* porównuje string do array - dlatego nie dziala - trzeba porownac array do array, lub znaleźć metode, która kazdego stringa przszuka po tablicy */}
+
+
+          {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
+
+          {/* {blogs.filter(item => (item.tag.find((tags) => !tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
           
+          {/* { lengthTagFilter === 0 ? 
+          
+          {blogs.map(({ title, content, date, tag, id }) => (
+              <Card
+              id={id}
+              title={title}
+              content={content}
+              date={date}
+              tag={tag}
+              key={id}
+              path="blog"
+              />
+            ))}
+          : null
+
+          } */}
+          
+          {lengthTagFilter}
+          {blogs
+          .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
+          .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))
+          .map(({ title, content, date, tag, id }) => (
+            <Card
+            id={id}
+            title={title}
+            content={content}
+            date={date}
+            tag={tag}
+            key={id}
+            path="blog"
+            />
+          ))}
+
+            {/* ////////////////// */}
+          <ul>
+          TEN
+          {blogs.filter(item => (item.tag.every((tags) => tags.includes(searchTag)))).map(({ tag }) => (
+            <li>
+            {tag}
+            </li>
+          ))}
+            TENs
+          </ul>
 
 
+
+
+          {/* <ul>
+          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ tag }) => (
+            <li> = {tag} =</li> 
+          ))}
+          </ul> */}
+
+          {searchTag}
 
         </StyledGrid>
       )
@@ -217,11 +300,13 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (change == true) {
       console.log(filterOptions)
       setSearchTag(filterOptions.map((i) => i.value));
-      setTest(searchTag.toString());
       console.log(searchTag)
-      console.log(test)
+      setLengthTagFilter(filterOptions.length)
+      console.log(lengthTagFilter)
       setChange(false)
     }
+    console.log(searchTag)
+
   })
 
   return (
