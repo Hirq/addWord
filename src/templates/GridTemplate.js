@@ -63,6 +63,8 @@ const options = [
   { value: 'Work', label: 'Work', id: 7 }
 ]
 
+const options2 = ['Book', 'Video','Internet', 'Story', 'Diary', 'Job','Holiday', 'Work']
+
 const table = ['1','2','3','4'];
 const table2 = ['1','3'];
 
@@ -167,6 +169,13 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (path === 'blog'){
       return(
         <StyledGrid>
+          {/* <ul>
+          {options2.filter(item => !searchTag.includes(item)).map((item) => (
+            <li>{item}</li>
+          ))}
+          </ul> */}
+
+          {/* {options2.filter(item => !searchTag.includes(item))} */}
 
           {/* porównuje string do array - dlatego nie dziala - trzeba porownac array do array, lub znaleźć metode, która kazdego stringa przszuka po tablicy */}
 
@@ -174,8 +183,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
           {/* .filter(item => (item.title.toLowerCase().includes(searchName))) */}
 
           {/* {blogs.filter(item => (item.tag.find((tags) => !tags.includes(searchTag)))).filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, tag, id }) => ( */}
-          {/* {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => ( */}
-          {blogs.filter(item => (item.tag.find((tags) => !searchTag.includes(tags)))).map(({ title, content, date, tag, id }) => (
+          {blogs.filter(item => (item.tag.find((tags) => tags.includes(searchTag)))).map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
             title={title}
@@ -186,22 +194,8 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             path="blog"
             />
           ))}
-          <ul>
-          {blogs.map(({ title, tag}) => (
-            <li> {test} ---- {searchTag.toString()}</li>
-          ))}
-          </ul>
-
-          Sprawdzic na tablicy co i jak sie dzieje
-
-          <ul>
-            {table.map((element) => (
-              <li>{element}</li>
-            ))
-            }
-          </ul>
           
-          {table.filter(item => !table2.includes(item))}
+
 
 
         </StyledGrid>
