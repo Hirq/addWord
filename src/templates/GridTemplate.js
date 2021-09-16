@@ -68,6 +68,7 @@ const optionsTest = ['Job', 'Work'];
 
 const table = ['1','2','3','4'];
 const table2 = ['1','3'];
+const filtry = [0,2,4];
 
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
   const [visibleBar, setVisibleBar] = useState(false);
@@ -166,6 +167,10 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     }
   }
 
+  const setBlogFilter = (i) => {
+    {blogs.filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))}
+  }
+
   const determinePathGird = (path) => {
     if (path === 'blog'){
       if (lengthTagFilter === 0) {
@@ -242,11 +247,20 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
           : null
 
           } */}
-          
-          {lengthTagFilter}
+
+ilosc filtorw - {lengthTagFilter}
+
+{searchTag.map((filter, i) => <h1>{searchTag[i]} x</h1>)}
+
+
+
           {blogs
-          .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
-          .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))
+
+          // .searchTag.map((filter, i) => {filtera(item => (item.tag.find((tags) => (tags.includes(searchTag[0]))))) }   )}
+          
+        //  .filter(item => (item.tag.find((tags) => (tags.includes(searchTag[0])))))
+        //  .filter(item => (item.tag.find((tags) => (tags.includes(searchTag[1]))))) 
+
           .map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
@@ -261,13 +275,13 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
 
             {/* ////////////////// */}
           <ul>
-          TEN
+          map filter
           {blogs.filter(item => (item.tag.every((tags) => tags.includes(searchTag)))).map(({ tag }) => (
             <li>
             {tag}
             </li>
           ))}
-            TENs
+          map filter
           </ul>
 
 
@@ -304,6 +318,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
       setLengthTagFilter(filterOptions.length)
       console.log(lengthTagFilter)
       setChange(false)
+      {searchTag.map((filter, i) => setBlogFilter(i))}
     }
     console.log(searchTag)
 
