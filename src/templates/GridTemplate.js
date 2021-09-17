@@ -255,7 +255,9 @@ ilosc filtorw - {lengthTagFilter}
 
 
           {blogs
+            // .filter(item => (item.tag.find((tags) => searchTag.map((filter, i) => (tags.includes(searchTag[i]))) )))
 
+            
           // .searchTag.map((filter, i) => {filtera(item => (item.tag.find((tags) => (tags.includes(searchTag[0]))))) }   )}
           
         //  .filter(item => (item.tag.find((tags) => (tags.includes(searchTag[0])))))
