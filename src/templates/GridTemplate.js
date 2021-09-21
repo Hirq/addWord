@@ -250,12 +250,12 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
 
 ilosc filtorw - {lengthTagFilter}
 
-{searchTag.map((filter, i) => <h1>{searchTag[i]} x</h1>)}
+{searchTag.map((filter, i) => <h1>{searchTag[i]} ? </h1>)}
 
 
 
           {blogs
-            // .filter(item => (item.tag.find((tags) => searchTag.map((filter, i) => (tags.includes(searchTag[i]))) )))
+            // .filter(item =>  (item.tag.find((tags) => searchTag.map((filter, i) => (tags.includes(searchTag[i]))) )))
 
             
           // .searchTag.map((filter, i) => {filtera(item => (item.tag.find((tags) => (tags.includes(searchTag[0]))))) }   )}
