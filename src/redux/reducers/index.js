@@ -134,6 +134,15 @@ const initialState = {
 
   blogs: [
     {
+      id: 5,
+      title: 'Teraz to',
+      content:
+        'Zrobic porzadek z wpisami na blogu i note, nastepnie zajac sie tworzeniem panelu administratora '
+        ,
+      date: '12.12.2012',
+      tag: ['Work'],
+    },
+    {
       id: 0,
       title: 'pierwsza strona',
       content:

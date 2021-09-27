@@ -74,7 +74,6 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
 
   const handleChangeTagSelect = (newValue, actionMeta) => {
     // console.log(newValue[newValue.length-1].value) // OK
-    console.log(newValue);
     setChange(true);
     // setAddFilter(newValue.map((i) => i.value));
     // setSearchTag(searchTag.concat(addFilter));
@@ -88,7 +87,8 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   }
 
   const handleSearchName = (e) => {
-    setSearchName(e.target.value);
+    setSearchName(e.target.value.toUpperCase());
+
   }
 
   const handleNewElementBarToggle = () => {
@@ -107,7 +107,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (withArchive === false ){
       return(
         <StyledGrid>
-          {notes.filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, id }) => (
+          {notes.filter(item => (item.title.toUpperCase().includes(searchName))).map(({ title, content, date, id }) => (
             <Card
             id={id}
             title={title}
@@ -123,7 +123,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     else{
       return(
         <StyledGrid>
-          {archiveNote.filter(item => (item.title.toLowerCase().includes(searchName))).map(({ title, content, date, id }) => (
+          {archiveNote.filter(item => (item.title.toUpperCase().includes(searchName))).map(({ title, content, date, id }) => (
             <Card
             id={id}
             title={title}
@@ -147,7 +147,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
           )
           }
-          <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/>
+          {/* <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/> */}
           <Input search placeholder="Search blog" value={searchName} onChange={handleSearchName}/>
         </>
       )
@@ -159,16 +159,14 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     }
   }
 
-  const setBlogFilter = (i) => {
-    {blogs.filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))}
-  }
-
   const determinePathGird = (path) => {
     if (path === 'blog'){
       if (lengthTagFilter === 0) {
         return (
           <StyledGrid>
-            {blogs.map(({ title, content, date, tag, id }) => (
+            {blogs
+            .filter(item => (item.title.toUpperCase().includes(searchName)))
+            .map(({ title, content, date, tag, id }) => (
                 <Card
                 id={id}
                 title={title}
@@ -186,6 +184,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
         return (
           <StyledGrid>
             {blogs
+            .filter(item => (item.title.toUpperCase().includes(searchName)))
             .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
             .map(({ title, content, date, tag, id }) => (
                 <Card
@@ -205,6 +204,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
         return (
           <StyledGrid>
             {blogs
+            .filter(item => (item.title.toUpperCase().includes(searchName)))
             .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
             .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))
             .map(({ title, content, date, tag, id }) => (
@@ -225,6 +225,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
         return (
           <StyledGrid>
             {blogs
+            .filter(item => (item.title.toUpperCase().includes(searchName)))
             .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[0])))))
             .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[1])))))
             .filter(item => (item.tag.some((tags) => (tags.includes(searchTag[2])))))
@@ -245,6 +246,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
       else {
         <StyledGrid>
           {blogs
+          .filter(item => (item.title.toUpperCase().includes(searchName)))
           .map(({ title, content, date, tag, id }) => (
             <Card
             id={id}
@@ -272,19 +274,14 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
 
   useEffect(() => {
     if (change == true) {
-      console.log(filterOptions)
       if (filterOptions.length <= 3) {
         setSearchTag(filterOptions.map((i) => i.value));
       }
-
-      console.log(searchTag)
       setLengthTagFilter(filterOptions.length)
-      console.log(lengthTagFilter)
       setChange(false)
-      {searchTag.map((filter, i) => setBlogFilter(i))}
     }
-    console.log(searchTag)
-
+    console.log("Dlugosc filtra - ",  lengthTagFilter)
+    console.log("Tablica tagow - ", searchTag)
   })
 
   return (
