@@ -302,12 +302,12 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   )
 };
 
-// GridTemplate.propTypes = {
-//   children: PropTypes.arrayOf(PropTypes.object).isRequired,
-// };
+GridTemplate.propTypes = {
+  path: PropTypes.oneOf(['note', 'blog']).isRequired,
+};
 
-// GridTemplate.defaultProps = {
-//   pageType: 'notes',
-// };
+GridTemplate.defaultProps = {
+  path: 'note',
+};
 
 export default GridTemplate;
