@@ -245,7 +245,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
-      archived: false,
+      archived: true,
     },
     {
       id: 87,
@@ -253,7 +253,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
-      archived: false,
+      archived: true,
     },
     {
       id: 88,
