@@ -9,7 +9,7 @@ import Paragraph from 'components/atoms/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon';
 import NewElementBar from 'components/organisms/NewElementBar';
 import Card from 'components/molecules/Card';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -50,6 +50,15 @@ const StyledButtonIcon = styled(ButtonIcon)`
 `
 const StyledReactSelect = styled(Select)`
   color: black;
+  width: 30%;
+`
+
+const StyledFilterBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: space-between;
+  gap: 0 20px;
 `
 
 const options = [
@@ -139,16 +148,25 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   }
   const determinePathSearch = (path) => {
     if (path === 'blog'){
+      const NoOptionsMessage = props => {
+        return (
+           <components.NoOptionsMessage {...props}>
+              Maximum 3 filter
+           </components.NoOptionsMessage>
+        );
+      };
       return(
         <>  
-          {(searchTag.length > 2) ? (
-            <StyledReactSelect value={filterOptions}  isMulti onChange={handleChangeTagSelect}/>
-          ) : (
-            <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
-          )
-          }
-          {/* <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/> */}
-          <Input search placeholder="Search blog" value={searchName} onChange={handleSearchName}/>
+          <StyledFilterBar>
+            <Input search placeholder="Search blog" value={searchName} onChange={handleSearchName}/>
+            {(searchTag.length > 2) ? (
+              <StyledReactSelect value={filterOptions}  isMulti onChange={handleChangeTagSelect} components={{ NoOptionsMessage }} />
+            ) : (
+              <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
+            )
+            }
+            {/* <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/> */}
+          </StyledFilterBar>
         </>
       )
     }
