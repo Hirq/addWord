@@ -27,7 +27,6 @@ const StyledPageHeader = styled.div`
 `;
 
 const StyledHeading = styled(Heading)`
-  margin: 25px 0 0 0;
   ::first-letter {
     text-transform: uppercase;
   }
@@ -59,6 +58,26 @@ const StyledFilterBar = styled.div`
   flex-wrap: nowrap;
   align-content: space-between;
   gap: 0 20px;
+`
+
+const StyledWrapperArchive = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -40px;
+`
+
+const SyledPositionArchive = styled.div`
+  margin: auto;
+`
+
+const StyledButtonArchive = styled(Button)`
+  width: 100;
+`
+
+const Testp = styled.p`
+  text-align: center;
+  margin-top: 0;
 `
 
 const options = [
@@ -146,6 +165,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
       )
     }
   }
+
   const determinePathSearch = (path) => {
     if (path === 'blog'){
       const NoOptionsMessage = props => {
@@ -172,7 +192,21 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     }
     if (path === 'note'){
       return(
-        <Input search placeholder="Search note" value={searchName} onChange={handleSearchName}/>
+        <>
+
+
+            <Input search placeholder="Search note" value={searchName} onChange={handleSearchName}/>
+            <StyledWrapperArchive>
+
+
+          <SyledPositionArchive>
+            <StyledButtonArchive onClick={hideArchive}> {withArchive ? 'Archive' : 'Actuall'}  </StyledButtonArchive>
+          </SyledPositionArchive>
+
+          {/* <input type="checkbox" checked={withArchive}/> */}
+      </StyledWrapperArchive>
+      <Testp><span>true center</span></Testp>
+      </>
       )
     }
   }
@@ -282,8 +316,6 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     if (path === 'note'){
       return(
         <>
-          <Button onClick={hideArchive}> Archive </Button>
-          <input type="checkbox" checked={withArchive}/>
           {checkArchive()}
         </>
       )
@@ -307,9 +339,9 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
       <StyledWrapper onClick={hideAddBar}>
         <StyledPageHeader>
           {determinePathSearch(path)}
-          <StyledHeading big as="h1">
-            {path}
-          </StyledHeading>
+          <StyledHeading big as="h1"> 
+              {path} 
+          </StyledHeading >
           <StyledParagraph>{withArchive ? countArchiveNote : countNotes }</StyledParagraph>
         </StyledPageHeader>
         {determinePathGird(path)}

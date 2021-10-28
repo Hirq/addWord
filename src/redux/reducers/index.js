@@ -137,7 +137,7 @@ const initialState = {
       id: 5,
       title: 'Teraz to',
       content:
-        'Zrobic porzadek z wpisami na blogu i note, nastepnie zajac sie tworzeniem panelu administratora '
+        'Zrobic porzadek z wpisami na blogu i note, nastepnie zajac sie tworzeniem panelu administratora a później poprawić responsywność calej aplikacji '
         ,
       date: '12.12.2012',
       tag: ['Work'],
