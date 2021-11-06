@@ -11,6 +11,7 @@ import BlogDetail from 'views/BlogDetail';
 import SetDetail from 'views/SetDetail';
 import Note from 'views/Note';
 import NoteDetail from 'views/NoteDetail';
+import Settings from 'views/Settings';
 
 
 const Root = () => (
@@ -26,6 +27,7 @@ const Root = () => (
             <Route exact path={routes.blogs} component={BlogDetail} />
             <Route exact path={routes.note} component={Note} />
             <Route exact path={routes.notes} component={NoteDetail} />
+            <Route exact path={routes.settings} component={Settings} />
           </Switch>
         </MainTemplate>
       </ThemeProviderDark>

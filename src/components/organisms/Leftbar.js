@@ -8,6 +8,7 @@ import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import ButtonIcon from 'components/atoms/ButtonIcon';
+import AdminIcon from 'assets/icons/pawn.svg';
 import { routes } from 'routes';
 
 const StyledWrapper = styled.nav`
@@ -41,6 +42,12 @@ const StyledLogoutButton = styled(ButtonIcon)`
   margin-top: auto;
 `;
 
+const StyledBottomIcons = styled.div`
+  margin-top: auto;
+`;
+
+
+
 const StyledLinksList = styled.ul`
   margin: 0;
   padding: 0;
@@ -62,7 +69,10 @@ const Leftbar = () => {
           <ButtonIcon as={NavLink} to={routes.note} icon={bulbIcon} activeclass="active" />
         </li>
       </StyledLinksList>
-      <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+      <StyledBottomIcons>
+        <StyledLogoutButton as={NavLink} to={routes.settings} icon={AdminIcon} />
+        <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+      </StyledBottomIcons>
     </StyledWrapper>
   );
 }

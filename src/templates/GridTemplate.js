@@ -61,18 +61,14 @@ const StyledFilterBar = styled.div`
 `
 
 const StyledWrapperArchive = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: -40px;
-`
-
-const SyledPositionArchive = styled.div`
-  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `
 
 const StyledButtonArchive = styled(Button)`
   width: 100;
+  justify-self: center;
+  margin-top: -10px;
 `
 
 const Testp = styled.p`
@@ -192,21 +188,11 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     }
     if (path === 'note'){
       return(
-        <>
-
-
-            <Input search placeholder="Search note" value={searchName} onChange={handleSearchName}/>
-            <StyledWrapperArchive>
-
-
-          <SyledPositionArchive>
-            <StyledButtonArchive onClick={hideArchive}> {withArchive ? 'Archive' : 'Actuall'}  </StyledButtonArchive>
-          </SyledPositionArchive>
-
+        <StyledWrapperArchive>
+          <Input search placeholder="Search note" value={searchName} onChange={handleSearchName}/>
+          <StyledButtonArchive onClick={hideArchive}> {withArchive ? 'Archive' : 'Actuall'}  </StyledButtonArchive>
           {/* <input type="checkbox" checked={withArchive}/> */}
-      </StyledWrapperArchive>
-      <Testp><span>true center</span></Testp>
-      </>
+        </StyledWrapperArchive>
       )
     }
   }

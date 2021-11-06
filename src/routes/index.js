@@ -9,4 +9,5 @@ export const routes = {
   notes: '/note/:index',
   register: '/register',
   login: '/login',
+  settings: '/settings',
 };
