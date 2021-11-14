@@ -149,3 +149,29 @@ export const editNote = (id, title, content, archived) => {
     },
   };
 };
+
+export const addTag = (tag) => {
+  const getId = () =>
+    `_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+
+  return {
+    type: 'ADD_TAG',
+    payload: {
+      tag: {
+        id: getId(),
+        ...tag,
+      },
+    },
+  };
+};
+
+export const removeTag = (id) => {
+  return {
+    type: 'REMOVE_TAG',
+    payload: {
+      id
+    },
+  };
+};

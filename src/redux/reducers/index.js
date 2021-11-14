@@ -320,6 +320,17 @@ const initialState = {
       archived: false,
     }
   ],
+
+  tags: [
+    { value: 'Book', label: 'Book', id: 0},
+    { value: 'Video', label: 'Video', id: 1 },  
+    { value: 'Internet', label: 'Internet', id: 2 },
+    { value: 'Story', label: 'Story', id: 3 },
+    { value: 'Diary', label: 'Diary', id: 4 },
+    { value: 'Job', label: 'Job', id: 5 },
+    { value: 'Holiday', label: 'Holiday', id: 6 },
+    { value: 'Work', label: 'Work', id: 7 }
+  ],
 }
 
 
@@ -467,6 +478,18 @@ const rootReducer = (state = initialState, action) => {
           : note
         )
       };
+      case 'ADD_TAG':
+        return {
+          ...state,
+          tags: [...state.tags, action.payload.tag],
+        };
+      case 'REMOVE_TAG':
+        const id_tag = action.payload.id      
+        return {
+          ...state,
+          tags: state.tags.filter((tags) => tags.id !== id_tag)
+        }; 
+
   default:
     return state;
   }

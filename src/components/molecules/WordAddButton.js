@@ -15,6 +15,11 @@ const StyledInput = styled(Input)`
   margin-right: 10px;
 `
 
+const StyledButton = styled(Button)`
+  width: 40px;
+  height: 40px;
+`
+
 const WordAddButton = ({ addWord }) => {
   // const addWord = useListUpdate(); 
   const wordAng = useWordAngUpdate();
@@ -37,11 +42,11 @@ const WordAddButton = ({ addWord }) => {
     <StyledForm onSubmit={handleSubmit}>
       <StyledInput value={wordAng || ''} name="wordAng" placeholder="ANG" onChange={handleChange} maxLength='30'></StyledInput>
       <StyledInput value={wordPl || ''} name="wordPl" placeholder="PL" onChange={e => setWordPl(e.target.value)} maxLength='30'></StyledInput>
-      <Button type="submit" onClick={() => addWord({
+      <StyledButton type="submit" onClick={() => addWord({
         wordPl: wordPl,
         wordAng: wordAng,
       })
-      }> Add Word</Button>
+      }> + </StyledButton>
       {/* <Button type="submit" onClick={addWord()}> Add Word</Button> */}
     </StyledForm>
     </>

@@ -159,8 +159,8 @@ const List = ({ words, wordSets, removeWord, addSet, addWordToSet }) => {
           : null }
           <StyledUl>
           {words.allIds.map((item) => 
-            <StyledLi key={item}>
-            {words.byId[item].wordPl}- {words.byId[item].wordAng}
+          <StyledLi key={item}>
+            {words.byId[item].wordPl} - {words.byId[item].wordAng}
             <StyledButtonTransferWord onClick={() => AddWordToSetAndDeleteFromList(words.byId[item], item, selectSet, selectSetName)} secondary> Add to set </StyledButtonTransferWord>
             <StyledButtonDelete onClick={() => removeWord(item)} secondary>DELETE</StyledButtonDelete>
           </StyledLi>
