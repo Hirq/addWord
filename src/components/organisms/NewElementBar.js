@@ -70,7 +70,7 @@ const options = [
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();
 
-const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog, editNote }) => {
+const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, id, notes, blogs, editBlog, editNote, tags }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState('');
@@ -119,7 +119,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
         setContent(data[0].content);
         data[0].tag.map((i) =>
         {
-          const filter = options.filter(item => item.value.includes(i))
+          const filter = tags.filter(item => item.value.includes(i))
           setFilterOptions(filterOptions => filterOptions.concat(filter))
         })   
         setTag(filterOptions.map((i) => i.value + ' '));
@@ -138,7 +138,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'blog'){
         return(
           <>
-            <StyledReactSelect isMulti options={options} onChange={handleChangeTagSelect}/>
+            <StyledReactSelect isMulti options={tags} onChange={handleChangeTagSelect}/>
             <StyledButtonSave onClick={() => addBlog({
                 title: title,
                 content: content,
@@ -171,7 +171,7 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       if (path === 'blog'){
         return(
           <>
-            <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
+            <StyledReactSelect value={filterOptions}  isMulti options={tags} onChange={handleChangeTagSelect}/>
             <StyledButtonSave onClick={() => editBlog(
               id,
               title,
@@ -230,10 +230,11 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
 // };
 
 const mapStateToProps = ( state ) => {
-  const { notes, blogs } = state;
+  const { notes, blogs, tags } = state;
   return {
     notes,
-    blogs
+    blogs,
+    tags
   };
 }
 

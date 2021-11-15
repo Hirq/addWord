@@ -87,7 +87,7 @@ const options = [
   { value: 'Work', label: 'Work', id: 7 }
 ]
 
-const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs }) => {
+const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs, tags }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
   const [searchTag, setSearchTag] = useState([]);
@@ -178,7 +178,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             {(searchTag.length > 2) ? (
               <StyledReactSelect value={filterOptions}  isMulti onChange={handleChangeTagSelect} components={{ NoOptionsMessage }} />
             ) : (
-              <StyledReactSelect value={filterOptions}  isMulti options={options} onChange={handleChangeTagSelect}/>
+              <StyledReactSelect value={filterOptions}  isMulti options={tags} onChange={handleChangeTagSelect}/>
             )
             }
             {/* <Input search placeholder="Search tag" value={searchTag} onChange={handleSearchTag}/> */}
