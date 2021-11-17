@@ -134,6 +134,15 @@ const initialState = {
 
   blogs: [
     {
+      id: 6,
+      title: 'Logowanie',
+      content:
+        'Czy logowanie tez zrobic przy uzyciu REDUX? mysle ze tak + nastepnie zrobic panel do tworzenia konta i logowania - ale nie wymagac logowania, automatycznie logowac jako uzytkownik test/test'
+        ,
+      date: '12.12.2012',
+      tag: ['Work'],
+    },
+    {
       id: 5,
       title: 'Teraz to',
       content:
