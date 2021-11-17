@@ -46,6 +46,7 @@ const StyledUl = styled.ul`
 `
 const StyledLi = styled.li`
   display: flex;
+  margin-left: 25px;
 `
 const Settings = ({tags, addTag, removeTag}) => {
   const [nameTag, setNameTag] = useState('');
