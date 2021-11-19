@@ -159,7 +159,7 @@ const initialState = {
         ' &&  usuwanie z setlisty pierwszego elementu dobrze- ale jak chcemy usunac odrazu drugi(czyli w sumie juz pierwszy to nie dziala za 1 przycisikem tylko drugim - dlaczego ? '
         ,
       date: '12.12.2012',
-      tag: ['Work'],
+      tag: ['Done'],
     },
     {
       id: 1,
@@ -167,7 +167,7 @@ const initialState = {
       content:
         'Poprawić CARD + GridTemplate + Blog - odpowienie propsy przekazać. Następnie REDUX - Dodawania, usuwanie i na koncu edycja bloga - react select dla nowego wpisu na blog',
       date: '12.12.2012',
-      tag: ['Work'],
+      tag: ['Done'],
     },
     {
       id: 2,
@@ -175,7 +175,7 @@ const initialState = {
       content:
         'Storybook ODPADA - Dwa bledy w consoli - jeden to zwiazany z styled-component ze podaje link jako true, a drugi to w TIMER do poprawy na potem',
       date: '05.01.1910',
-      tag: ['Video'],
+      tag: ['Done'],
     },
     {
       id: 3,
@@ -183,7 +183,7 @@ const initialState = {
       content:
         'Poprawić widok listy + dodać notatki podobne do bloga - coś w stylu to do zrobić i tez panel po prawej stronie z możliwościa ',
       date: '11.07.2018',
-      tag: ['Internet'],
+      tag: ['Internet','Done'],
     },
     {
       id: 4,
@@ -278,7 +278,7 @@ const initialState = {
       content:
         'test',
       date: '19.05.2021',
-      archived: false,
+      archived: true,
     },
     {
       id: 90,
@@ -294,7 +294,7 @@ const initialState = {
       content:
         '',
       date: '19.05.2021',
-      archived: false,
+      archived: true,
     },
     {
       id: 92,
@@ -338,7 +338,8 @@ const initialState = {
     { value: 'Diary', label: 'Diary', id: 4 },
     { value: 'Job', label: 'Job', id: 5 },
     { value: 'Holiday', label: 'Holiday', id: 6 },
-    { value: 'Work', label: 'Work', id: 7 }
+    { value: 'Work', label: 'Work', id: 7 },
+    { value: 'Done', label: 'Done', id: 8 }
   ],
 }
 

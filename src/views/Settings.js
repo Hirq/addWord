@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Button from 'components/atoms/Button';
 import Input from 'components/atoms/Input';
+import Paragraph from 'components/atoms/Paragraph';
 import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
 
 const StyledWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 100px 300px;
+  grid-template-rows: 30px 150px 300px;
   grid-gap: 10px;
 `
 const StyledBoxHeader = styled.div`
@@ -17,6 +18,13 @@ const StyledBoxHeader = styled.div`
   grid-column-end: 3;
   text-align: center;
 `
+
+const StyledParahraphHeader = styled(Paragraph)`
+  font-size: 30px;
+  font-weight: 600;
+  margin:0;
+`
+
 const StyledFlexCenter = styled.div`
   display: flex;
   justify-content: center;
@@ -58,10 +66,16 @@ const Settings = ({tags, addTag, removeTag}) => {
   return(
     <ListTemplate>
       <StyledWrapper>
-        <StyledBoxHeader>Header</StyledBoxHeader>
-        <StyledFlexCenter>Account</StyledFlexCenter>
+        <StyledBoxHeader>
+          <StyledParahraphHeader>Account Panel</StyledParahraphHeader>
+        </StyledBoxHeader>
+        <StyledFlexCenter>
+          <Paragraph>Basic</Paragraph>
+        </StyledFlexCenter>
         <StyledBoxTag1>
-          <StyledFlexCenter>Tags</StyledFlexCenter> 
+          <StyledFlexCenter>
+            <Paragraph>Tags</Paragraph>
+          </StyledFlexCenter> 
           <StyledFlexCenter>
             <Input value={nameTag||''} placeholder="name tag" onChange={handleTagName}/>
           </StyledFlexCenter> 
