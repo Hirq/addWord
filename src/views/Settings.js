@@ -25,10 +25,21 @@ const StyledParahraphHeader = styled(Paragraph)`
   margin:0;
 `
 
+const StyledParahraphLogin= styled(Paragraph)`
+  font-size: 20px;
+  margin: 0;
+  padding: 5px;
+`
+
 const StyledFlexCenter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+const StyledFlexLogin = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: start;
 `
 const StyledBoxTag1 = styled.div`
   background-color: #0A56DF;
@@ -42,6 +53,14 @@ const StyledBoxTag2 = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
 `
+const StyledBoxLogin = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.2fr;
+  grid-template-rows: 50px 100px;
+  grid-gap: 10px;
+  align-items: start;;
+`
+
 
 const StyledButton = styled(Button)`
   margin-left: auto;
@@ -58,10 +77,24 @@ const StyledLi = styled.li`
 `
 const Settings = ({tags, addTag, removeTag}) => {
   const [nameTag, setNameTag] = useState('');
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [hidden, setHidden] = useState(true);
 
   const handleTagName = (e) => {
     setNameTag(e.target.value);
   }
+  
+  const handleLogin = (e) => {
+    setLogin(e.target.value);
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  }
+  const handleHidden = () => {
+    setHidden(state => !state)
+  }
+
 
   return(
     <ListTemplate>
@@ -86,8 +119,18 @@ const Settings = ({tags, addTag, removeTag}) => {
             })}> ADD </Button>
           </StyledFlexCenter> 
         </StyledBoxTag1>
-        <StyledBoxTag2> 
-        </StyledBoxTag2>
+        <StyledFlexLogin> 
+        
+          <StyledBoxLogin>        
+            <StyledParahraphLogin> Login </StyledParahraphLogin>
+            <Input value={login||''} placeholder="login" onChange={handleLogin}/>
+            <Button> SHOW </Button>
+            <StyledParahraphLogin>Password </StyledParahraphLogin>
+            <Input type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
+            <Button onClick={handleHidden}> SHOW </Button>
+          </StyledBoxLogin>
+
+        </StyledFlexLogin>
         <StyledUl>
         <StyledBoxTag2>
           {tags.map((item) => 
