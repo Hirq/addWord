@@ -18,19 +18,16 @@ const StyledBoxHeader = styled.div`
   grid-column-end: 3;
   text-align: center;
 `
-
 const StyledParahraphHeader = styled(Paragraph)`
   font-size: 30px;
   font-weight: 600;
   margin:0;
 `
-
 const StyledParahraphLogin= styled(Paragraph)`
   font-size: 20px;
   margin: 0;
   padding: 5px;
 `
-
 const StyledFlexCenter = styled.div`
   display: flex;
   justify-content: center;
@@ -38,7 +35,7 @@ const StyledFlexCenter = styled.div`
 `
 const StyledFlexLogin = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: start;
 `
 const StyledBoxTag1 = styled.div`
@@ -60,9 +57,14 @@ const StyledBoxLogin = styled.div`
   grid-gap: 10px;
   align-items: start;;
 `
-
-
-const StyledButton = styled(Button)`
+const StyledItem = styled.div`
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  align-self: center;
+`
+const StyledButtonDeleteTag = styled(Button)`
   margin-left: auto;
   min-width: 105px;
   height: 25px;
@@ -75,6 +77,13 @@ const StyledLi = styled.li`
   display: flex;
   margin-left: 25px;
 `
+const StyledInput = styled(Input)`
+  width: 220px;
+`
+const StyledButtonShowHide = styled(Button)`
+  width: 100px;
+`
+
 const Settings = ({tags, addTag, removeTag}) => {
   const [nameTag, setNameTag] = useState('');
   const [login, setLogin] = useState('');
@@ -123,18 +132,20 @@ const Settings = ({tags, addTag, removeTag}) => {
         
           <StyledBoxLogin>        
             <StyledParahraphLogin> Login </StyledParahraphLogin>
-            <Input value={login||''} placeholder="login" onChange={handleLogin}/>
-            <Button> SHOW </Button>
+            <StyledInput value={login||''} placeholder="login" onChange={handleLogin}/>
+
             <StyledParahraphLogin>Password </StyledParahraphLogin>
-            <Input type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
-            <Button onClick={handleHidden}> SHOW </Button>
+            <StyledInput type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
+            <StyledItem>
+              <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW" : "HIDE"} </StyledButtonShowHide>
+            </StyledItem>  
           </StyledBoxLogin>
 
         </StyledFlexLogin>
         <StyledUl>
         <StyledBoxTag2>
           {tags.map((item) => 
-            <StyledLi>{item.value} <StyledButton secondary onClick={() => removeTag(item.id)}> DELETE </StyledButton></StyledLi>
+            <StyledLi>{item.value} <StyledButtonDeleteTag secondary onClick={() => removeTag(item.id)}> DELETE </StyledButtonDeleteTag></StyledLi>
           )}
         </StyledBoxTag2>
         </StyledUl>
