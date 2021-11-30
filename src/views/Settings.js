@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Button from 'components/atoms/Button';
@@ -6,6 +6,9 @@ import Input from 'components/atoms/Input';
 import Paragraph from 'components/atoms/Paragraph';
 import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
+
+import { db } from '../firebase-config'; 
+import { collection, getDocs } from "firebase/firestore";
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -90,6 +93,10 @@ const Settings = ({tags, addTag, removeTag}) => {
   const [password, setPassword] = useState('');
   const [hidden, setHidden] = useState(true);
 
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users");
+
+
   const handleTagName = (e) => {
     setNameTag(e.target.value);
   }
@@ -104,6 +111,17 @@ const Settings = ({tags, addTag, removeTag}) => {
     setHidden(state => !state)
   }
 
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(data);
+      console.log(users);
+    };
+
+    getUsers();
+  }, [])
+
 
   return(
     <ListTemplate>
@@ -113,6 +131,16 @@ const Settings = ({tags, addTag, removeTag}) => {
         </StyledBoxHeader>
         <StyledFlexCenter>
           <Paragraph>Basic</Paragraph>
+          <Paragraph>
+            
+
+            {users.map((user) => {
+              <h1>
+               {user.name} - {user.age}
+               </h1>
+          })}
+        
+          </Paragraph>
         </StyledFlexCenter>
         <StyledBoxTag1>
           <StyledFlexCenter>
