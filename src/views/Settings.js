@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
 
 import { db } from '../firebase-config'; 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -96,6 +96,9 @@ const Settings = ({tags, addTag, removeTag}) => {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
+  const createUser = async () =>{
+    await addDoc(usersCollectionRef, {login: login, password: password});
+  }
 
   const handleTagName = (e) => {
     setNameTag(e.target.value);
@@ -115,11 +118,9 @@ const Settings = ({tags, addTag, removeTag}) => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(data);
-      console.log(users);
     };
 
-    getUsers();
+    getUsers()
   }, [])
 
 
@@ -131,16 +132,14 @@ const Settings = ({tags, addTag, removeTag}) => {
         </StyledBoxHeader>
         <StyledFlexCenter>
           <Paragraph>Basic</Paragraph>
-          <Paragraph>
-            
-
-            {users.map((user) => {
-              <h1>
-               {user.name} - {user.age}
-               </h1>
-          })}
+          <StyledBoxTag1>
+            {users.map((user) => (
+              <h4>
+               {user.login} - {user.password} 
+              </h4>
+            ))}
         
-          </Paragraph>
+          </StyledBoxTag1>
         </StyledFlexCenter>
         <StyledBoxTag1>
           <StyledFlexCenter>
@@ -166,6 +165,7 @@ const Settings = ({tags, addTag, removeTag}) => {
             <StyledInput type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
             <StyledItem>
               <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW" : "HIDE"} </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={createUser}> ADD USER </StyledButtonShowHide>
             </StyledItem>  
           </StyledBoxLogin>
 
