@@ -5,7 +5,7 @@ import Leftbar from 'components/organisms/Leftbar';
 import Topbar from 'components/organisms/Topbar';
 
 const StyledWrapper = styled.div`
-  padding: 65px 50px 15px 150px;
+  padding: 65px 30px 15px 150px;
 `;
 
 const UserPageTemplate = ({ children, theme}) => {

@@ -12,14 +12,15 @@ import Card from 'components/molecules/Card';
 import Select, { components } from 'react-select';
 
 const StyledWrapper = styled.div`
-  padding: 25px 150px 25px 70px;
+  padding: 25px 50px 135px 70px;
   height: 90vh;
 `;
 
 const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 85px;
+  grid-gap: 15px;
+  margin-bottom: 10px;
 `;
 
 const StyledPageHeader = styled.div`
@@ -50,6 +51,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
 const StyledReactSelect = styled(Select)`
   color: black;
   width: 30%;
+    z-index: -1;
 `
 
 const StyledFilterBar = styled.div`
@@ -321,7 +323,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   })
 
   return (
-    <UserPageTemplate >
+    <UserPageTemplate>
       <StyledWrapper onClick={hideAddBar}>
         <StyledPageHeader>
           {determinePathSearch(path)}

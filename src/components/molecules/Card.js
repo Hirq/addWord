@@ -21,7 +21,6 @@ const StyledWrapper = styled.div`
     css`
       min-height: 100px;
       grid-template-rows: repeat(auto-fit, minmax(100px, auto));
-      margin: 10px 10px;
     `
   }
   &:hover{
@@ -72,7 +71,9 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
           <WrapperToDown>
-            <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
+            { tag.length > 1 ? <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
+            
+            : tag }
             <Paragraph>{date}</Paragraph>
             <Button onClick={() => removeBlog(id)} secondary>REMOVE</Button>
           </WrapperToDown>
