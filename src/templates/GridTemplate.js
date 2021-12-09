@@ -51,13 +51,6 @@ const StyledButtonIcon = styled(ButtonIcon)`
 const StyledReactSelect = styled(Select)`
   color: black;
   width: 30%;
-  /* position: fixed; */
-  /* z-index: 999 !important; */
-
-  & .Select-menu-outer {
-    z-index: 999 !important;
-  }
-
 `
 
 const StyledFilterBar = styled.div`
@@ -94,13 +87,6 @@ const options = [
   { value: 'Holiday', label: 'Holiday', id: 6 },
   { value: 'Work', label: 'Work', id: 7 }
 ]
-
-const customStyles = {
-  ///.....
-  menuPortal: provided => ({ ...provided, zIndex: 9999 }),
-  menu: provided => ({ ...provided, zIndex: 9999 })
-  ///.....
-}
 
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs, tags }) => {
   const [visibleBar, setVisibleBar] = useState(false);
@@ -186,6 +172,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
            </components.NoOptionsMessage>
         );
       };
+
       return(
         <>  
           <StyledFilterBar>
@@ -193,8 +180,9 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
             {(searchTag.length > 2) ? (
               <StyledReactSelect value={filterOptions}  isMulti onChange={handleChangeTagSelect} components={{ NoOptionsMessage }}      />
             ) : (
-              <StyledReactSelect value={filterOptions}  isMulti options={tags} onChange={handleChangeTagSelect}       
-              
+              <StyledReactSelect 
+
+              value={filterOptions}  isMulti options={tags} onChange={handleChangeTagSelect}   
               />
             )
             }

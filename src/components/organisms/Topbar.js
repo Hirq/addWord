@@ -15,6 +15,7 @@ const StyledWrapperTop = styled.div`
   flex-direction: row;
   justify-content: left;
   align-items: stretch;
+  z-index: 900;
 `;
 
 const StyledLeftPage = styled.div`
