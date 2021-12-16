@@ -72,22 +72,6 @@ const StyledButtonArchive = styled(Button)`
   margin-top: -10px;
 `
 
-const Testp = styled.p`
-  text-align: center;
-  margin-top: 0;
-`
-
-const options = [
-  { value: 'Book', label: 'Book', id: 0},
-  { value: 'Video', label: 'Video', id: 1 },  
-  { value: 'Internet', label: 'Internet', id: 2 },
-  { value: 'Story', label: 'Story', id: 3 },
-  { value: 'Diary', label: 'Diary', id: 4 },
-  { value: 'Job', label: 'Job', id: 5 },
-  { value: 'Holiday', label: 'Holiday', id: 6 },
-  { value: 'Work', label: 'Work', id: 7 }
-]
-
 const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, blogs, tags }) => {
   const [visibleBar, setVisibleBar] = useState(false);
   const [withArchive, setWithArchive] = useState(false);
@@ -121,7 +105,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   }
 
   const hideAddBar = () => {
-    {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
+    visibleBar ? setVisibleBar(false) : setVisibleBar(false)
   }
 
   const hideArchive = () => {

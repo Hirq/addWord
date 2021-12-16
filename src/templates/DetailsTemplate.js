@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UserPageTemplate from 'templates/UserPageTemplate';
@@ -80,10 +79,6 @@ const StyledMainParagraph = styled(Paragraph)`
   white-space: pre-line;
 `
 
-const StyledReactSelect = styled(Select)`
-  color: black;
-`
-
 const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
@@ -94,7 +89,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   }
 
   const hideAddBar = () => {
-    {visibleBar ? setVisibleBar(false) : setVisibleBar(false)}
+    visibleBar ? setVisibleBar(false) : setVisibleBar(false)
   }
 
   const handleConfirmBox = () => {
