@@ -87,6 +87,12 @@ const StyledButtonShowHide = styled(Button)`
   width: 100px;
 `
 
+const StyledBoxAccounts = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+`
+
 const Settings = ({tags, addTag, removeTag}) => {
   const [nameTag, setNameTag] = useState('');
   const [login, setLogin] = useState('');
@@ -96,8 +102,17 @@ const Settings = ({tags, addTag, removeTag}) => {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
-  const createUser = async () =>{
+  const createUser = async () => {
     await addDoc(usersCollectionRef, {login: login, password: password});
+  }
+
+  const loginUser = (login, password) => {
+    users.find(user => user.login === login ? 
+      console.log('jest taki login ' + login)
+    :
+      console.log('brak ' + login)
+    )
+
   }
 
   const handleTagName = (e) => {
@@ -131,15 +146,13 @@ const Settings = ({tags, addTag, removeTag}) => {
           <StyledParahraphHeader>Account Panel</StyledParahraphHeader>
         </StyledBoxHeader>
         <StyledFlexCenter>
-          <Paragraph>Basic</Paragraph>
-          <StyledBoxTag1>
+          <StyledBoxAccounts>
             {users.map((user) => (
-              <h4>
+              <div>
                {user.login} - {user.password} 
-              </h4>
+              </div>
             ))}
-        
-          </StyledBoxTag1>
+          </StyledBoxAccounts>
         </StyledFlexCenter>
         <StyledBoxTag1>
           <StyledFlexCenter>
@@ -165,7 +178,8 @@ const Settings = ({tags, addTag, removeTag}) => {
             <StyledInput type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
             <StyledItem>
               <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW" : "HIDE"} </StyledButtonShowHide>
-              <StyledButtonShowHide onClick={createUser}> ADD USER </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={createUser}> Add user </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={loginUser(login, password)}> Sign in </StyledButtonShowHide>
             </StyledItem>  
           </StyledBoxLogin>
 
