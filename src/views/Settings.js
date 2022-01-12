@@ -99,20 +99,16 @@ const Settings = ({tags, addTag, removeTag}) => {
   const [password, setPassword] = useState('');
   const [hidden, setHidden] = useState(true);
 
+  
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, {login: login, password: password});
-  }
+  };
 
-  const loginUser = (login, password) => {
-    users.find(user => user.login === login ? 
-      console.log('jest taki login ' + login)
-    :
-      console.log('brak ' + login)
-    )
-
+  const signIn = () => {
+    (users.find(user => user.login === login) ? console.log('We have user: ' + login) : console.log('I dont know user: ' + login))
   }
 
   const handleTagName = (e) => {
@@ -179,7 +175,7 @@ const Settings = ({tags, addTag, removeTag}) => {
             <StyledItem>
               <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW" : "HIDE"} </StyledButtonShowHide>
               <StyledButtonShowHide onClick={createUser}> Add user </StyledButtonShowHide>
-              <StyledButtonShowHide onClick={loginUser(login, password)}> Sign in </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={signIn}> Sign in </StyledButtonShowHide>
             </StyledItem>  
           </StyledBoxLogin>
 
