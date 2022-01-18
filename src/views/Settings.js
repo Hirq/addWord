@@ -8,12 +8,12 @@ import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
 
 import { db } from '../firebase-config'; 
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, deleteDoc } from "firebase/firestore";
 
 const StyledWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 30px 150px 300px;
+  grid-template-rows: 30px 250px 300px;
   grid-gap: 10px;
 `
 const StyledBoxHeader = styled.div`
@@ -98,17 +98,24 @@ const Settings = ({tags, addTag, removeTag}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [hidden, setHidden] = useState(true);
-
-  
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
     await addDoc(usersCollectionRef, {login: login, password: password});
+    alert('You create new account login: ' + login);
+    setTimeout(() => { 
+      window.location.reload(false);
+    }, 1)
   };
 
-  const signIn = () => {
-    (users.find(user => user.login === login) ? console.log('We have user: ' + login) : console.log('I dont know user: ' + login))
+  const deleteUser = async (user) => {
+    await deleteDoc(usersCollectionRef, user )
+    console.log('delete user: ' + user.login)
+  }
+
+  const signIn = (loginUser, passwordUser) => {
+    (users.find(user => user.login === loginUser && user.password === passwordUser) ? console.log('We have user: ' + loginUser) : console.log('I dont know user: ' + loginUser))
   }
 
   const handleTagName = (e) => {
@@ -144,8 +151,8 @@ const Settings = ({tags, addTag, removeTag}) => {
         <StyledFlexCenter>
           <StyledBoxAccounts>
             {users.map((user) => (
-              <div>
-               {user.login} - {user.password} 
+              <div key={user.id}>
+               {user.login} - {user.password} <Button secondary onClick={() => deleteUser(user)}> Delete user </Button>
               </div>
             ))}
           </StyledBoxAccounts>
@@ -175,7 +182,7 @@ const Settings = ({tags, addTag, removeTag}) => {
             <StyledItem>
               <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW" : "HIDE"} </StyledButtonShowHide>
               <StyledButtonShowHide onClick={createUser}> Add user </StyledButtonShowHide>
-              <StyledButtonShowHide onClick={signIn}> Sign in </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={() => signIn(login, password)}> Sign in 2 </StyledButtonShowHide>
             </StyledItem>  
           </StyledBoxLogin>
 
@@ -183,7 +190,7 @@ const Settings = ({tags, addTag, removeTag}) => {
         <StyledUl>
         <StyledBoxTag2>
           {tags.map((item) => 
-            <StyledLi>{item.value} <StyledButtonDeleteTag secondary onClick={() => removeTag(item.id)}> DELETE </StyledButtonDeleteTag></StyledLi>
+             <StyledLi key={item.id}>{item.value} <StyledButtonDeleteTag secondary  onClick={() => removeTag(item.id)}> DELETE </StyledButtonDeleteTag></StyledLi>
           )}
         </StyledBoxTag2>
         </StyledUl>

@@ -151,7 +151,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         {wordSetList.length > 0  ?
           <>
             <select onChange={handleChangeSelectWord} >
-              {wordSetList.map(( item ) => (
+              {wordSetList.map((item) => (
                 <option value={item} key={item} > {contentSet[item].wordAng} </option>
               ))}
             </select>
