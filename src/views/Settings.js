@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
 
 import { db } from '../firebase-config'; 
-import { collection, getDocs, addDoc, deleteDoc } from "firebase/firestore";
+import { collection, doc, getDocs, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -56,7 +56,7 @@ const StyledBoxTag2 = styled.div`
 const StyledBoxLogin = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 0.2fr;
-  grid-template-rows: 50px 100px;
+  grid-template-rows: 40px 100px;
   grid-gap: 10px;
   align-items: start;;
 `
@@ -64,7 +64,7 @@ const StyledItem = styled.div`
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 5;
   align-self: center;
 `
 const StyledButtonDeleteTag = styled(Button)`
@@ -97,6 +97,8 @@ const Settings = ({tags, addTag, removeTag}) => {
   const [nameTag, setNameTag] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordNew, setPasswordNew] = useState('');
+  const [passwordNewRepeat, setPasswordNewRepeat] = useState('');
   const [hidden, setHidden] = useState(true);
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
@@ -109,9 +111,19 @@ const Settings = ({tags, addTag, removeTag}) => {
     }, 1)
   };
 
-  const deleteUser = async (user) => {
-    await deleteDoc(usersCollectionRef, user )
-    console.log('delete user: ' + user.login)
+  const deleteUser = async (id) => { 
+    const userDoc = doc(db, "users", id);
+    await deleteDoc(userDoc)
+  }
+
+  const updateUser = async(user, newPassword, newPasswordRepeat) => {
+    console.log(newPasswordRepeat, newPassword);
+    if (newPassword === newPasswordRepeat) {
+      const userDoc = doc(db, "users", user.id)
+      const newFields = {password: newPassword}
+      await updateDoc(userDoc, newFields);
+      console.log('new password: ' + newPassword)
+    }
   }
 
   const signIn = (loginUser, passwordUser) => {
@@ -127,6 +139,12 @@ const Settings = ({tags, addTag, removeTag}) => {
   }
   const handlePassword = (e) => {
     setPassword(e.target.value);
+  }
+  const handlePasswordNew = (e) => {
+    setPasswordNew(e.target.value);
+  }
+  const handlePasswordNewRepeat = (e) => {
+    setPasswordNewRepeat(e.target.value);
   }
   const handleHidden = () => {
     setHidden(state => !state)
@@ -152,7 +170,11 @@ const Settings = ({tags, addTag, removeTag}) => {
           <StyledBoxAccounts>
             {users.map((user) => (
               <div key={user.id}>
-               {user.login} - {user.password} <Button secondary onClick={() => deleteUser(user)}> Delete user </Button>
+               {user.login} - {user.password} <Button secondary onClick={() => deleteUser(user.id)}> Delete user </Button> 
+
+               <Button secondary onClick={() => updateUser(user, passwordNew, passwordNewRepeat)}> Update pass </Button>
+
+
               </div>
             ))}
           </StyledBoxAccounts>
@@ -179,10 +201,16 @@ const Settings = ({tags, addTag, removeTag}) => {
 
             <StyledParahraphLogin>Password </StyledParahraphLogin>
             <StyledInput type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
+
+            <StyledParahraphLogin>Password new </StyledParahraphLogin>
+            <StyledInput type={hidden ? "password" : "text"} value={passwordNew||''} placeholder="password" onChange={handlePasswordNew}/>
+            <StyledParahraphLogin>Password new repeat</StyledParahraphLogin>
+            <StyledInput type={hidden ? "password" : "text"} value={passwordNewRepeat||''} placeholder="password" onChange={handlePasswordNewRepeat}/>
+
             <StyledItem>
-              <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW" : "HIDE"} </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW PASS" : "HIDE PASS"} </StyledButtonShowHide>
               <StyledButtonShowHide onClick={createUser}> Add user </StyledButtonShowHide>
-              <StyledButtonShowHide onClick={() => signIn(login, password)}> Sign in 2 </StyledButtonShowHide>
+              <StyledButtonShowHide onClick={() => signIn(login, password)}> Sign in </StyledButtonShowHide>
             </StyledItem>  
           </StyledBoxLogin>
 
