@@ -42,13 +42,11 @@ const StyledFlexLogin = styled.div`
   align-items: start;
 `
 const StyledBoxTag1 = styled.div`
-  background-color: #0A56DF;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   align-items: center;
 `
 const StyledBoxTag2 = styled.div`
-  background-color: #0A56DF;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
