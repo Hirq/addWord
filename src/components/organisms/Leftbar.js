@@ -8,7 +8,8 @@ import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import ButtonIcon from 'components/atoms/ButtonIcon';
-import AdminIcon from 'assets/icons/pawn.svg';
+import SettingsIcon from 'assets/icons/pawn.svg';
+import AdminIcon from 'assets/icons/adminPanel.svg';
 import { routes } from 'routes';
 
 const StyledWrapper = styled.nav`
@@ -71,7 +72,8 @@ const Leftbar = () => {
         </li>
       </StyledLinksList>
       <StyledBottomIcons>
-        <StyledLogoutButton as={NavLink} to={routes.settings} icon={AdminIcon} />
+        <StyledLogoutButton as={NavLink} to={routes.admin} icon={AdminIcon} />
+        <StyledLogoutButton as={NavLink} to={routes.settings} icon={SettingsIcon} />
         <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
       </StyledBottomIcons>
     </StyledWrapper>

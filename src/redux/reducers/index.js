@@ -134,6 +134,15 @@ const initialState = {
 
   blogs: [
     {
+      id: 7,
+      title: 'Logowanie / rejestracja',
+      content:
+        'dodać podstrone /login - z group boxem - do zaznaczenia czy logujemy sie rejestrujemy - wtedy dochodzi pole do powtórzenia hasła. - zmiana hasła tam gdzie jest + na login i register opcja zaloaguj jako test/test - lub korzystanie bez logowania - ale nie widzi panelu - blokada dla niezalogowanych do obsługi '
+        ,
+      date: '25.01.2022',
+      tag: ['Work'],
+    },
+    {
       id: 6,
       title: 'Logowanie',
       content:

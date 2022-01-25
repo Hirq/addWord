@@ -166,15 +166,7 @@ const Settings = ({tags, addTag, removeTag}) => {
         </StyledBoxHeader>
         <StyledFlexCenter>
           <StyledBoxAccounts>
-            {users.map((user) => (
-              <div key={user.id}>
-               {user.login} - {user.password} <Button secondary onClick={() => deleteUser(user.id)}> Delete user </Button> 
 
-               <Button secondary onClick={() => updateUser(user, passwordNew, passwordNewRepeat)}> Update pass </Button>
-
-
-              </div>
-            ))}
           </StyledBoxAccounts>
         </StyledFlexCenter>
         <StyledBoxTag1>

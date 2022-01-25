@@ -10,4 +10,5 @@ export const routes = {
   register: '/register',
   login: '/login',
   settings: '/settings',
+  admin: '/adminpanel'
 };

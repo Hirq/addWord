@@ -12,6 +12,7 @@ import SetDetail from 'views/SetDetail';
 import Note from 'views/Note';
 import NoteDetail from 'views/NoteDetail';
 import Settings from 'views/Settings';
+import AdminPanel from 'views/AdminPanel';
 
 
 const Root = () => (
@@ -28,6 +29,7 @@ const Root = () => (
             <Route exact path={routes.note} component={Note} />
             <Route exact path={routes.notes} component={NoteDetail} />
             <Route exact path={routes.settings} component={Settings} />
+            <Route exact path={routes.admin} component={AdminPanel} />
           </Switch>
         </MainTemplate>
       </ThemeProviderDark>
