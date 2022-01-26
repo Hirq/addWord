@@ -13,6 +13,7 @@ import Note from 'views/Note';
 import NoteDetail from 'views/NoteDetail';
 import Settings from 'views/Settings';
 import AdminPanel from 'views/AdminPanel';
+import Register from 'views/Register';
 
 
 const Root = () => (
@@ -30,6 +31,7 @@ const Root = () => (
             <Route exact path={routes.notes} component={NoteDetail} />
             <Route exact path={routes.settings} component={Settings} />
             <Route exact path={routes.admin} component={AdminPanel} />
+            <Route exact path={routes.register} component={Register} />
           </Switch>
         </MainTemplate>
       </ThemeProviderDark>

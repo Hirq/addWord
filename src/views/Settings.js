@@ -6,9 +6,11 @@ import Input from 'components/atoms/Input';
 import Paragraph from 'components/atoms/Paragraph';
 import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
-
 import { db } from '../firebase-config'; 
 import { collection, doc, getDocs, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
+
+import { routes } from 'routes';
+import { NavLink } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -166,7 +168,7 @@ const Settings = ({tags, addTag, removeTag}) => {
         </StyledBoxHeader>
         <StyledFlexCenter>
           <StyledBoxAccounts>
-
+            <Button as={NavLink} to={routes.register}> REGISTER </Button>
           </StyledBoxAccounts>
         </StyledFlexCenter>
         <StyledBoxTag1>
