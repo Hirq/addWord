@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Heading from 'components/atoms/Heading'
+import Paragraph from 'components/atoms/Paragraph';
+import Input from 'components/atoms/Input';
+import Button from 'components/atoms/Button';
 
 const StyledBox = styled.div`
   position: absolute;
@@ -23,9 +26,20 @@ const Register = () => {
     <ListTemplate>
       <StyledBox>
         <StyledHeading> Register </StyledHeading>
-        <StyledHeading> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
-          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading>
+        <Paragraph>Login</Paragraph>
+        <Input placeholder='LOGIN'/>
+        <Paragraph>Password</Paragraph>
+        <Input placeholder='PASSWORD'/>
+        <Paragraph>Password repeat</Paragraph>
+        <Input placeholder='PASSWORD'/>
+
+        <Button>LOGIN / Register</Button>
+        <Button>LOG as TEST</Button>
+        <Button>Create account / Login in</Button>
+
       </StyledBox>
+      <StyledHeading> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
+          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading>
     </ListTemplate>
   )
 }
