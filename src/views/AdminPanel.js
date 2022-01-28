@@ -38,16 +38,11 @@ const AdminPanel = () => {
   return(
     <ListTemplate>
       <Paragraph> Account count: {users.length} </Paragraph>
-      <Paragraph>
         {users.map((user) => (
           <div key={user.id}>
             {user.login} - {user.password} <Button secondary onClick={() => deleteUser(user.id)}> Delete user </Button> 
           </div>
         ))}
-      </Paragraph>
-
-        
-
     </ListTemplate>
   )
 }

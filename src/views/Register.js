@@ -17,6 +17,62 @@ const StyledBox = styled.div`
   margin-right: auto;
 `
 
+const StyledLoginArea = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 0.1fr 1fr;
+  justify-items: center;
+`
+// 1 2
+// 3 4
+// 5 6
+const Item1 = styled.div`
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: right;
+`
+const Item2 = styled.div`
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: left;
+  align-self: center;
+`
+const Item3 = styled.div`
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  justify-self: right;
+`
+const Item4 = styled.div`
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  justify-self: left;
+  align-self: center;
+`
+const Item5 = styled.div`
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  justify-self: right;
+`
+const Item6 = styled.div`
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  justify-self: left;
+  align-self: center;
+`
+
+
+
 const StyledHeading = styled(Heading)`
   text-align: center;
 `
@@ -26,13 +82,14 @@ const Register = () => {
     <ListTemplate>
       <StyledBox>
         <StyledHeading> Register </StyledHeading>
-        <Paragraph>Login</Paragraph>
-        <Input placeholder='LOGIN'/>
-        <Paragraph>Password</Paragraph>
-        <Input placeholder='PASSWORD'/>
-        <Paragraph>Password repeat</Paragraph>
-        <Input placeholder='PASSWORD'/>
-
+        <StyledLoginArea>
+            <Item1><Paragraph>Login</Paragraph></Item1>
+            <Item2><Input placeholder='LOGIN'/></Item2>
+            <Item3><Paragraph>Password</Paragraph></Item3>
+            <Item4><Input placeholder='PASSWORD'/></Item4>
+            <Item5><Paragraph>LoPasswordgin</Paragraph></Item5>
+            <Item6><Input placeholder='PASSWORD'/></Item6>
+        </StyledLoginArea>
         <Button>LOGIN / Register</Button>
         <Button>LOG as TEST</Button>
         <Button>Create account / Login in</Button>
