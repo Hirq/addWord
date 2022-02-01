@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Heading from 'components/atoms/Heading'
@@ -15,6 +15,10 @@ const StyledBox = styled.div`
   right: 0;
   margin-left: auto;
   margin-right: auto;
+`
+
+const StyledHeading = styled(Heading)`
+  text-align: center;
 `
 
 const StyledLoginArea = styled.div`
@@ -71,30 +75,61 @@ const Item6 = styled.div`
   align-self: center;
 `
 
+const StyledButtonsArea = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 6fr;
+  justify-items: center;
+`
 
+const ItemButton3 = styled.div`
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  justify-self: center;
+  margin-top: auto;
+`
 
-const StyledHeading = styled(Heading)`
-  text-align: center;
+const StyledButtonLoginAsTest = styled(Button)`
+  width: 150px;
+  height: 25px;
+  margin-top: auto;
 `
 
 const Register = () => {
+  const [isLogin, setIsLogn] = useState(true); // Login TRUE : Resgiter FALSE
+
+  const handleButtonAction = () => {
+    setIsLogn(state => !state)
+  }
+
   return(
     <ListTemplate>
       <StyledBox>
-        <StyledHeading> Register </StyledHeading>
+        <StyledHeading> {isLogin ? "Login" : "Register"} </StyledHeading>
         <StyledLoginArea>
             <Item1><Paragraph>Login</Paragraph></Item1>
             <Item2><Input placeholder='LOGIN'/></Item2>
             <Item3><Paragraph>Password</Paragraph></Item3>
             <Item4><Input placeholder='PASSWORD'/></Item4>
-            <Item5><Paragraph>LoPasswordgin</Paragraph></Item5>
-            <Item6><Input placeholder='PASSWORD'/></Item6>
+            {isLogin ? null : 
+              <>
+                <Item5><Paragraph>LoPasswordgin</Paragraph></Item5>
+                <Item6><Input placeholder='PASSWORD'/></Item6>
+              </>
+            }
         </StyledLoginArea>
-        <Button>LOGIN / Register</Button>
-        <Button>LOG as TEST</Button>
-        <Button>Create account / Login in</Button>
-
+        <StyledButtonsArea>
+          <Button onClick={handleButtonAction}> GO TO {isLogin  ? "REGISTER": "LOGIN"}</Button>
+          {isLogin 
+            ? <Button>Login in</Button>
+            : <Button>Create account</Button>
+          }
+          <ItemButton3><StyledButtonLoginAsTest second>LOG as TEST</StyledButtonLoginAsTest></ItemButton3>
+      </StyledButtonsArea>
       </StyledBox>
+
       <StyledHeading> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
           wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading>
     </ListTemplate>
