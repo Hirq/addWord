@@ -78,23 +78,26 @@ const Item6 = styled.div`
 const StyledButtonsArea = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr;
   justify-items: center;
 `
 
-const ItemButton3 = styled.div`
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  justify-self: center;
-  margin-top: auto;
-`
+// const ItemButton3 = styled.div`
+//   grid-column-start: 1;
+//   grid-column-end: 3;
+//   grid-row-start: 2;
+//   grid-row-end: 3;
+//   justify-self: center;
+//   margin-top: auto;
+// `
 
 const StyledButtonLoginAsTest = styled(Button)`
   width: 150px;
   height: 25px;
-  margin-top: auto;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -75px;
 `
 
 const Register = () => {
@@ -126,8 +129,9 @@ const Register = () => {
             ? <Button>Login in</Button>
             : <Button>Create account</Button>
           }
-          <ItemButton3><StyledButtonLoginAsTest second>LOG as TEST</StyledButtonLoginAsTest></ItemButton3>
       </StyledButtonsArea>
+      <StyledButtonLoginAsTest second>LOG as TEST</StyledButtonLoginAsTest>
+
       </StyledBox>
 
       <StyledHeading> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
