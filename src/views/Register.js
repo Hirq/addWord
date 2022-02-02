@@ -78,7 +78,7 @@ const Item6 = styled.div`
 const StyledButtonsArea = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 6fr;
+  grid-template-rows: 1fr 5fr;
   justify-items: center;
 `
 
