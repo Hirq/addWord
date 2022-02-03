@@ -48,8 +48,6 @@ const StyledBottomIcons = styled.div`
   margin-top: auto;
 `;
 
-
-
 const StyledLinksList = styled.ul`
   margin: 0;
   padding: 0;

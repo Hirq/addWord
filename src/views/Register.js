@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Heading from 'components/atoms/Heading'
 import Paragraph from 'components/atoms/Paragraph';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
+import { db } from '../firebase-config'; 
+import { collection, doc, getDocs, addDoc } from "firebase/firestore";
+import ButtonIcon from 'components/atoms/ButtonIcon'
+import EyeIcon from 'assets/icons/eye-password.svg';
 
 const StyledBox = styled.div`
   position: absolute;
@@ -27,7 +31,7 @@ const StyledLoginArea = styled.div`
   justify-items: center;
 `
 // 1 2
-// 3 4
+// 3 4 7
 // 5 6
 const Item1 = styled.div`
   grid-column-start: 1;
@@ -58,6 +62,7 @@ const Item4 = styled.div`
   grid-row-end: 3;
   justify-self: left;
   align-self: center;
+  display: inline-flex;
 `
 const Item5 = styled.div`
   grid-column-start: 1;
@@ -82,15 +87,6 @@ const StyledButtonsArea = styled.div`
   justify-items: center;
 `
 
-// const ItemButton3 = styled.div`
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row-start: 2;
-//   grid-row-end: 3;
-//   justify-self: center;
-//   margin-top: auto;
-// `
-
 const StyledButtonLoginAsTest = styled(Button)`
   width: 150px;
   height: 25px;
@@ -100,12 +96,58 @@ const StyledButtonLoginAsTest = styled(Button)`
   margin-left: -75px;
 `
 
+const StyledEyeButton = styled(ButtonIcon)`
+  background-color: red;
+  width: 35px;
+  height: 35px;
+`;
+
 const Register = () => {
   const [isLogin, setIsLogn] = useState(true); // Login TRUE : Resgiter FALSE
+  const [hidden, setHidden] = useState(true);
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordNew, setPasswordNew] = useState('');
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users");
 
   const handleButtonAction = () => {
     setIsLogn(state => !state)
   }
+  const handleHidden = () => {
+    setHidden(state => !state)
+  }
+
+  const handleLogin = (e) => {
+    setLogin(e.target.value);
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  }
+  const handlePasswordNew = (e) => {
+    setPasswordNew(e.target.value);
+  }
+
+  const createUser = async () => {
+    await addDoc(usersCollectionRef, {login: login, password: password});
+    alert('You create new account login: ' + login);
+    setTimeout(() => { 
+      window.location.reload(false);
+    }, 1)
+  };
+
+  const signIn = (loginUser, passwordUser) => {
+    (users.find(user => user.login === loginUser && user.password === passwordUser) ? console.log('We have user: ' + loginUser) : console.log('I dont know user: ' + loginUser))
+  }
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers()
+  }, [])
 
   return(
     <ListTemplate>
@@ -113,27 +155,28 @@ const Register = () => {
         <StyledHeading> {isLogin ? "Login" : "Register"} </StyledHeading>
         <StyledLoginArea>
             <Item1><Paragraph>Login</Paragraph></Item1>
-            <Item2><Input placeholder='LOGIN'/></Item2>
+            <Item2><Input value={login||''} placeholder="LOGIN" onChange={handleLogin}/></Item2>
             <Item3><Paragraph>Password</Paragraph></Item3>
-            <Item4><Input placeholder='PASSWORD'/></Item4>
+            <Item4>
+              <Input type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
+              <StyledEyeButton icon={EyeIcon} onClick={handleHidden}/>
+            </Item4>
             {isLogin ? null : 
               <>
                 <Item5><Paragraph>LoPasswordgin</Paragraph></Item5>
-                <Item6><Input placeholder='PASSWORD'/></Item6>
+                <Item6><Input type={hidden ? "password" : "text"} value={passwordNew||''} placeholder="password" onChange={handlePasswordNew}/></Item6>
               </>
             }
         </StyledLoginArea>
         <StyledButtonsArea>
           <Button onClick={handleButtonAction}> GO TO {isLogin  ? "REGISTER": "LOGIN"}</Button>
           {isLogin 
-            ? <Button>Login in</Button>
-            : <Button>Create account</Button>
+            ? <Button onClick={() => signIn(login, password)}>Login in</Button>
+            : <Button onClick={createUser}>Create account</Button>
           }
       </StyledButtonsArea>
-      <StyledButtonLoginAsTest second>LOG as TEST</StyledButtonLoginAsTest>
-
+      <StyledButtonLoginAsTest onClick={() => signIn('test', 'test')}>LOG as TEST</StyledButtonLoginAsTest>
       </StyledBox>
-
       <StyledHeading> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
           wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading>
     </ListTemplate>
