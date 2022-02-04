@@ -129,8 +129,21 @@ const Register = () => {
   }
 
   const createUser = async () => {
-    await addDoc(usersCollectionRef, {login: login, password: password});
-    alert('You create new account login: ' + login);
+    if ((password === passwordNew) && (login !== '')) {
+      await addDoc(usersCollectionRef, {login: login, password: password});
+      alert('You create new account login: ' + login);
+      console.log('1');
+    }
+    else {
+      if (password !== passwordNew) {
+        alert('These passwords not same: ' + login);
+        console.log('2');
+      }
+      else if (login === '') {
+        alert('Login is empty: ' + login);
+        console.log('3');
+      } 
+    }
     setTimeout(() => { 
       window.location.reload(false);
     }, 1)
