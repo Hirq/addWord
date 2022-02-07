@@ -82,9 +82,21 @@ const Item6 = styled.div`
 
 const StyledButtonsArea = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 0.05fr 1fr;
   grid-template-rows: 1fr;
   justify-items: center;
+`
+
+const SyledButtonLeft = styled(Button)`
+  grid-column-start: 1;
+  grid-column-end: 2;
+  justify-self: right;
+`
+
+const SyledButtonRight = styled(Button)`
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-self: left;
 `
 
 const StyledButtonLoginAsTest = styled(Button)`
@@ -182,10 +194,10 @@ const Register = () => {
             }
         </StyledLoginArea>
         <StyledButtonsArea>
-          <Button onClick={handleButtonAction}> GO TO {isLogin  ? "REGISTER": "LOGIN"}</Button>
+          <SyledButtonLeft onClick={handleButtonAction}> GO TO {isLogin  ? "REGISTER": "LOGIN"}</SyledButtonLeft>
           {isLogin 
-            ? <Button onClick={() => signIn(login, password)}>Login in</Button>
-            : <Button onClick={createUser}>Create account</Button>
+            ? <SyledButtonRight onClick={() => signIn(login, password)}>Login in</SyledButtonRight>
+            : <SyledButtonRight onClick={createUser}>Create account</SyledButtonRight>
           }
       </StyledButtonsArea>
       <StyledButtonLoginAsTest onClick={() => signIn('test', 'test')}>LOG as TEST</StyledButtonLoginAsTest>
