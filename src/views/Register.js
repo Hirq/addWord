@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Heading from 'components/atoms/Heading'
 import Paragraph from 'components/atoms/Paragraph';
@@ -14,15 +14,24 @@ const StyledBox = styled.div`
   position: absolute;
   width: 50%;
   height: 500px;
-  background-color: red;
+  /* background-color: red; */
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
+
 `
 
 const StyledHeading = styled(Heading)`
   text-align: center;
+  color: ${({ isLogin }) => (isLogin ? 'red' : 'blue')};
+  /* transform: translate(${({ isLogin }) => (isLogin ? '0' : '100%')});
+  transition: transform 0.25s ease-in-out; */
+`
+
+const StyledHeading2 = styled(Heading)`
+  text-align: center;
+  margin-top: 700px;
 `
 
 const StyledLoginArea = styled.div`
@@ -109,7 +118,6 @@ const StyledButtonLoginAsTest = styled(Button)`
 `
 
 const StyledEyeButton = styled(ButtonIcon)`
-  background-color: red;
   width: 35px;
   height: 35px;
 `;
@@ -123,8 +131,10 @@ const Register = () => {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
+  // const Header = document.querySelectorAll(StyledHeading);
+
   const handleButtonAction = () => {
-    setIsLogn(state => !state)
+    setIsLogn(state => !state);
   }
   const handleHidden = () => {
     setHidden(state => !state)
@@ -177,18 +187,18 @@ const Register = () => {
   return(
     <ListTemplate>
       <StyledBox>
-        <StyledHeading> {isLogin ? "Login" : "Register"} </StyledHeading>
+        <StyledHeading big isLogin={isLogin}> {isLogin ? "Login" : "Register"} </StyledHeading>
         <StyledLoginArea>
             <Item1><Paragraph>Login</Paragraph></Item1>
             <Item2><Input value={login||''} placeholder="LOGIN" onChange={handleLogin}/></Item2>
             <Item3><Paragraph>Password</Paragraph></Item3>
             <Item4>
               <Input type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
-              <StyledEyeButton icon={EyeIcon} onClick={handleHidden}/>
+              <StyledEyeButton visible icon={EyeIcon} onClick={handleHidden}/>
             </Item4>
             {isLogin ? null : 
               <>
-                <Item5><Paragraph>LoPasswordgin</Paragraph></Item5>
+                <Item5><Paragraph>Password</Paragraph></Item5>
                 <Item6><Input type={hidden ? "password" : "text"} value={passwordNew||''} placeholder="password" onChange={handlePasswordNew}/></Item6>
               </>
             }
@@ -202,8 +212,8 @@ const Register = () => {
       </StyledButtonsArea>
       <StyledButtonLoginAsTest onClick={() => signIn('test', 'test')}>LOG as TEST</StyledButtonLoginAsTest>
       </StyledBox>
-      <StyledHeading> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
-          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading>
+      <StyledHeading2> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
+          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading2>
     </ListTemplate>
   )
 }

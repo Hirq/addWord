@@ -134,6 +134,15 @@ const initialState = {
 
   blogs: [
     {
+      id: 8,
+      title: 'Panel boczny - jak otwieramy, to tez powinien byc przycisk w tym sammy miejscy do zamkniecia',
+      content:
+        ' '
+        ,
+      date: '25.01.2022',
+      tag: ['Work'],
+    },
+    {
       id: 7,
       title: 'Logowanie / rejestracja',
       content:
