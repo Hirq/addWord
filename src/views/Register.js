@@ -11,22 +11,28 @@ import ButtonIcon from 'components/atoms/ButtonIcon'
 import EyeIcon from 'assets/icons/eye-password.svg';
 
 const StyledBox = styled.div`
+  margin-top:;
   position: absolute;
   width: 50%;
   height: 500px;
-  /* background-color: red; */
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
-
 `
 
 const StyledHeading = styled(Heading)`
   text-align: center;
   color: ${({ isLogin }) => (isLogin ? 'red' : 'blue')};
-  /* transform: translate(${({ isLogin }) => (isLogin ? '0' : '100%')});
-  transition: transform 0.25s ease-in-out; */
+
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  top: 0;
+  transform: translate(${({ isLogin }) => (isLogin ? '0' : '100%')});
+  transition: transform 0.25s ease-in-out;
+  margin-top: 100px;
 `
 
 const StyledHeading2 = styled(Heading)`
@@ -35,6 +41,7 @@ const StyledHeading2 = styled(Heading)`
 `
 
 const StyledLoginArea = styled.div`
+  margin-top: 80px;
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;
   justify-items: center;
