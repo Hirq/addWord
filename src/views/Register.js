@@ -11,7 +11,7 @@ import ButtonIcon from 'components/atoms/ButtonIcon'
 import EyeIcon from 'assets/icons/eye-password.svg';
 
 const StyledBox = styled.div`
-  margin-top:;
+  z-index: 0;
   position: absolute;
   width: 50%;
   height: 500px;
@@ -19,23 +19,44 @@ const StyledBox = styled.div`
   right: 0;
   margin-left: auto;
   margin-right: auto;
+  /* background-color: red; */
+  box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
+  -webkit-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
+  -moz-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
+
+
 `
 
 const StyledHeading = styled(Heading)`
+  z-index: 1;
   text-align: center;
-  color: ${({ isLogin }) => (isLogin ? 'red' : 'blue')};
-
   position: fixed;
   display: flex;
   flex-direction: column;
-  right: 0;
+  width: 100vw;
+  margin-left: 30px;
   top: 0;
-  transform: translate(${({ isLogin }) => (isLogin ? '0' : '100%')});
-  transition: transform 0.25s ease-in-out;
+  transform: translate(${({ isLogin }) => (isLogin ? '0' : '-100%')});
+  transition: transform 0.75s ease-in-out;
   margin-top: 100px;
+  margin-left: 0px;
 `
 
 const StyledHeading2 = styled(Heading)`
+  z-index: 1;
+  text-align: center;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  margin-left: 30px;
+  top: 0;
+  transform: translate(${({ isLogin }) => (!isLogin ? '0' : '100%')});
+  transition: transform 0.75s ease-in-out;
+  margin-top: 100px;
+  margin-left: 0px;
+`
+const StyledHeading3 = styled(Heading)`
   text-align: center;
   margin-top: 700px;
 `
@@ -192,9 +213,20 @@ const Register = () => {
   }, [])
 
   return(
+    <>
+    {/* {isLogin ? 
+    <StyledHeading big isLogin={isLogin}> {isLogin ? "Login" : "Register"} </StyledHeading>
+    :
+    <StyledHeading2 big isLogin={isLogin}> {isLogin ? "Login" : "Register"} </StyledHeading2>
+    } */}
+    <StyledHeading big isLogin={isLogin}> Login </StyledHeading>
+    <StyledHeading2 big isLogin={isLogin}> Register </StyledHeading2>
+    
+    
+
     <ListTemplate>
+
       <StyledBox>
-        <StyledHeading big isLogin={isLogin}> {isLogin ? "Login" : "Register"} </StyledHeading>
         <StyledLoginArea>
             <Item1><Paragraph>Login</Paragraph></Item1>
             <Item2><Input value={login||''} placeholder="LOGIN" onChange={handleLogin}/></Item2>
@@ -219,9 +251,10 @@ const Register = () => {
       </StyledButtonsArea>
       <StyledButtonLoginAsTest onClick={() => signIn('test', 'test')}>LOG as TEST</StyledButtonLoginAsTest>
       </StyledBox>
-      <StyledHeading2> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
-          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading2>
+      <StyledHeading3> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
+          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading3>
     </ListTemplate>
+    </>
   )
 }
 

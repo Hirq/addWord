@@ -26,6 +26,8 @@ export const lightTheme = {
   activeIconColor: 'orange',
   colorButtonSecondary: 'white',
   colorBorder: '#FFF',
+  colorButtonThird: 'hsl(105, 34%, 28%)',
+  colorBoxShadow : 'hsl(145, 14%, 12%)',
 }
 
 export const darkTheme = {
@@ -40,7 +42,7 @@ export const darkTheme = {
   colorButtonSecondary: 'white',
   colorBorder: '#6B8096',
   colorButtonThird: 'hsl(105, 34%, 28%)',
-
+  colorBoxShadow : 'hsl(177, 70%, 65%)',
 
   gradient: 'linear-gradient(#091236, #1E215D)', // czy potrzebne to nam?
 }
