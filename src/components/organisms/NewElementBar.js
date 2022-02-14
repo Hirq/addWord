@@ -30,7 +30,6 @@ const StyledTextArea = styled(Input)`
   border-radius: 20px;
   height: 30vh;
   width: 500px;
-
 `;
 
 const StyledInput = styled(Input)`
@@ -54,18 +53,6 @@ const StyledButtonClose = styled(Button)`
 const StyledReactSelect = styled(Select)`
   color: black;
 `
-
-
-const options = [
-  { value: 'Book', label: 'Book', id: 0},
-  { value: 'Video', label: 'Video', id: 1 },
-  { value: 'Internet', label: 'Internet', id: 2 },
-  { value: 'Story', label: 'Story', id: 3 },
-  { value: 'Diary', label: 'Diary', id: 4 },
-  { value: 'Job', label: 'Job', id: 5 },
-  { value: 'Holiday', label: 'Holiday', id: 6 },
-  { value: 'Work', label: 'Work', id: 7 }
-]
 
 var dateCurrent = new Date(),
 today = dateCurrent.getFullYear() + '-' + (dateCurrent.getMonth() + 1) + '-' + dateCurrent.getDate();

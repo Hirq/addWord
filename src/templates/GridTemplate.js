@@ -81,7 +81,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
   const [change, setChange] = useState(false);
   const [lengthTagFilter, setLengthTagFilter] = useState(0);
 
-  const handleChangeTagSelect = (newValue, actionMeta) => {
+  const handleChangeTagSelect = (newValue) => {
     // console.log(newValue[newValue.length-1].value) // OK
     setChange(true);
     // setAddFilter(newValue.map((i) => i.value));
@@ -90,10 +90,6 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
     // setSearchTag(newValue[newValue.length-1].value);
     setFilterOptions(newValue);
   };
-
-  const handleSearchTag = (e) => {
-    setSearchTag(e.target.value);
-  }
 
   const handleSearchName = (e) => {
     setSearchName(e.target.value.toUpperCase());

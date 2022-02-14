@@ -7,7 +7,7 @@ import Paragraph from 'components/atoms/Paragraph';
 import { connect } from 'react-redux';
 import { addTag as addTagAction, removeTag as removeTagAction } from 'redux/actions';
 import { db } from '../firebase-config'; 
-import { collection, doc, getDocs, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, addDoc, updateDoc } from "firebase/firestore";
 
 import { routes } from 'routes';
 import { NavLink } from 'react-router-dom';
@@ -110,11 +110,6 @@ const Settings = ({tags, addTag, removeTag}) => {
       window.location.reload(false);
     }, 1)
   };
-
-  const deleteUser = async (id) => { 
-    const userDoc = doc(db, "users", id);
-    await deleteDoc(userDoc)
-  }
 
   const updateUser = async(user, newPassword, newPasswordRepeat) => {
     console.log(newPasswordRepeat, newPassword);

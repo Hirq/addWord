@@ -1,6 +1,5 @@
 import React from 'react';
 import GridTemplate from 'templates/GridTemplate';
-import Card from 'components/molecules/Card';
 import { connect } from 'react-redux';
 
 const Blog = ({ blogs, tags }) => {

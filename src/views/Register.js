@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import ListTemplate from 'templates/ListTemplate';
 import Heading from 'components/atoms/Heading'
 import Paragraph from 'components/atoms/Paragraph';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import { db } from '../firebase-config'; 
-import { collection, doc, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import ButtonIcon from 'components/atoms/ButtonIcon'
 import EyeIcon from 'assets/icons/eye-password.svg';
 
@@ -19,12 +19,9 @@ const StyledBox = styled.div`
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  /* background-color: red; */
   box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
   -webkit-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
   -moz-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
-
-
 `
 
 const StyledHeading = styled(Heading)`
@@ -55,10 +52,6 @@ const StyledHeading2 = styled(Heading)`
   transition: transform 0.75s ease-in-out;
   margin-top: 100px;
   margin-left: 0px;
-`
-const StyledHeading3 = styled(Heading)`
-  text-align: center;
-  margin-top: 700px;
 `
 
 const StyledLoginArea = styled.div`
@@ -214,18 +207,9 @@ const Register = () => {
 
   return(
     <>
-    {/* {isLogin ? 
-    <StyledHeading big isLogin={isLogin}> {isLogin ? "Login" : "Register"} </StyledHeading>
-    :
-    <StyledHeading2 big isLogin={isLogin}> {isLogin ? "Login" : "Register"} </StyledHeading2>
-    } */}
     <StyledHeading big isLogin={isLogin}> Login </StyledHeading>
     <StyledHeading2 big isLogin={isLogin}> Register </StyledHeading2>
-    
-    
-
     <ListTemplate>
-
       <StyledBox>
         <StyledLoginArea>
             <Item1><Paragraph>Login</Paragraph></Item1>
@@ -251,8 +235,6 @@ const Register = () => {
       </StyledButtonsArea>
       <StyledButtonLoginAsTest onClick={() => signIn('test', 'test')}>LOG as TEST</StyledButtonLoginAsTest>
       </StyledBox>
-      <StyledHeading3> Parametr dodajemy do Register /\ i jak mamy login to widok loginu, a jak register to register - wszystko na 1 widoku, tylko dochodzi z prawej na cssach parametry i zmienia się napis login na register, w takiej formie ze ten 
-          wyjezdza w gorym a ten wchodzi z dolu. - lub tez od prawej i jeszcze przycisk musi sie zmienic na odpowiedni  + mozliwosc zalogowania przy uzyciu test/test </StyledHeading3>
     </ListTemplate>
     </>
   )
