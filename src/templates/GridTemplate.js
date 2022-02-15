@@ -148,7 +148,7 @@ const GridTemplate = ({path, notes, countNotes, archiveNote, countArchiveNote, b
       const NoOptionsMessage = props => {
         return (
            <components.NoOptionsMessage {...props}>
-              Maximum 3 filter
+              Maximum 3 filters
            </components.NoOptionsMessage>
         );
       };
