@@ -33,6 +33,10 @@ const StyledRightPage = styled.div`
   align-content: center;
 `
 
+const StyledLoginAs = styled.div`
+  padding-right: 30px;
+`
+
 const Topbar = () => {
   return (
     <>
@@ -41,6 +45,9 @@ const Topbar = () => {
         <WordAddButton/>
       </StyledLeftPage>
       <StyledRightPage>
+        <StyledLoginAs>
+          Login as: context  
+        </StyledLoginAs>
         <ToggleChangeTheme/>
         {/* <Timer/> */}
       </StyledRightPage>

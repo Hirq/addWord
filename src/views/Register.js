@@ -9,6 +9,9 @@ import { db } from '../firebase-config';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import ButtonIcon from 'components/atoms/ButtonIcon'
 import EyeIcon from 'assets/icons/eye-password.svg';
+import { routes } from 'routes';
+
+import {Redirect, Route} from 'react-router-dom';
 
 const StyledBox = styled.div`
   z-index: 0;
@@ -19,9 +22,10 @@ const StyledBox = styled.div`
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
+  margin-top: 150px;
+  /* box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
   -webkit-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
-  -moz-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow};
+  -moz-box-shadow: -1px 3px 166px 159px ${({theme}) => theme.colorBoxShadow}; */
 `
 
 const StyledHeading = styled(Heading)`
@@ -35,7 +39,7 @@ const StyledHeading = styled(Heading)`
   top: 0;
   transform: translate(${({ isLogin }) => (isLogin ? '0' : '-100%')});
   transition: transform 0.75s ease-in-out;
-  margin-top: 100px;
+  margin-top: 250px;
   margin-left: 0px;
 `
 
@@ -50,7 +54,7 @@ const StyledHeading2 = styled(Heading)`
   top: 0;
   transform: translate(${({ isLogin }) => (!isLogin ? '0' : '100%')});
   transition: transform 0.75s ease-in-out;
-  margin-top: 100px;
+  margin-top: 250px;
   margin-left: 0px;
 `
 
@@ -193,7 +197,14 @@ const Register = () => {
   };
 
   const signIn = (loginUser, passwordUser) => {
-    (users.find(user => user.login === loginUser && user.password === passwordUser) ? console.log('We have user: ' + loginUser) : console.log('I dont know user: ' + loginUser))
+    (users.find(user => user.login === loginUser && user.password === passwordUser) 
+    ?
+    
+      // console.log('We have user: ' + loginUser)
+      window.location.href = "/List"
+  
+
+    : console.log('I dont know user: ' + loginUser))
   }
 
   useEffect(() => {
@@ -217,7 +228,7 @@ const Register = () => {
             <Item3><Paragraph>Password</Paragraph></Item3>
             <Item4>
               <Input type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
-              <StyledEyeButton visible icon={EyeIcon} onClick={handleHidden}/>
+              {hidden ? <StyledEyeButton notVisible icon={EyeIcon} onClick={handleHidden}/> : <StyledEyeButton visible icon={EyeIcon} onClick={handleHidden}/>}
             </Item4>
             {isLogin ? null : 
               <>

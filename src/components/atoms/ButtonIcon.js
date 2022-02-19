@@ -18,8 +18,15 @@ const ButtonIcon = styled.button`
   ${({ visible }) =>
     visible &&
     css`
-      background-color: ${({ theme }) => theme.activeIconColor};
+      background-color: ${({ theme }) => theme.visibleIconColor};
     `}
+
+  ${({ notVisible }) => 
+    notVisible &&
+    css`
+      background-color: ${({ theme }) => theme.notVisibleIconColor}; 
+    `}
+
 `;
 
 export default ButtonIcon;

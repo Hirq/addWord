@@ -28,6 +28,11 @@ export const lightTheme = {
   colorBorder: '#FFF',
   colorButtonThird: 'hsl(105, 34%, 28%)',
   colorBoxShadow : 'hsl(145, 14%, 12%)',
+
+  //icons
+  activeIconColor: 'orange',
+  visibleIconColor: 'hsl(100, 20%, 100%)',
+  notVisibleIconColor: 'orange',
 }
 
 export const darkTheme = {
@@ -38,11 +43,15 @@ export const darkTheme = {
   leftBar: 'hsl(175, 34%, 28%)', 
   topBar: 'hsl(175, 34%, 28%)',
   colorButton: 'hsl(100, 20%, 80%)',
-  activeIconColor: 'hsl(100, 20%, 80%)',
   colorButtonSecondary: 'white',
   colorBorder: '#6B8096',
   colorButtonThird: 'hsl(105, 34%, 28%)',
   colorBoxShadow : 'hsl(177, 70%, 65%)',
+
+  //icons
+  activeIconColor: 'hsl(100, 20%, 80%)',
+  visibleIconColor: 'hsl(100, 20%, 80%)',
+  notVisibleIconColor: 'hsl(50, 20%, 100%)',
 
   gradient: 'linear-gradient(#091236, #1E215D)', // czy potrzebne to nam?
 }

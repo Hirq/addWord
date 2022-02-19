@@ -135,6 +135,15 @@ const initialState = {
   blogs: [
     {
       id: 8,
+      title: 'zalogowany jako: nazwa uzytkownika - wtedy na dole w rogu mamy mozliwosc wylogowania i opcje do panelu uzytkownika, w przeciwnym razie jest inna ikona i mozliwosc zalogowania / rejestracji + jak zalogowany jako admin/admin to widze wszystkie konta',
+      content:
+        ' '
+        ,
+      date: '19.02.2022',
+      tag: ['Work'],
+    },
+    {
+      id: 8,
       title: 'Panel boczny - jak otwieramy, to tez powinien byc przycisk w tym sammy miejscy do zamkniecia',
       content:
         ' '
