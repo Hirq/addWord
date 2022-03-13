@@ -135,7 +135,8 @@ const initialState = {
   blogs: [
     {
       id: 8,
-      title: 'zalogowany jako: nazwa uzytkownika - wtedy na dole w rogu mamy mozliwosc wylogowania i opcje do panelu uzytkownika, w przeciwnym razie jest inna ikona i mozliwosc zalogowania / rejestracji + jak zalogowany jako admin/admin to widze wszystkie konta',
+      title: 'zalogowany jako: nazwa uzytkownika - wtedy na dole w rogu mamy mozliwosc wylogowania i opcje do panelu uzytkownika, w przeciwnym razie jest inna ikona i mozliwosc zalogowania / rejestracji + jak zalogowany jako admin/admin to widze wszystkie konta' +
+      ' powinienem chyba dodac do reduxa tablica user - isLogged? userName i wtedy przechowujemy w naszym api informacje o tym i moge wtedy wyswietlać i odnosić sie do tego - tak mam z innymi rzeczami zwiazanymi z firebase ',
       content:
         ' '
         ,
@@ -144,7 +145,16 @@ const initialState = {
     },
     {
       id: 8,
-      title: 'Panel boczny - jak otwieramy, to tez powinien byc przycisk w tym sammy miejscy do zamkniecia',
+      title: 'Panel boczny - jak otwieramy, to tez powinien byc przycisk w tym sammy miejscy do zamkniecia + opisac context w zeszycie szczegółowo i dowiedzieć się co i jak z tym sie je',
+      content:
+        ' '
+        ,
+      date: '25.01.2022',
+      tag: ['Work'],
+    },
+    {
+      id: 8,
+      title: 'Pozalatwiac te zadania w końcu - i juz kolejne pisać po angielsku - przecież taki miał być tego sens',
       content:
         ' '
         ,
