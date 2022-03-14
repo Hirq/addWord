@@ -10,8 +10,10 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import ButtonIcon from 'components/atoms/ButtonIcon'
 import EyeIcon from 'assets/icons/eye-password.svg';
 import { routes } from 'routes';
+import { loginUser as loginUserAction } from 'redux/actions';
+import { connect } from 'react-redux';
 
-import {Redirect, Route} from 'react-router-dom';
+
 
 const StyledBox = styled.div`
   z-index: 0;
@@ -58,7 +60,7 @@ const StyledHeading2 = styled(Heading)`
   margin-left: 0px;
 `
 
-const StyledLoginArea = styled.div`
+const StyledLoginArea = styled.form`
   margin-top: 80px;
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;
@@ -147,7 +149,7 @@ const StyledEyeButton = styled(ButtonIcon)`
   height: 35px;
 `;
 
-const Register = () => {
+const Register = ({loginUser2}) => {
   const [isLogin, setIsLogn] = useState(true); // Login TRUE : Resgiter FALSE
   const [hidden, setHidden] = useState(true);
   const [login, setLogin] = useState('');
@@ -205,7 +207,7 @@ const Register = () => {
   
 
     : console.log('I dont know user: ' + loginUser))
-  }
+  };
 
   useEffect(() => {
     const getUsers = async () => {
@@ -240,7 +242,8 @@ const Register = () => {
         <StyledButtonsArea>
           <SyledButtonLeft onClick={handleButtonAction}> GO TO {isLogin  ? "REGISTER": "LOGIN"}</SyledButtonLeft>
           {isLogin 
-            ? <SyledButtonRight onClick={() => signIn(login, password)}>Login in</SyledButtonRight>
+            // ? <SyledButtonRight onClick={() => signIn(login, password)}>Login in</SyledButtonRight>
+            ? <SyledButtonRight onClick={() => loginUser2(login, password, true)}>Login in</SyledButtonRight>
             : <SyledButtonRight onClick={createUser}>Create account</SyledButtonRight>
           }
       </StyledButtonsArea>
@@ -251,4 +254,13 @@ const Register = () => {
   )
 }
 
-export default Register;
+const mapStateToProps = state => {
+  const { user } = state;
+  return { user }; 
+}
+
+const mapDispatchToProps = dispatch => ({
+  loginUser2: (login, password, loggedIn) => dispatch(loginUserAction(login, password, loggedIn)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

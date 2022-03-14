@@ -106,6 +106,9 @@
 // }
 
 const initialState = {
+  user: {
+    user: null
+  },
   words: {
     allIds: ['1','2','3','4'],
     byId:{
@@ -133,6 +136,15 @@ const initialState = {
   },
 
   blogs: [
+    {
+      id: 8,
+      title: 'Jak mamy nazwe funkcji const Register = ({loginUser2}) to opisac to że jak mamy funkcje z reduxa to uzywamy {}, bo znowu mialem problem ze znalezieniem tego - ZESZYT i dlaczego to uzywamy, ze musimy zre... co zrobić?',
+      content:
+        ' '
+        ,
+      date: '19.02.2022',
+      tag: ['Work'],
+    },
     {
       id: 8,
       title: 'zalogowany jako: nazwa uzytkownika - wtedy na dole w rogu mamy mozliwosc wylogowania i opcje do panelu uzytkownika, w przeciwnym razie jest inna ikona i mozliwosc zalogowania / rejestracji + jak zalogowany jako admin/admin to widze wszystkie konta' +
@@ -525,17 +537,31 @@ const rootReducer = (state = initialState, action) => {
           : note
         )
       };
-      case 'ADD_TAG':
-        return {
-          ...state,
-          tags: [...state.tags, action.payload.tag],
-        };
-      case 'REMOVE_TAG':
-        const id_tag = action.payload.id      
-        return {
-          ...state,
-          tags: state.tags.filter((tags) => tags.id !== id_tag)
-        }; 
+    case 'ADD_TAG':
+      return {
+        ...state,
+        tags: [...state.tags, action.payload.tag],
+      };
+    case 'REMOVE_TAG':
+      const id_tag = action.payload.id      
+      return {
+        ...state,
+        tags: state.tags.filter((tags) => tags.id !== id_tag)
+      }; 
+    case 'LOGIN':
+      return {
+        ...state, 
+        user: state.user = {
+          login: action.payload.login,
+          password: action.payload.password,
+          loggedIn: action.payload.loggedIn
+        }
+      };
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: state.user = null
+      };
 
   default:
     return state;
