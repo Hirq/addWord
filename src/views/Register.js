@@ -12,8 +12,10 @@ import EyeIcon from 'assets/icons/eye-password.svg';
 import { routes } from 'routes';
 import { loginUser as loginUserAction } from 'redux/actions';
 import { connect } from 'react-redux';
-
-
+import { Redirect, Route, NavLink, Link } from 'react-router-dom';
+import List from 'views/List';
+import { withRouter, useHistory } from "react-router";
+import { compose } from 'react-compose';
 
 const StyledBox = styled.div`
   z-index: 0;
@@ -149,7 +151,7 @@ const StyledEyeButton = styled(ButtonIcon)`
   height: 35px;
 `;
 
-const Register = ({loginUser2}) => {
+const Register = ({ logging }) => {
   const [isLogin, setIsLogn] = useState(true); // Login TRUE : Resgiter FALSE
   const [hidden, setHidden] = useState(true);
   const [login, setLogin] = useState('');
@@ -157,7 +159,7 @@ const Register = ({loginUser2}) => {
   const [passwordNew, setPasswordNew] = useState('');
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
-
+  const history = useHistory();
   // const Header = document.querySelectorAll(StyledHeading);
 
   const handleButtonAction = () => {
@@ -199,14 +201,19 @@ const Register = ({loginUser2}) => {
   };
 
   const signIn = (loginUser, passwordUser) => {
-    (users.find(user => user.login === loginUser && user.password === passwordUser) 
-    ?
-    
-      // console.log('We have user: ' + loginUser)
-      window.location.href = "/List"
-  
-
-    : console.log('I dont know user: ' + loginUser))
+    if(users.find(user => user.login === loginUser && user.password === passwordUser)) {
+    return(
+      logging(loginUser, passwordUser),
+      console.log('We have user: ' + loginUser),
+      history.push({
+        pathname:  "/list"
+      })
+    )
+    } else {
+      return(
+        console.log('I dont know user: ' + loginUser)
+      )
+    }
   };
 
   useEffect(() => {
@@ -242,8 +249,7 @@ const Register = ({loginUser2}) => {
         <StyledButtonsArea>
           <SyledButtonLeft onClick={handleButtonAction}> GO TO {isLogin  ? "REGISTER": "LOGIN"}</SyledButtonLeft>
           {isLogin 
-            // ? <SyledButtonRight onClick={() => signIn(login, password)}>Login in</SyledButtonRight>
-            ? <SyledButtonRight onClick={() => loginUser2(login, password, true)}>Login in</SyledButtonRight>
+            ? <SyledButtonRight onClick={() => signIn(login, password)}>Login in</SyledButtonRight>
             : <SyledButtonRight onClick={createUser}>Create account</SyledButtonRight>
           }
       </StyledButtonsArea>
@@ -254,13 +260,8 @@ const Register = ({loginUser2}) => {
   )
 }
 
-const mapStateToProps = state => {
-  const { user } = state;
-  return { user }; 
-}
-
 const mapDispatchToProps = dispatch => ({
-  loginUser2: (login, password, loggedIn) => dispatch(loginUserAction(login, password, loggedIn)),
+  logging: (login, password) => dispatch(loginUserAction(login, password)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Register);

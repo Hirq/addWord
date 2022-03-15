@@ -15,7 +15,6 @@ import Settings from 'views/Settings';
 import AdminPanel from 'views/AdminPanel';
 import Register from 'views/Register';
 
-
 const Root = () => (
   <Provider store={store}>
     <BrowserRouter>

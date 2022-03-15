@@ -11,6 +11,8 @@ import ButtonIcon from 'components/atoms/ButtonIcon';
 import SettingsIcon from 'assets/icons/pawn.svg';
 import AdminIcon from 'assets/icons/adminPanel.svg';
 import { routes } from 'routes';
+import { connect } from 'react-redux';
+import { logoutUser as logoutUserAction } from 'redux/actions';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -54,7 +56,7 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Leftbar = () => {
+const Leftbar = ({ logout }) => {
   return(
     <StyledWrapper>
       <StyledLogoLink to="/" />
@@ -72,7 +74,7 @@ const Leftbar = () => {
       <StyledBottomIcons>
         <StyledLogoutButton as={NavLink} to={routes.admin} icon={AdminIcon} />
         <StyledLogoutButton as={NavLink} to={routes.settings} icon={SettingsIcon} />
-        <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+        <StyledLogoutButton as={NavLink} onClick={() => logout()} to="/logout" icon={logoutIcon} />
       </StyledBottomIcons>
     </StyledWrapper>
   );
@@ -85,4 +87,8 @@ const Leftbar = () => {
 //   pageType: 'notes',
 // };
 
-export default Leftbar;
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUserAction()),
+});
+
+export default connect(null, mapDispatchToProps)(Leftbar);

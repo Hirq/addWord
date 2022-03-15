@@ -176,13 +176,18 @@ export const removeTag = (id) => {
   };
 };
 
-export const loginUser = (login, password, loggedIn) => {
+export const loginUser = (login, password) => {
   return {
     type: 'LOGIN',
     payload: {
       login,
-      password,
-      loggedIn
+      password
     },
   };
 }; 
+
+export const logoutUser = () => {
+  return {
+    type: 'LOGOUT',
+  };
+};

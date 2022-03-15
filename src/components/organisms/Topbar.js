@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ToggleChangeTheme from 'components/molecules/ToggleChangeTheme';
 import Timer from 'components/molecules/Timer';
 import WordAddButton from 'components/molecules/WordAddButton';
+import { connect } from 'react-redux';
 
 const StyledWrapperTop = styled.div`
   position: fixed;
@@ -37,7 +38,7 @@ const StyledLoginAs = styled.div`
   padding-right: 30px;
 `
 
-const Topbar = () => {
+const Topbar = ({user}) => {
   return (
     <>
     <StyledWrapperTop>
@@ -46,7 +47,7 @@ const Topbar = () => {
       </StyledLeftPage>
       <StyledRightPage>
         <StyledLoginAs>
-          Login as: context  
+          Login as: {user.login} 
         </StyledLoginAs>
         <ToggleChangeTheme/>
         {/* <Timer/> */}
@@ -56,4 +57,11 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+const mapStateToProps = ( state ) => {
+  const { user } = state;
+  return {
+    user
+  };
+}
+
+export default connect(mapStateToProps, null)(Topbar);
