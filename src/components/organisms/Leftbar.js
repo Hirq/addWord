@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import bulbIcon from 'assets/icons/bulb.svg';
@@ -74,7 +74,7 @@ const Leftbar = ({ logout }) => {
       <StyledBottomIcons>
         <StyledLogoutButton as={NavLink} to={routes.admin} icon={AdminIcon} />
         <StyledLogoutButton as={NavLink} to={routes.settings} icon={SettingsIcon} />
-        <StyledLogoutButton as={NavLink} onClick={() => logout()} to="/logout" icon={logoutIcon} />
+        <StyledLogoutButton as={Link} onClick={() => logout()} to={routes.list} icon={logoutIcon} />
       </StyledBottomIcons>
     </StyledWrapper>
   );

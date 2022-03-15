@@ -138,7 +138,7 @@ const initialState = {
   blogs: [
     {
       id: 8,
-      title: 'Jak mamy nazwe funkcji const Register = ({loginUser2}) to opisac to że jak mamy funkcje z reduxa to uzywamy {}, bo znowu mialem problem ze znalezieniem tego - ZESZYT i dlaczego to uzywamy, ze musimy destrukturyzacja + opisac co to jest HOC',
+      title: 'Jak mamy nazwe funkcji const Register = ({loginUser2}) to opisac to że jak mamy funkcje z reduxa to uzywamy {}, bo znowu mialem problem ze znalezieniem tego - ZESZYT i dlaczego to uzywamy, ze musimy destrukturyzacja + opisac co to jest HOC + history i withRouter o co w tym chodzi',
       content:
         ' '
         ,
@@ -561,8 +561,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: state.user = {
-          login: '',
-          password: '',
+          login: null,
+          password: null,
           loggedIn: false
         }
       };

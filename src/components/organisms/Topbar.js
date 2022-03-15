@@ -47,7 +47,7 @@ const Topbar = ({user}) => {
       </StyledLeftPage>
       <StyledRightPage>
         <StyledLoginAs>
-          Login as: {user.login} 
+          { user.login !== null && <> Login as: {user.login} </> }
         </StyledLoginAs>
         <ToggleChangeTheme/>
         {/* <Timer/> */}

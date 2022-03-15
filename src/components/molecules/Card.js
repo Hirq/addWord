@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
   border-color: ${({theme}) => theme.colorBorder};
   background-color: ${({ theme }) => (theme.bodyExtra)};
   display:grid;
-  grid-template-rows: 0.25fr 1fr;
+  grid-template-rows: 0.25fr auto;
   overflow:hidden;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   ${({ set }) =>
@@ -34,8 +34,9 @@ const InnerWrapper = styled.div`
     css`
       display:flex;
       flex-direction: column;
-      justify-content: flex-end;
-    `}
+      align-content: flex-start;
+      justify-content: flex-start;
+    `};
 `;
 
 const WrapperToDown = styled.div`
@@ -72,7 +73,6 @@ const Card = ({ id, title, content, date, tag, removeBlog, path, removeNote }) =
           <Paragraph>{content}</Paragraph>
           <WrapperToDown>
             { tag.length > 1 ? <Paragraph>{tag.map((i) => i + ' ')}</Paragraph>
-            
             : tag }
             <Paragraph>{date}</Paragraph>
             <Button onClick={() => removeBlog(id)} secondary>REMOVE</Button>
