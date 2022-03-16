@@ -107,9 +107,10 @@
 
 const initialState = {
   user: {
-    login: null,
-    password: null,
-    loggedIn: false
+    id: 1,
+    login: 'test',
+    password: 'test',
+    loggedIn: true
   },
   words: {
     allIds: ['1','2','3','4'],

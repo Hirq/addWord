@@ -9,13 +9,9 @@ import { db } from '../firebase-config';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import ButtonIcon from 'components/atoms/ButtonIcon'
 import EyeIcon from 'assets/icons/eye-password.svg';
-import { routes } from 'routes';
 import { loginUser as loginUserAction } from 'redux/actions';
 import { connect } from 'react-redux';
-import { Redirect, Route, NavLink, Link } from 'react-router-dom';
-import List from 'views/List';
-import { withRouter, useHistory } from "react-router";
-import { compose } from 'react-compose';
+import { useHistory } from "react-router";
 
 const StyledBox = styled.div`
   z-index: 0;
@@ -202,13 +198,13 @@ const Register = ({ logging }) => {
 
   const signIn = (loginUser, passwordUser) => {
     if(users.find(user => user.login === loginUser && user.password === passwordUser)) {
-    return(
-      logging(loginUser, passwordUser),
-      console.log('We have user: ' + loginUser),
-      history.push({
-        pathname:  "/list"
-      })
-    )
+      return(
+        logging(loginUser, passwordUser),
+        console.log('We have user: ' + loginUser),
+        history.push({
+          pathname:  "/list"
+        })
+      )
     } else {
       return(
         console.log('I dont know user: ' + loginUser)

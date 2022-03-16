@@ -93,7 +93,7 @@ const StyledBoxAccounts = styled.div`
   align-items: center;
 `
 
-const Settings = ({tags, addTag, removeTag}) => {
+const Settings = ({tags, addTag, removeTag, user}) => {
   const [nameTag, setNameTag] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -163,6 +163,7 @@ const Settings = ({tags, addTag, removeTag}) => {
         </StyledBoxHeader>
         <StyledFlexCenter>
           <StyledBoxAccounts>
+            
           </StyledBoxAccounts>
         </StyledFlexCenter>
         <StyledBoxTag1>
@@ -183,7 +184,7 @@ const Settings = ({tags, addTag, removeTag}) => {
         
           <StyledBoxLogin>        
             <StyledParahraphLogin> Login </StyledParahraphLogin>
-            <StyledInput value={login||''} placeholder="login" onChange={handleLogin}/>
+            <StyledInput value={login||""} placeholder="login" onChange={handleLogin}/>
 
             <StyledParahraphLogin>Password </StyledParahraphLogin>
             <StyledInput type={hidden ? "password" : "text"} value={password||''} placeholder="password" onChange={handlePassword}/>
@@ -195,8 +196,8 @@ const Settings = ({tags, addTag, removeTag}) => {
 
             <StyledItem>
               <StyledButtonShowHide onClick={handleHidden}> {hidden ? "SHOW PASS" : "HIDE PASS"} </StyledButtonShowHide>
-              <StyledButtonShowHide onClick={createUser}> Add user </StyledButtonShowHide>
-              <StyledButtonShowHide onClick={() => signIn(login, password)}> Sign in </StyledButtonShowHide>
+              {/* <StyledButtonShowHide onClick={updateUser(user, passwordNew, passwordNewRepeat)}> change password </StyledButtonShowHide> */} 
+              to działało jak była lista jak przy usuwaniu, teraz brakuje nam id do danego user na bazie firebase
             </StyledItem>  
           </StyledBoxLogin>
 
