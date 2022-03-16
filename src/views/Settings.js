@@ -163,7 +163,6 @@ const Settings = ({tags, addTag, removeTag}) => {
         </StyledBoxHeader>
         <StyledFlexCenter>
           <StyledBoxAccounts>
-            <Button as={NavLink} to={routes.register}> REGISTER </Button>
           </StyledBoxAccounts>
         </StyledFlexCenter>
         <StyledBoxTag1>

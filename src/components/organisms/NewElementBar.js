@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Select from 'react-select';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
+import ButtonIcon from 'components/atoms/ButtonIcon';
 import Heading from 'components/atoms/Heading';
 import { connect } from 'react-redux';
 import { addBlog as addBlogAction, addNote as addNoteAction, editBlog as editBlogAction, editNote as editNoteAction } from 'redux/actions';
@@ -48,6 +49,17 @@ const StyledButtonClose = styled(Button)`
   width: 25px;
   height: 25px;
   background-color: ${(theme) => theme.activeIconColor};
+`
+
+const StyledButtonClose2 = styled(ButtonIcon)`
+  position: fixed;
+  right: 10px;
+  bottom: 10px; 
+  :hover {
+    background-color: ${({ theme }) => (theme.colorButtonSecondary)};
+    border: inset;
+    border-color: ${({ theme }) => (theme.colorButtonSecondary)};
+  }
 `
 
 const StyledReactSelect = styled(Select)`
@@ -198,8 +210,8 @@ const NewElementBar = ({ isVisible, addBlog, hideAddBar, addNote, path, action, 
       <StyledButtonClose>X</StyledButtonClose>
       <StyledInput placeholder="title" value={title || ''} onChange={handleChangeTitle}/>
       <StyledTextArea as="textarea" placeholder="description" value={content || ''} onChange={handleChangeContent} />
-
       {determinePath(path)}
+      <StyledButtonClose2>CLOSE</StyledButtonClose2>
     </StyledWrapper>
   </form>
 

@@ -254,6 +254,7 @@ const Register = ({ logging }) => {
           }
       </StyledButtonsArea>
       <StyledButtonLoginAsTest onClick={() => signIn('test', 'test')}>LOG as TEST</StyledButtonLoginAsTest>
+      <Button onClick={() => signIn('admin', 'admin')}>LOG as ADMIN</Button>
       </StyledBox>
     </ListTemplate>
     </>

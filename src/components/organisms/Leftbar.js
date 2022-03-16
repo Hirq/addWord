@@ -56,7 +56,7 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Leftbar = ({ logout }) => {
+const Leftbar = ({ user, logout }) => {
   return(
     <StyledWrapper>
       <StyledLogoLink to="/" />
@@ -72,9 +72,15 @@ const Leftbar = ({ logout }) => {
         </li>
       </StyledLinksList>
       <StyledBottomIcons>
-        <StyledLogoutButton as={NavLink} to={routes.admin} icon={AdminIcon} />
+        { user.login === 'admin' && <StyledLogoutButton as={NavLink} to={routes.admin} icon={AdminIcon} /> }
         <StyledLogoutButton as={NavLink} to={routes.settings} icon={SettingsIcon} />
-        <StyledLogoutButton as={Link} onClick={() => logout()} to={routes.list} icon={logoutIcon} />
+
+        { user.login === null 
+          ? <StyledLogoutButton as={NavLink} to={routes.register} icon={AdminIcon} /> 
+          : <StyledLogoutButton as={Link} onClick={() => logout()} to={routes.list} icon={logoutIcon} />
+        }
+
+
       </StyledBottomIcons>
     </StyledWrapper>
   );
@@ -87,8 +93,14 @@ const Leftbar = ({ logout }) => {
 //   pageType: 'notes',
 // };
 
+
+const mapStateToProps = state => {
+  const { user } = state;
+  return { user };
+}
+
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutUserAction()),
 });
 
-export default connect(null, mapDispatchToProps)(Leftbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Leftbar);

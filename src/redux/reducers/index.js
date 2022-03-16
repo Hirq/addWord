@@ -107,7 +107,9 @@
 
 const initialState = {
   user: {
-    user: null
+    login: null,
+    password: null,
+    loggedIn: false
   },
   words: {
     allIds: ['1','2','3','4'],
@@ -137,7 +139,16 @@ const initialState = {
 
   blogs: [
     {
-      id: 8,
+      id: 12,
+      title: 'Trzeba zrobić coś takiego, że jak tworzymy użytkownika to dodajemy mu tagi podstawowe i kazdy użytkonik ma swoje i słowa tez ??? - ale to chyba później zrobimy',
+      content:
+        ' '
+        ,
+      date: '13.03.2022',
+      tag: ['Work'],
+    },
+    {
+      id: 11,
       title: 'Jak mamy nazwe funkcji const Register = ({loginUser2}) to opisac to że jak mamy funkcje z reduxa to uzywamy {}, bo znowu mialem problem ze znalezieniem tego - ZESZYT i dlaczego to uzywamy, ze musimy destrukturyzacja + opisac co to jest HOC + history i withRouter o co w tym chodzi',
       content:
         ' '
@@ -146,7 +157,7 @@ const initialState = {
       tag: ['Work'],
     },
     {
-      id: 8,
+      id: 10,
       title: 'zalogowany jako: nazwa uzytkownika - wtedy na dole w rogu mamy mozliwosc wylogowania i opcje do panelu uzytkownika, w przeciwnym razie jest inna ikona i mozliwosc zalogowania / rejestracji + jak zalogowany jako admin/admin to widze wszystkie konta' +
       ' powinienem chyba dodac do reduxa tablica user - isLogged? userName i wtedy przechowujemy w naszym api informacje o tym i moge wtedy wyswietlać i odnosić sie do tego - tak mam z innymi rzeczami zwiazanymi z firebase ',
       content:
@@ -156,7 +167,7 @@ const initialState = {
       tag: ['Work'],
     },
     {
-      id: 8,
+      id: 9,
       title: 'Panel boczny - jak otwieramy, to tez powinien byc przycisk w tym sammy miejscy do zamkniecia + opisac context w zeszycie szczegółowo i dowiedzieć się co i jak z tym sie je',
       content:
         ' '
