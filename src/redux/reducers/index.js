@@ -140,6 +140,15 @@ const initialState = {
 
   blogs: [
     {
+      id: 13,
+      title: '1.Zeszyt && 2.W set liscie zrobić metode przetlumacz i zliczac pkt',
+      content:
+        ' '
+        ,
+      date: '16.03.2022',
+      tag: ['Work'],
+    },
+    {
       id: 12,
       title: 'Trzeba zrobić coś takiego, że jak tworzymy użytkownika to dodajemy mu tagi podstawowe i kazdy użytkonik ma swoje i słowa tez ??? - ale to chyba później zrobimy',
       content:
