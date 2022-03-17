@@ -2,6 +2,7 @@ export const routes = {
   home: '/',
   list: '/list',
   setList: '/list/:index',
+  oneWordTest: '/list/:index/:index',
   blog: '/blog',
   blogs: '/blog/:index',
 

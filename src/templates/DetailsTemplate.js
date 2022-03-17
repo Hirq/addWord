@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { removeSet as removeSetAction, removeWordUseName as removeWordUseNameAction, } from 'redux/actions';
 import ConfirmBox from 'components/atoms/ConfirmBox';
 import NewElementBar from 'components/organisms/NewElementBar';
+import { routes } from 'routes';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 170px;
@@ -165,11 +166,12 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         { path === 'list' &&
           <>
             <Button onClick={handleConfirmBox}>Delete set</Button>
+            <StyledButtonModalBack as={Link} to={routes.oneWordTest} link >Check - TEST</StyledButtonModalBack>
             <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
               <StyledHeadingModal>You are sure want to delete this set list ?</StyledHeadingModal>
               <StyledButtonsModal>
                 <StyledButtonModalBack onClick={handleConfirmBox}>back</StyledButtonModalBack>
-                <StyledButtonModalRemove onClick={() => removeSet(id)} as={Link} to={`/list`}  link>REMOVE</StyledButtonModalRemove>
+                <StyledButtonModalRemove onClick={() => removeSet(id)} as={Link} to={routes.list}  link>REMOVE</StyledButtonModalRemove>
               </StyledButtonsModal>
             </ConfirmBox>
           </>
@@ -185,7 +187,12 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
             <Paragraph>{date}</Paragraph>
           </>
         }
-        <Button as={Link} to={'/'+path} link> save </Button>
+        { path === 'oneWord' &&
+          <>
+            <Paragraph>HEY musimy przekazac id wordSeta, a nastepnie wybrac pierwsze slowo i z nextem przelaczac link u gory z /list/901/1 na /list/901/2</Paragraph>
+          </>
+        }
+        <Button as={Link} to={'/'+path} link> Back </Button>
       </StyledWrapper>
       { path === 'blog' || 'note' ?
       determinePath(path)

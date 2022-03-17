@@ -14,6 +14,7 @@ import NoteDetail from 'views/NoteDetail';
 import Settings from 'views/Settings';
 import AdminPanel from 'views/AdminPanel';
 import Register from 'views/Register';
+import oneWordTest from 'views/oneWordTest';
 
 const Root = () => (
   <Provider store={store}>
@@ -31,6 +32,7 @@ const Root = () => (
             <Route exact path={routes.settings} component={Settings} />
             <Route exact path={routes.admin} component={AdminPanel} />
             <Route exact path={routes.register} component={Register} />
+            <Route exact path={routes.oneWordTest} component={oneWordTest} />
           </Switch>
         </MainTemplate>
       </ThemeProviderDark>
