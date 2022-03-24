@@ -12,6 +12,7 @@ import { removeSet as removeSetAction, removeWordUseName as removeWordUseNameAct
 import ConfirmBox from 'components/atoms/ConfirmBox';
 import NewElementBar from 'components/organisms/NewElementBar';
 import { routes } from 'routes';
+import { Redirect } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 170px;
@@ -84,6 +85,11 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
   const [visibleBar, setVisibleBar] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+  const handleRedirect = () => {
+    setRedirect(state => !state)
+  };
 
   const handleNewElementBarToggle = () => {
     setVisibleBar(state => !state)
@@ -139,6 +145,10 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
     setFirstWord(id)
   }, [wordSets])
 
+  if (redirect)  {
+    return <Redirect to={`/list/${id}/1`} />;
+  } 
+
   return(
     <UserPageTemplate>
       <StyledWrapper onClick={hideAddBar}>
@@ -156,7 +166,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
                 <option value={item} key={item} > {contentSet[item].wordAng} </option>
               ))}
             </select>
-            <StyledButtonWordRemove onClick={() => deleteWord(selectWord,id)} secondary> Remove REDUX </StyledButtonWordRemove>
+            <StyledButtonWordRemove onClick={() => deleteWord(selectWord,id)} secondary> Remove </StyledButtonWordRemove>
           </>
         : null }
         { wordSetList === {} 
@@ -166,7 +176,8 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         { path === 'list' &&
           <>
             <Button onClick={handleConfirmBox}>Delete set</Button>
-            <StyledButtonModalBack as={Link} to={routes.oneWordTest} link >Check - TEST</StyledButtonModalBack>
+            {/* <StyledButtonModalBack as={Link} to={routes.oneWordTest} link >Check - TEST</StyledButtonModalBack> */}
+            <StyledButtonModalBack as={Link} onClick={handleRedirect} link >Check - TEST</StyledButtonModalBack>
             <ConfirmBox ariaHideApp={false} isOpen={visibleBox} onRequestClose={handleConfirmBox}>
               <StyledHeadingModal>You are sure want to delete this set list ?</StyledHeadingModal>
               <StyledButtonsModal>
@@ -189,7 +200,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         }
         { path === 'oneWord' &&
           <>
-            <Paragraph>HEY musimy przekazac id wordSeta, a nastepnie wybrac pierwsze slowo i z nextem przelaczac link u gory z /list/901/1 na /list/901/2</Paragraph>
+            <Paragraph> {id} HEY musimy przekazac id wordSeta, a nastepnie wybrac pierwsze slowo i z nextem przelaczac link u gory z /list/901/1 na /list/901/2</Paragraph>
           </>
         }
         <Button as={Link} to={'/'+path} link> Back </Button>

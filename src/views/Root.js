@@ -14,7 +14,7 @@ import NoteDetail from 'views/NoteDetail';
 import Settings from 'views/Settings';
 import AdminPanel from 'views/AdminPanel';
 import Register from 'views/Register';
-import oneWordTest from 'views/oneWordTest';
+import oneWordTest from 'views/OneWordTest';
 
 const Root = () => (
   <Provider store={store}>
