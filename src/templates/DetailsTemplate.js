@@ -81,7 +81,7 @@ const StyledMainParagraph = styled(Paragraph)`
   white-space: pre-line;
 `
 
-const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets  }) => {
+const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetList = [], path, id, removeSet, removeWordUseName, wordSets, idSet  }) => {
   const [visibleBox, setVisibleBox] = useState(false);
   const [selectWord, setSelectWord] = useState();
   const [visibleBar, setVisibleBar] = useState(false);
@@ -200,7 +200,7 @@ const DetailsTemplate = ({ title, content, date, tag, contentSet = {}, wordSetLi
         }
         { path === 'oneWord' &&
           <>
-            <Paragraph> {id} HEY musimy przekazac id wordSeta, a nastepnie wybrac pierwsze slowo i z nextem przelaczac link u gory z /list/901/1 na /list/901/2</Paragraph>
+            <Paragraph> {id} {idSet} HEY musimy przekazac id wordSeta, a nastepnie wybrac pierwsze slowo i z nextem przelaczac link u gory z /list/901/1 na /list/901/2</Paragraph>
           </>
         }
         <Button as={Link} to={'/'+path} link> Back </Button>
